@@ -1,7 +1,7 @@
-name: Publish
+name: Update Changelog
 
 concurrency:
-  group: publish
+  group: update-changelog
   cancel-in-progress: true
 
 on:
