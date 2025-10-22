@@ -42,17 +42,19 @@ This project does not accept low-effort or wholesale AI-generated contributions.
 Exceptions to this are simple tools like Rider's single-line completion feature.
 
 ## Building
+1. Fork this repo
+Give it a name you'll remember.
 
-1. Clone this repo:
+2. Clone that repo:
 ```shell
-git clone https://github.com/space-wizards/space-station-14.git
+git clone link-to-my-awesome-fork
 ```
-2. Go to the project folder and run `RUN_THIS.py` to initialize the submodules and load the engine:
+3. Go to the project folder and run `RUN_THIS.py` to initialize the submodules and load the engine:
 ```shell
-cd space-station-14
+cd fork-name
 python RUN_THIS.py
 ```
-3. Compile the solution:  
+4. Compile the solution:  
 
 Build the server using `dotnet build`.
 
