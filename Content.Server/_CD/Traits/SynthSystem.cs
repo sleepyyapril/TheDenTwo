@@ -1,25 +1,28 @@
-using Content.Shared._CD.Traits; // TheDen - Move to shared
-using Content.Shared.Body.Systems; // TheDen - Move to shared
+using Content.Server.Body.Systems;
+using Content.Shared.Chat.TypingIndicator;
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.Chat.TypingIndicator; // TheDen - Refactor to be partial
+namespace Content.Server._CD.Traits;
 
-public abstract partial class SharedTypingIndicatorSystem // TheDen - Refactor to be partial
+public sealed class SynthSystem : EntitySystem
 {
     private static readonly ProtoId<TypingIndicatorPrototype> RobotTypingIndicator = "robot"; // Misfit - Type safety
     private static readonly ProtoId<ReagentPrototype> SynthBlood = "SynthBlood"; // Misfit - Type safety
 
-    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!; // TheDen - Move to shared
+    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
+    [Dependency] private readonly SharedTypingIndicatorSystem _typingIndicator = default!; // TheDen - Switch to set indicator prototype
 
-    public void InitializeCD() // TheDen - Refactor to be partial
+    public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<SynthComponent, ComponentStartup>(OnStartup);
     }
 
     private void OnStartup(EntityUid uid, SynthComponent component, ComponentStartup args)
     {
-        SetIndicatorPrototype(uid, RobotTypingIndicator); // TheDen - Switch to set indicator prototype
+        _typingIndicator.SetIndicatorPrototype(uid, RobotTypingIndicator); // TheDen - Switch to set indicator prototype
 
         // Give them synth blood. Ion storm notif is handled in that system
         _bloodstream.ChangeBloodReagent(uid, SynthBlood); // Misfit - Type safety

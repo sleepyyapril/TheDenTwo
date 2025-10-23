@@ -1,6 +1,6 @@
 using Content.Shared.Chat.TypingIndicator; // TheDen - Refactor to be partial
 
-namespace Content.Shared._CD.Traits; // TheDen - Move to shared
+namespace Content.Server._CD.Traits;
 
 /// <summary>
 /// Set players' blood to coolant
