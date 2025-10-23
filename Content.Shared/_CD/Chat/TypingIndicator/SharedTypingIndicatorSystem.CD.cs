@@ -12,18 +12,14 @@ public abstract partial class SharedTypingIndicatorSystem // TheDen - Refactor t
 
     [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!; // TheDen - Move to shared
 
-    public void InitializeSynth() // TheDen - Refactor to be partial
+    public void InitializeCD() // TheDen - Refactor to be partial
     {
         SubscribeLocalEvent<SynthComponent, ComponentStartup>(OnStartup);
     }
 
     private void OnStartup(EntityUid uid, SynthComponent component, ComponentStartup args)
     {
-        if (TryComp<TypingIndicatorComponent>(uid, out var indicator))
-        {
-            indicator.TypingIndicatorPrototype = RobotTypingIndicator; // Misfit - Type safety
-            Dirty(uid, indicator);
-        }
+        SetIndicatorPrototype(uid, RobotTypingIndicator); // TheDen - Switch to set indicator prototype
 
         // Give them synth blood. Ion storm notif is handled in that system
         _bloodstream.ChangeBloodReagent(uid, SynthBlood); // Misfit - Type safety

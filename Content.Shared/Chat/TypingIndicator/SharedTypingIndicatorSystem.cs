@@ -33,7 +33,7 @@ public abstract partial class SharedTypingIndicatorSystem : EntitySystem // TheD
 
         SubscribeAllEvent<TypingChangedEvent>(OnTypingChanged);
 
-        InitializeSynth(); // TheDen - Refactor synth system to be partial
+        InitializeCD(); // TheDen - Refactor synth system to be partial
     }
 
     private void OnPlayerAttached(PlayerAttachedEvent ev)
