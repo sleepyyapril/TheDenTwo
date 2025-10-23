@@ -10,7 +10,7 @@ namespace Content.Shared.Chat.TypingIndicator;
 /// <summary>
 ///     Supports typing indicators on entities.
 /// </summary>
-public partial class SharedTypingIndicatorSystem : EntitySystem // TheDen - Refactor to be partial
+public abstract partial class SharedTypingIndicatorSystem : EntitySystem // TheDen - Refactor to be partial
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
