@@ -32,8 +32,6 @@ public abstract partial class SharedTypingIndicatorSystem : EntitySystem // TheD
         SubscribeLocalEvent<TypingIndicatorClothingComponent, InventoryRelayedEvent<BeforeShowTypingIndicatorEvent>>(BeforeShow);
 
         SubscribeAllEvent<TypingChangedEvent>(OnTypingChanged);
-
-        InitializeCD(); // TheDen - Refactor synth system to be partial
     }
 
     private void OnPlayerAttached(PlayerAttachedEvent ev)
