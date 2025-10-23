@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Chat.TypingIndicator; // TheDen - Refactor to be partial
 
-public abstract partial class SharedTypingIndicatorSystem // Den - Refactor to be partial
+public abstract partial class SharedTypingIndicatorSystem // TheDen - Refactor to be partial
 {
     private static readonly ProtoId<TypingIndicatorPrototype> RobotTypingIndicator = "robot"; // Misfit - Type safety
     private static readonly ProtoId<ReagentPrototype> SynthBlood = "SynthBlood"; // Misfit - Type safety
