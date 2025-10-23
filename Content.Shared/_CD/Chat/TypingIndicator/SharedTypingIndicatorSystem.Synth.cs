@@ -1,21 +1,19 @@
-using Content.Server.Body.Systems;
-using Content.Shared.Chat.TypingIndicator;
+using Content.Shared._CD.Traits; // TheDen - Move to shared
+using Content.Shared.Body.Systems; // TheDen - Move to shared
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._CD.Traits;
+namespace Content.Shared.Chat.TypingIndicator; // TheDen - Refactor to be partial
 
-public sealed class SynthSystem : EntitySystem
+public abstract partial class SharedTypingIndicatorSystem // Den - Refactor to be partial
 {
     private static readonly ProtoId<TypingIndicatorPrototype> RobotTypingIndicator = "robot"; // Misfit - Type safety
     private static readonly ProtoId<ReagentPrototype> SynthBlood = "SynthBlood"; // Misfit - Type safety
 
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
+    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!; // TheDen - Move to shared
 
-    public override void Initialize()
+    public void InitializeSynth() // TheDen - Refactor to be partial
     {
-        base.Initialize();
-
         SubscribeLocalEvent<SynthComponent, ComponentStartup>(OnStartup);
     }
 

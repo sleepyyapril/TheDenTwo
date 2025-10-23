@@ -10,7 +10,7 @@ namespace Content.Shared.Chat.TypingIndicator;
 /// <summary>
 ///     Supports typing indicators on entities.
 /// </summary>
-public abstract class SharedTypingIndicatorSystem : EntitySystem
+public partial class SharedTypingIndicatorSystem : EntitySystem // TheDen - Refactor to be partial
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -32,6 +32,8 @@ public abstract class SharedTypingIndicatorSystem : EntitySystem
         SubscribeLocalEvent<TypingIndicatorClothingComponent, InventoryRelayedEvent<BeforeShowTypingIndicatorEvent>>(BeforeShow);
 
         SubscribeAllEvent<TypingChangedEvent>(OnTypingChanged);
+
+        InitializeSynth(); // TheDen - Refactor synth system to be partial
     }
 
     private void OnPlayerAttached(PlayerAttachedEvent ev)
