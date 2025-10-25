@@ -6,7 +6,7 @@ public abstract partial class SharedTypingIndicatorSystem
 {
     public void SetIndicatorPrototype(EntityUid uid, ProtoId<TypingIndicatorPrototype> proto, TypingIndicatorComponent? component = null)
     {
-        if (!Resolve(uid, ref component))
+        if (!Resolve(uid, ref component, false))
             return;
 
         component.TypingIndicatorPrototype = proto;
