@@ -118,7 +118,7 @@ public sealed class ConsentManager : IConsentManager
     {
         // ReSharper disable once ConvertIfStatementToReturnStatement
         if (!InternalConsents.TryGetValue(userId, out var consentToggles))
-            return GetDefaultToggles();
+            consentToggles = GetDefaultToggles();
 
         var consentIds = new List<UserConsentInfo>();
 
