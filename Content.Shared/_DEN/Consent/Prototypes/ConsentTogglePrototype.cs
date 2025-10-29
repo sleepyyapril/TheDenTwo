@@ -5,7 +5,7 @@ namespace Content.Shared._DEN.Consent.Prototypes;
 /// <summary>
 /// This is a prototype for declaring consent toggles.
 /// </summary>
-[Prototype]
+[Prototype("consent")]
 public sealed partial class ConsentTogglePrototype : IPrototype
 {
     /// <inheritdoc/>

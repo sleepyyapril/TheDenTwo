@@ -1,3 +1,4 @@
+using Content.Shared._DEN.Consent.Prototypes;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -10,5 +11,5 @@ namespace Content.Shared._DEN.Consent.Components;
 public sealed partial class ConsentComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public Dictionary<ProtoId<ConsentTogglePrototype>, bool> ConsentToggles { get; set; } = new();
+    public List<ProtoId<ConsentTogglePrototype>> ConsentToggles { get; set; } = new();
 }

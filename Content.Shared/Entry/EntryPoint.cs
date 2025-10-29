@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using Content.Shared._DEN.Consent.Managers;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.IoC;
 using Content.Shared.Maps;
@@ -45,6 +46,7 @@ namespace Content.Shared.Entry
 
             InitTileDefinitions();
             IoCManager.Resolve<MarkingManager>().Initialize();
+            IoCManager.Resolve<IConsentManager>().Initialize(); // DEN: Consent system
 
 #if DEBUG
             var configMan = IoCManager.Resolve<IConfigurationManager>();

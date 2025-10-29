@@ -1,3 +1,4 @@
+using Content.Shared._DEN.Consent.EntitySystems;
 using Content.Shared._DEN.Consent.Events;
 using Content.Shared._DEN.Consent.Prototypes;
 using Robust.Shared.Network;
@@ -11,12 +12,12 @@ namespace Content.Shared._DEN.Consent.Managers;
 public interface IConsentManager
 {
     event Action<ConsentUpdatedEventArgs>? OnConsentUpdated;
-    event Action? OnConsentSet;
-    protected Dictionary<NetUserId, List<ProtoId<ConsentTogglePrototype>>> UserConsents { get; }
+    event Action<NetUserId>? OnConsentSet;
 
-
+    void Initialize();
     void SetConsentToggle(NetUserId userId, ProtoId<ConsentTogglePrototype> toggle, bool newValue);
-    void SetConsentToggles(NetUserId userId, List<ProtoId<ConsentTogglePrototype>> toggles);
+    void SetConsentToggles(NetUserId userId, List<UserConsentInfo> toggles);
     List<ProtoId<ConsentTogglePrototype>> GetConsentToggles(NetUserId userId);
+    bool GetDefaultValue(ProtoId<ConsentTogglePrototype> toggle);
 }
 

@@ -1,21 +1,24 @@
+using Content.Shared._DEN.Consent.Components;
+using Content.Shared._DEN.Consent.Managers;
 using Content.Shared._DEN.Consent.Prototypes;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared._DEN.Consent.EntitySystems;
 
-/// <summary>
-/// This handles updating consent based on entity events.
-/// </summary>
 public abstract class SharedConsentSystem : EntitySystem
 {
-    /// <inheritdoc/>
-    public override void Initialize()
+    [Dependency] protected readonly IConsentManager ConsentManager = default!;
+
+    public bool HasConsent(EntityUid uid, ProtoId<ConsentTogglePrototype> toggle)
     {
-        base.Initialize();
+        var defaultValue = ConsentManager.GetDefaultValue(toggle);
+
+        if (TryComp<ConsentComponent>(uid, out var consent)
+            && consent.ConsentToggles.Contains(toggle))
+            return !defaultValue;
+
+        return defaultValue;
     }
 }
 
-[Serializable, NetSerializable]
-public record struct UserConsentToggle(ProtoId<ConsentTogglePrototype> ToggleId);
-
+public record struct UserConsentInfo(ProtoId<ConsentTogglePrototype> ToggleId, bool ToggleValue);

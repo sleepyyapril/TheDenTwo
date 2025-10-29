@@ -1,4 +1,5 @@
 using Content.Shared._DEN.Consent.EntitySystems;
+using Content.Shared._DEN.Consent.Prototypes;
 using Lidgren.Network;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -11,7 +12,7 @@ namespace Content.Shared._DEN.Consent.Events;
 /// </summary>
 /// <param name="UserId">The <see cref="NetUserId"/> of the user with their toggle updated.</param>
 /// <param name="Toggle">The <see cref="UserConsentToggle"/> containing the toggle id and its new value. </param>
-public record struct ConsentUpdated(NetUserId UserId, UserConsentToggle Toggle);
+public record struct ConsentUpdated(NetUserId UserId, ProtoId<ConsentTogglePrototype> Toggle, bool NewValue);
 
 /// <summary>
 /// Used to update consent settings on either the client or the server.
@@ -20,31 +21,28 @@ public sealed class MsgUpdateConsent : NetMessage
 {
     public override MsgGroups MsgGroup => MsgGroups.Command;
 
-    public List<UserConsentToggle> UpdatedConsents = [];
+    public List<ProtoId<ConsentTogglePrototype>> NotDefaultConsents = [];
 
     public override void ReadFromBuffer(NetIncomingMessage buffer, IRobustSerializer serializer)
     {
         var length = buffer.ReadVariableInt32();
 
-        UpdatedConsents.Clear();
+        NotDefaultConsents.Clear();
 
         for (var i = 0; i < length; i++)
         {
             var updatedConsent = (ProtoId<ConsentTogglePrototype>) buffer.ReadString();
-            var newValue = buffer.ReadBoolean();
-            var newToggle = new UserConsentToggle(updatedConsent, newValue);
-            UpdatedConsents.Add(newToggle);
+            NotDefaultConsents.Add(updatedConsent);
         }
     }
 
     public override void WriteToBuffer(NetOutgoingMessage buffer, IRobustSerializer serializer)
     {
-        buffer.WriteVariableInt32(UpdatedConsents.Count);
+        buffer.WriteVariableInt32(NotDefaultConsents.Count);
 
-        foreach (var consentPair in UpdatedConsents)
+        foreach (var consentId in NotDefaultConsents)
         {
-            buffer.Write(consentPair.ToggleId);
-            buffer.Write(consentPair.ToggleValue);
+            buffer.Write(consentId);
         }
     }
 }
