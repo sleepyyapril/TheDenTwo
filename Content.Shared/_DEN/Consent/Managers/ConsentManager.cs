@@ -1,12 +1,9 @@
-using System.Linq;
-using System.Threading;
 using Content.Shared._DEN.Consent.EntitySystems;
 using Content.Shared._DEN.Consent.Events;
 using Content.Shared._DEN.Consent.Prototypes;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._DEN.Consent.Managers;
 
@@ -16,7 +13,6 @@ namespace Content.Shared._DEN.Consent.Managers;
 /// </summary>
 public sealed class ConsentManager : IConsentManager
 {
-
     [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
 

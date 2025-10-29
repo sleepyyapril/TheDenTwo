@@ -2,7 +2,6 @@ using Content.Shared._DEN.Consent.Components;
 using Content.Shared._DEN.Consent.EntitySystems;
 using Content.Shared._DEN.Consent.Events;
 using Content.Shared._DEN.Consent.Managers;
-using Content.Shared.Mind.Components;
 using Robust.Server.Player;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -41,8 +40,11 @@ public sealed class ConsentSystem : SharedConsentSystem
         if (consentComponent.ConsentToggles == consentToggles)
             return;
 
+        var ent = (attachedEntity, consentComponent);
         consentComponent.ConsentToggles = consentToggles;
-        Dirty<ConsentComponent>((attachedEntity, consentComponent));
+
+        Dirty<ConsentComponent>(ent);
+        RaiseLocalEvent(new ConsentUpdatedEvent(attachedEntity));
     }
 
     private void OnMindAdded(PlayerAttachedEvent ev)

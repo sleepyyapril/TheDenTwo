@@ -1,18 +1,24 @@
-using Content.Shared._DEN.Consent.EntitySystems;
+using Content.Shared._DEN.Consent.Components;
 using Content.Shared._DEN.Consent.Prototypes;
 using Lidgren.Network;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Content.Shared._DEN.Consent.Managers;
 
 namespace Content.Shared._DEN.Consent.Events;
 
 /// <summary>
-/// Used to inform same-side about updated consents, for whatever reason.
+/// Used to inform same-side entity systems about updated consents, for whatever reason.
 /// </summary>
-/// <param name="UserId">The <see cref="NetUserId"/> of the user with their toggle updated.</param>
-/// <param name="Toggle">The <see cref="UserConsentToggle"/> containing the toggle id and its new value. </param>
-public record struct ConsentUpdated(NetUserId UserId, ProtoId<ConsentTogglePrototype> Toggle, bool NewValue);
+/// <remarks>
+/// This will only run if the user in question has a valid AttachedEntity.
+/// <see cref="IConsentManager"/> contains an action that always runs on update.
+/// </remarks>
+public sealed class ConsentUpdatedEvent(EntityUid uid) : EntityEventArgs
+{
+    public EntityUid Entity { get; } = uid;
+}
 
 /// <summary>
 /// Used to update consent settings on either the client or the server.
