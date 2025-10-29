@@ -63,10 +63,7 @@ public sealed class ConsentManager : IConsentManager
         if (!InternalConsents.ContainsKey(userId))
             InternalConsents[userId] = GetDefaultToggles();
 
-        var toggles = InternalConsents[userId]
-            .Where(t => t.ToggleId != toggleId)
-            .ToList();
-
+        var toggles = GetConsentTogglesExcept(userId, toggleId);
         var toggle = new UserConsentInfo(toggleId, newValue);
 
         if (newValue != DefaultToggleValues[toggleId])
