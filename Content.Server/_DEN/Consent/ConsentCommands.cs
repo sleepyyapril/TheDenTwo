@@ -65,6 +65,12 @@ public sealed class ConsentCommand : LocalizedCommands
         var consents = _consentManager.GetConsentToggles(shell.Player.UserId);
         var consentsMessage = string.Join("\n -", consents);
 
+        if (consents.Count == 0)
+        {
+            shell.WriteLine("No different consents; all are using default.");
+            return;
+        }
+
         shell.WriteLine($"Different consents: \n- {consentsMessage}");
     }
 
