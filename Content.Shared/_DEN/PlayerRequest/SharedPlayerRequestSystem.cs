@@ -7,13 +7,6 @@ namespace Content.Shared._DEN.PlayerRequest;
 /// </summary>
 public abstract partial class SharedPlayerRequestSystem : EntitySystem
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-
-
-    }
-
     /// <summary>
     /// Start a player request that sends the popups and alert as needed.
     /// </summary>
