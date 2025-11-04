@@ -7,6 +7,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._DEN.PlayerRequest;
 
+// todo: prediction??? maybe unnecessary???
 public sealed class PlayerRequestSystem : SharedPlayerRequestSystem
 {
     [Dependency] private readonly ServerAlertsSystem _alertsSystem = null!;
@@ -56,6 +57,9 @@ public sealed class PlayerRequestSystem : SharedPlayerRequestSystem
 
             entry.OnAccepted(requester, target);
             ClearAlert(translation, target);
+
+            RemCompDeferred<PlayerRequestComponent>(requester);
+            RemCompDeferred<PlayerRequestComponent>(target);
 
             if (requestProto.AcceptPopup == null)
                 continue;
