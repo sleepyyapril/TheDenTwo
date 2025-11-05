@@ -31,6 +31,9 @@ public sealed class PlayerRequestSystem : SharedPlayerRequestSystem
         senderComp.Receivers[request] = receiver;
         receiverComp.Senders[request] = sender;
 
+        Dirty(sender, senderComp);
+        Dirty(receiver, receiverComp);
+
         RaiseLocalEvent(new PlayerRequestStartedEvent(request, sender, receiver));
     }
 
