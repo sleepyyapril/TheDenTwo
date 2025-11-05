@@ -57,21 +57,37 @@ public abstract partial class SharedPlayerRequestSystem : EntitySystem
         if (!_alertTranslations.TryGetValue(ev.AlertId, out var requestId))
             return;
 
-        var statusUpdatedEvent = new PlayerRequestUpdatedEvent(requestId, ev.User, true);
+        if (!TryGetSender(requestId, ev.User, out var sender))
+            return;
+
+        var statusUpdatedEvent = new PlayerRequestUpdatedEvent(requestId, ev.User, sender, true);
         RaiseLocalEvent(statusUpdatedEvent);
     }
 
     private void OnRequestUpdated(PlayerRequestUpdatedEvent ev)
     {
-        if (!ev.IsApproved)
+        if (ev.IsApproved)
+            OnRequestApproved(ev);
+
+        if (!TryComp<RequestReceiverComponent>(ev.Receiver, out var receiverComp)
+            || !TryComp<RequestSenderComponent>(ev.Sender, out var senderComp))
             return;
 
+        receiverComp.Senders.Remove(ev.RequestId);
+        senderComp.Receivers.Remove(ev.RequestId);
+
+        Dirty(ev.Receiver, receiverComp);
+        Dirty(ev.Sender, senderComp);
+    }
+
+    private void OnRequestApproved(PlayerRequestUpdatedEvent ev)
+    {
         var requestProto = _protoManager.Index(ev.RequestId);
 
         if (!TryComp<RequestReceiverComponent>(ev.Receiver, out var requestComp))
             return;
 
-        if (!TryGetSender(ev.RequestId, ev.Receiver, out var sender, requestComp))
+        if (!TryGetSender(ev.RequestId, (ev.Receiver, requestComp), out var sender))
             return;
 
         ClearAlert(ev.RequestId, ev.Receiver);
@@ -99,4 +115,5 @@ public record struct PlayerRequestStartedEvent(
 public record struct PlayerRequestUpdatedEvent(
     ProtoId<PlayerRequestPrototype> RequestId,
     EntityUid Receiver,
+    EntityUid Sender,
     bool IsApproved);
