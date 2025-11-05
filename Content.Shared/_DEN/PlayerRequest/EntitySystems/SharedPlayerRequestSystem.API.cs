@@ -48,22 +48,20 @@ public abstract partial class SharedPlayerRequestSystem
     /// <param name="request">The request that we should try to find the sender in.</param>
     /// <param name="receiver">The receiver that received the request.</param>
     /// <param name="sender">The output sender that was acquired.</param>
-    /// <param name="receiverComp">The <see cref="RequestReceiverComponent"/> to be resolved.</param>
     /// <returns>True if a valid EntityUid was found, false if not.</returns>
     /// <remarks>The entity will always exist if it returned true.</remarks>
     public bool TryGetSender(ProtoId<PlayerRequestPrototype> request,
-        EntityUid receiver,
-        out EntityUid sender,
-        RequestReceiverComponent? receiverComp = null)
+        Entity<RequestReceiverComponent?> receiver,
+        out Entity<RequestSenderComponent?> sender)
     {
         sender = EntityUid.Invalid;
 
-        if (!Resolve(receiver, ref receiverComp, false)
-            || !receiverComp.Senders.TryGetValue(request, out var potentialSender)
-            || !Exists(potentialSender))
+        if (!Resolve(receiver, ref receiver.Comp, false)
+            || !receiver.Comp.Senders.TryGetValue(request, out var potentialSender)
+            || !Exists(potentialSender) || !TryComp<RequestSenderComponent>(potentialSender, out var senderComp))
             return false;
 
-        sender = potentialSender;
+        sender = (potentialSender, senderComp);
         return true;
     }
 
@@ -73,22 +71,20 @@ public abstract partial class SharedPlayerRequestSystem
     /// <param name="request">The request that the sender sent.</param>
     /// <param name="sender">The sender that sent the request.</param>
     /// <param name="receiver">The output receiver acquired.</param>
-    /// <param name="senderComp">The <see cref="RequestSenderComponent"/> to be resolved.</param>
     /// <returns>True if a valid EntityUid was found, false if not.</returns>
     /// <remarks>The entity will always exist if it returned true.</remarks>
     public bool TryGetReceiver(ProtoId<PlayerRequestPrototype> request,
-        EntityUid sender,
-        out EntityUid receiver,
-        RequestSenderComponent? senderComp = null)
+        Entity<RequestSenderComponent?> sender,
+        out Entity<RequestReceiverComponent?> receiver)
     {
         receiver = EntityUid.Invalid;
 
-        if (!Resolve(sender, ref senderComp, false)
-            || !senderComp.Receivers.TryGetValue(request, out var potentialReceiver)
-            || !Exists(potentialReceiver))
+        if (!Resolve(sender, ref sender.Comp, false)
+            || !sender.Comp.Receivers.TryGetValue(request, out var potentialReceiver)
+            || !Exists(potentialReceiver) || !TryComp<RequestReceiverComponent>(potentialReceiver, out var receiverComp))
             return false;
 
-        receiver = potentialReceiver;
+        receiver = (potentialReceiver, receiverComp);
         return true;
     }
 
