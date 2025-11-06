@@ -39,13 +39,37 @@ public sealed class PlayerRequestSystem : SharedPlayerRequestSystem
 
     public override void ApproveRequest(ProtoId<PlayerRequestPrototype> request, EntityUid receiver)
     {
-        var statusUpdatedEvent = new PlayerRequestUpdatedEvent(request, receiver, true);
+        if (!TryComp<RequestReceiverComponent>(receiver, out var receiverComp)
+            || !TryGetSender(request, (receiver, receiverComp), out var sender))
+            return;
+
+        var statusUpdatedEvent = new PlayerRequestUpdatedEvent(request, receiver, sender, true);
         RaiseLocalEvent(statusUpdatedEvent);
     }
 
     public override void CancelRequest(ProtoId<PlayerRequestPrototype> request, EntityUid cancelling)
     {
-        var statusUpdatedEvent = new PlayerRequestUpdatedEvent(request, cancelling, false);
+        Entity<RequestSenderComponent?> sender;
+        Entity<RequestReceiverComponent?> receiver;
+
+        if (TryGetSender(request, cancelling, out var potentialSender)
+            && TryComp<RequestReceiverComponent>(cancelling, out var receiverComp))
+        {
+            sender = potentialSender;
+            receiver = (cancelling, receiverComp);
+        }
+        else if (TryGetReceiver(request, cancelling, out var potentialReceiver)
+                 && TryComp<RequestSenderComponent>(cancelling, out var senderComp))
+        {
+            sender = (cancelling, senderComp);
+            receiver = potentialReceiver;
+        }
+        else
+        {
+            return;
+        }
+
+        var statusUpdatedEvent = new PlayerRequestUpdatedEvent(request, receiver, sender, false);
         RaiseLocalEvent(statusUpdatedEvent);
     }
 }
