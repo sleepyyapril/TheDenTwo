@@ -1,8 +1,8 @@
-using Content.Shared._Funkystation.ResourceOverview.Components;
+using Content.Shared._DEN.ResourceOverview.Components;
 using Robust.Client.UserInterface;
 
 
-namespace Content.Client._Funkystation.ResourceOverview.UI;
+namespace Content.Client._DEN.ResourceOverview.UI;
 
 
 public sealed class ResourceOverviewConsoleBoundUserInterface : BoundUserInterface

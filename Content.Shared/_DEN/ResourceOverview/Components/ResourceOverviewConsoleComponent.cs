@@ -1,9 +1,9 @@
-using Content.Shared._Funkystation.ResourceOverview.EntitySystems;
+using Content.Shared._DEN.ResourceOverview.EntitySystems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
 
-namespace Content.Shared._Funkystation.ResourceOverview.Components;
+namespace Content.Shared._DEN.ResourceOverview.Components;
 
 /// <summary>
 ///     Marks an entity as a Resource Overview Console.

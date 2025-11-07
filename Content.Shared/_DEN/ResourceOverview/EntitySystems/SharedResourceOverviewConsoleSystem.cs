@@ -1,4 +1,4 @@
-namespace Content.Shared._Funkystation.ResourceOverview.EntitySystems;
+namespace Content.Shared._DEN.ResourceOverview.EntitySystems;
 
 
 public abstract partial class SharedResourceOverviewConsoleSystem : EntitySystem

@@ -1,7 +1,7 @@
 using Content.Shared.Materials;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Funkystation.Material;
+namespace Content.Shared._DEN.Material;
 
 /// <summary>
 /// This is a prototype for categorizing materials.

@@ -1,4 +1,4 @@
-namespace Content.Shared._Funkystation.ResourceOverview;
+namespace Content.Shared._DEN.ResourceOverview;
 
 
 public enum ResourceStatus

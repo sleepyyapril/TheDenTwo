@@ -1,0 +1,26 @@
+<BoxContainer
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    SetHeight="35"
+    VerticalExpand="True">
+        <BoxContainer HorizontalExpand="True"
+                      SetHeight="35"
+                      VerticalAlignment="Top">
+            <PanelContainer Name="DepartmentIndicatorPanel" VerticalExpand="True" SetWidth="7">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#a940ff" />
+                </PanelContainer.PanelOverride>
+            </PanelContainer>
+            <Button Name="OverviewButton"
+                    VerticalExpand="True"
+                    HorizontalExpand="True"
+                    StyleClasses="ButtonSquare">
+                <BoxContainer VerticalExpand="True" HorizontalExpand="True">
+                    <RichTextLabel Name="ItemNameLabel" Margin="5 0 0 0" Text="[color=white]Epistemics[/color]" />
+                    <Control HorizontalExpand="True" />
+                    <RichTextLabel Name="ResourceStatusLabel" Margin="0 0 10 0" Text="[color=#00f511]Surplus[/color]" />
+                </BoxContainer>
+            </Button>
+        </BoxContainer>
+</BoxContainer>
