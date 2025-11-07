@@ -1,0 +1,10 @@
+- type: materialCategory
+  id: Default
+  materials: []
+
+- type: materialCategory
+  id: Essential
+  materials:
+  - Steel
+  - Glass
+  - Plastic

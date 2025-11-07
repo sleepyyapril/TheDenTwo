@@ -1,0 +1,33 @@
+- type: entity
+  id: ComputerResourceOverview
+  parent: BaseComputerAiAccess
+  name: resource overview computer
+  description: A computer used to keep track of station resources in all departments.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: bounty
+    - map: ["computerLayerKeys"]
+      state: tech_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: ResourceOverviewConsole
+  - type: ActivatableUI
+    key: enum.ResourceOverviewConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.ResourceOverviewConsoleUiKey.Key:
+        type: ResourceOverviewConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"
+  - type: AccessReader
+    access: [["Quartermaster"]]

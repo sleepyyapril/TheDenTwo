@@ -1,0 +1,24 @@
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Resource Overview"
+    Resizable="False"
+    SetSize="1120 750"
+    MinSize="1120 750">
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
+        <BoxContainer VerticalExpand="True"
+                  HorizontalExpand="True"
+                  SizeFlagsStretchRatio="1.5"
+                  StyleClasses="PanelLight">
+            <RichTextLabel SetHeight="30" HorizontalExpand="True" Text="Meow" />
+        </BoxContainer>
+
+        <BoxContainer VerticalExpand="True"
+                      HorizontalExpand="True"
+                      StyleClasses="AngleRect">
+            <RichTextLabel SetHeight="30" HorizontalExpand="True" Text="Meow" />
+        </BoxContainer>
+    </BoxContainer>
+
+</controls:FancyWindow>
