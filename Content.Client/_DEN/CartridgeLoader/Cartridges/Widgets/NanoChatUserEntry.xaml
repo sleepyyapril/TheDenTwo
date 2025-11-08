@@ -1,0 +1,30 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+              HorizontalExpand="True"
+              SetHeight="50">
+    <PanelContainer VerticalExpand="True"
+                    SetWidth="8">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#cd61ff"/>
+        </PanelContainer.PanelOverride>
+    </PanelContainer>
+    <Button HorizontalExpand="True"
+            VerticalExpand="True"
+            StyleClasses="ButtonSquare"
+            Margin="1 0"
+            Pressed="True">
+        <BoxContainer HorizontalExpand="True"
+                      VerticalExpand="True"
+                      Orientation="Vertical">
+            <RichTextLabel Name="NameLabel"
+                           Text="[color=#d9d9d9][bold]Vincent Ledoux[/bold][/color]"
+                           HorizontalExpand="True"
+                           SetHeight="15" />
+            <Control SetHeight="5" />
+            <RichTextLabel Name="JobLabel"
+                           Text="[color=white][font size=10]Research Director[/font][/color]"
+                           HorizontalExpand="True"
+                           SetHeight="15" />
+        </BoxContainer>
+    </Button>
+</BoxContainer>

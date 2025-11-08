@@ -1,0 +1,16 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:widgets="clr-namespace:Content.Client._DEN.CartridgeLoader.Cartridges.Widgets"
+              HorizontalExpand="True"
+              VerticalExpand="True">
+    <BoxContainer HorizontalExpand="True"
+                  VerticalExpand="True"
+                  Orientation="Vertical">
+        <widgets:NanoChatTopBar />
+        <BoxContainer HorizontalExpand="True"
+                      VerticalExpand="True"
+                      Margin="3">
+            <widgets:NanoChatChatsContainer Name="ChatsContainer" Margin="0 0 3 0" />
+            <widgets:NanoChatMessageBox Name="MessageBox" Visible="True" />
+        </BoxContainer>
+    </BoxContainer>
+</BoxContainer>

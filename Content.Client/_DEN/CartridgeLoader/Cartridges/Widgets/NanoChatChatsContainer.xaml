@@ -1,0 +1,25 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              HorizontalExpand="True"
+              VerticalExpand="True"
+              Orientation="Horizontal">
+    <PanelContainer Name="ChatsContainer"
+                    HorizontalExpand="True"
+                    VerticalExpand="True">
+        <ScrollContainer VerticalExpand="True"
+                         HorizontalExpand="True"
+                         HScrollEnabled="False">
+            <BoxContainer Name="ChatList"
+                          Orientation="Vertical"
+                          VerticalExpand="True"
+                          HorizontalExpand="True"
+                          Margin="4">
+                <RichTextLabel Name="NoChatsLabel"
+                               Text="No chats found."
+                               HorizontalAlignment="Center"
+                               Margin="0 35"
+                               Visible="True" />
+                <!-- <widgets:NanoChatUserEntry /> -->
+            </BoxContainer>
+        </ScrollContainer>
+    </PanelContainer>
+</BoxContainer>

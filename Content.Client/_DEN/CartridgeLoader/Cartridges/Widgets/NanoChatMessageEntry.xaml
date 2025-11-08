@@ -1,0 +1,10 @@
+<PanelContainer xmlns="https://spacestation14.io"
+                VerticalExpand="True"
+                MinSize="30 30"
+                Margin="2">
+    <BoxContainer HorizontalExpand="True" VerticalExpand="True" Orientation="Vertical">
+        <PanelContainer StyleClasses="PanelLight" HorizontalAlignment="Right" MaxWidth="330">
+            <RichTextLabel Text="1" Margin="10"></RichTextLabel>
+        </PanelContainer>
+    </BoxContainer>
+</PanelContainer>
