@@ -1,6 +1,8 @@
+using Content.Shared._DEN.NanoChat;
+
 namespace Content.Server._DEN.NanoChat;
 
-public sealed class NanoChatCardSystem
+public sealed partial class NanoChatCardSystem : SharedNanoChatCardSystem
 {
-    
+
 }
