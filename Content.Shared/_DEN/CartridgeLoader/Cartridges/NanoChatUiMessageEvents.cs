@@ -12,27 +12,30 @@ public sealed class NanoChatUiMessageEvent(INanoChatUiMessageEvent payload) : Ca
 }
 
 /// <summary>
-/// An event called by group chats and when someone new sends you a message.
+/// An event called by trying to create a group chat or message someone new.
 /// </summary>
-/// <param name="conversationId">The conversation ID.</param>
 /// <param name="members">The members in the conversation.</param>
 [Serializable, NetSerializable]
-public sealed class NanoChatUiConversationCreatedEvent(
-    Guid conversationId,
-    HashSet<uint> members) : INanoChatUiMessageEvent
+public sealed class NanoChatUiConversationCreatedEvent(HashSet<uint> members) : INanoChatUiMessageEvent
 {
-    [ViewVariables]
-    public Guid ConversationId = conversationId;
-
     [ViewVariables]
     public HashSet<uint> Members = members;
 }
 
 [Serializable, NetSerializable]
-public sealed class NanoChatUiMessageReceivedEvent(NanoChatMessage message) : INanoChatUiMessageEvent
+public sealed class NanoChatUiMessageSentEvent(
+    NanoChatMessageType messageType,
+    TimeSpan sentAt,
+    string content) : INanoChatUiMessageEvent
 {
     [ViewVariables]
-    public NanoChatMessage Message = message;
+    public NanoChatMessageType MessageType = messageType;
+
+    [ViewVariables]
+    public TimeSpan SentAt = sentAt;
+
+    [ViewVariables]
+    public string Content = content;
 }
 
 [Serializable, NetSerializable]
@@ -56,13 +59,9 @@ public sealed class NanoChatUiMessageDeletedEvent(
 }
 
 [Serializable, NetSerializable]
-public sealed class NanoChatUiCheckedConversationEvent(
-    Guid conversationId,
-    uint seenById) : INanoChatUiMessageEvent
+public sealed class NanoChatUiSetCurrentConversationEvent(
+    Guid? conversationId) : INanoChatUiMessageEvent
 {
     [ViewVariables]
-    public Guid ConversationId = conversationId;
-
-    [ViewVariables]
-    public uint SeenById = seenById;
+    public Guid? ConversationId = conversationId;
 }

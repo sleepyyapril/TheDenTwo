@@ -9,28 +9,20 @@ public sealed partial class NanoChatCartridgeSystem : EntitySystem
 {
     [Dependency] private readonly CartridgeLoaderSystem _cartridgeLoaderSystem = null!;
 
-    private Dictionary<uint, NanoChatUser> _users = new();
-
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<NanoChatCartridgeComponent, CartridgeUiReadyEvent>(OnUiReady);
         SubscribeLocalEvent<NanoChatCartridgeComponent, CartridgeMessageEvent>(OnUiMessage);
-        SubscribeLocalEvent<NanoChatCartridgeComponent, EntParentChangedMessage>(OnCartridgeParentChanged);
-    }
-
-    private void OnCartridgeParentChanged(Entity<NanoChatCartridgeComponent> ent, ref EntParentChangedMessage args)
-    {
-
     }
 
     private void OnUiReady(Entity<NanoChatCartridgeComponent> ent, ref CartridgeUiReadyEvent args)
     {
-        if (!TryGetNanoChatCard(ent, out var card))
+        if (!TryUpdateCard(ent, out var card))
             return;
 
-        UpdateUiState(ent, args.Loader);
+        UpdateUiState(card.Value, args.Loader);
     }
 
     private void OnUiMessage(Entity<NanoChatCartridgeComponent> ent, ref CartridgeMessageEvent args)
@@ -38,19 +30,19 @@ public sealed partial class NanoChatCartridgeSystem : EntitySystem
         if (args is not NanoChatUiMessageEvent message)
             return;
 
-        if (!TryGetNanoChatCard(ent, out var card))
+        if (!TryUpdateCard(ent, out var card))
             return;
 
         switch (message.Payload)
         {
             case NanoChatUiConversationCreatedEvent ev:
-                OnConversationCreated(card.Value, ev);
+                OnAttemptConversationCreated(card.Value, ev);
                 break;
-            case NanoChatUiCheckedConversationEvent ev:
-                OnCheckedConversation(card.Value, ev);
+            case NanoChatUiSetCurrentConversationEvent ev:
+                OnSetCurrentConversation(card.Value, ev);
                 break;
-            case NanoChatUiMessageReceivedEvent ev:
-                OnMessageReceived(card.Value, ev);
+            case NanoChatUiMessageSentEvent ev:
+                OnAttemptMessageSent(card.Value, ev);
                 break;
             case NanoChatUiMessageEditedEvent ev:
                 OnMessageEdited(card.Value, ev);
@@ -61,15 +53,22 @@ public sealed partial class NanoChatCartridgeSystem : EntitySystem
         }
     }
 
+    public void UpdateUiState(Entity<NanoChatCardComponent> ent)
+    {
+        if (ent.Comp.LoaderUid == null || !Exists(ent.Comp.LoaderUid.Value))
+            return;
+
+        UpdateUiState(ent, ent.Comp.LoaderUid.Value);
+    }
+
     private void UpdateUiState(Entity<NanoChatCardComponent> ent, EntityUid loader)
     {
         var state = new NanoChatUiState
         {
             Conversations = ent.Comp.Conversations,
             Messages = ent.Comp.Messages,
-            Users = ent.Comp.Users,
-            SilencedConversations = ent.Comp.SilencedConversations,
-            UnreadMessages = ent.Comp.UnreadMessages
+            RelevantUsers = ent.Comp.RelevantUsers,
+            UnreadMessages = ent.Comp.UnreadMessages,
         };
 
         _cartridgeLoaderSystem.UpdateCartridgeUiState(loader, state);

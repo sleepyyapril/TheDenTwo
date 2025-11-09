@@ -1,11 +1,15 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._DEN.CartridgeLoader.Cartridges;
-using Content.Shared.CartridgeLoader;
 
 namespace Content.Server._DEN.CartridgeLoader.Cartridges;
 
 public sealed partial class NanoChatCartridgeSystem
 {
+    public bool CanMessageUser(Entity<NanoChatCardComponent> ent, uint target)
+    {
+        return true;
+    }
+
     public bool TryGetNanoChatCard(Entity<NanoChatCartridgeComponent> ent,
         [NotNullWhen(true)] out Entity<NanoChatCardComponent>? card)
     {
@@ -19,8 +23,19 @@ public sealed partial class NanoChatCartridgeSystem
         return true;
     }
 
-    private void UpdateCard(Entity<NanoChatCartridgeComponent> ent)
+    private bool TryUpdateCard(Entity<NanoChatCartridgeComponent> ent,
+        [NotNullWhen(true)] out Entity<NanoChatCardComponent>? resultCard)
     {
+        if (!TryGetNanoChatCard(ent, out var maybeCard)
+            || maybeCard is not { } card)
+        {
+            ent.Comp.Card = null;
+            resultCard = null;
+            return false;
+        }
 
+        ent.Comp.Card = card;
+        resultCard = card;
+        return true;
     }
 }

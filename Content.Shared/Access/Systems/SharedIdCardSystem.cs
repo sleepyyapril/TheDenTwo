@@ -1,4 +1,5 @@
 using System.Globalization;
+using Content.Shared._DEN.Access.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
@@ -155,6 +156,11 @@ public abstract class SharedIdCardSystem : EntitySystem
         Dirty(uid, id);
         UpdateEntityName(uid, id);
 
+        // Start DEN: raise an event on ID card updating
+        var ev = new IdCardJobTitleUpdatedEvent(jobTitle);
+        RaiseLocalEvent(ev);
+        // End DEN
+
         if (player != null)
         {
             _adminLogger.Add(LogType.Identity, LogImpact.Low,
@@ -248,6 +254,11 @@ public abstract class SharedIdCardSystem : EntitySystem
         id.FullName = fullName;
         Dirty(uid, id);
         UpdateEntityName(uid, id);
+
+        // Start DEN: raise an event on ID card updating
+        var ev = new IdCardNameUpdatedEvent(fullName);
+        RaiseLocalEvent(ev);
+        // End DEN
 
         if (player != null)
         {
