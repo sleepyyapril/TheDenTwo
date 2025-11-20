@@ -1,3 +1,4 @@
+using Content.Shared._DEN.NanoChat;
 using Content.Shared.CartridgeLoader;
 using Robust.Shared.Serialization;
 
@@ -24,10 +25,14 @@ public sealed class NanoChatUiConversationCreatedEvent(HashSet<uint> members) : 
 
 [Serializable, NetSerializable]
 public sealed class NanoChatUiMessageSentEvent(
+    Guid conversationId,
     NanoChatMessageType messageType,
     TimeSpan sentAt,
     string content) : INanoChatUiMessageEvent
 {
+    [ViewVariables]
+    public Guid ConversationId = conversationId;
+
     [ViewVariables]
     public NanoChatMessageType MessageType = messageType;
 

@@ -8,7 +8,8 @@
             <graphics:StyleBoxFlat BackgroundColor="#cd61ff"/>
         </PanelContainer.PanelOverride>
     </PanelContainer>
-    <Button HorizontalExpand="True"
+    <Button Name="ConversationButton"
+            HorizontalExpand="True"
             VerticalExpand="True"
             StyleClasses="ButtonSquare"
             Margin="1 0"
@@ -16,12 +17,12 @@
         <BoxContainer HorizontalExpand="True"
                       VerticalExpand="True"
                       Orientation="Vertical">
-            <RichTextLabel Name="NameLabel"
+            <RichTextLabel Name="TitleLabel"
                            Text="[color=#d9d9d9][bold]Vincent Ledoux[/bold][/color]"
                            HorizontalExpand="True"
                            SetHeight="15" />
             <Control SetHeight="5" />
-            <RichTextLabel Name="JobLabel"
+            <RichTextLabel Name="SubtitleLabel"
                            Text="[color=white][font size=10]Research Director[/font][/color]"
                            HorizontalExpand="True"
                            SetHeight="15" />
