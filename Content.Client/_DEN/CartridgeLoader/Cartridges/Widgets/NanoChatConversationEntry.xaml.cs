@@ -19,4 +19,6 @@ public sealed partial class NanoChatUserEntry : BoxContainer
 
         _sawmill = _logManager.GetSawmill("nanochat.ui.entry");
     }
+
+    public void SetConversationTitle()
 }
