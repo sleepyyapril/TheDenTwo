@@ -33,29 +33,29 @@ public sealed partial class PlayerRequestPrototype : IPrototype, IInheritingProt
     /// How long (in seconds) should the request stay waiting for a player to accept before canceling?
     /// </summary>
     [DataField]
-    public int AutoDeclineAfter { get; } = 30;
+    public int AutoDeclineAfter { get; set; } = 30;
 
     /// <summary>
     /// The popup message that will appear when a player receives this request.
     /// </summary>
     [DataField(required: true)]
-    public LocId ReceivePopup { get; }
+    public LocId ReceivePopup { get; set; }
 
     /// <summary>
     /// The popup message that will appear when a player sends the request.
     /// </summary>
     [DataField(required: true)]
-    public LocId SendPopup { get; }
+    public LocId SendPopup { get; set; }
 
     /// <summary>
     /// The popup message that will appear to the requester when the target player accepts this request.
     /// </summary>
     [DataField]
-    public LocId? AcceptPopup { get; }
+    public LocId? AcceptPopup { get; set; }
 
     /// <summary>
     /// The popup message that will appear to the requester when the target player accepts this request.
     /// </summary>
     [DataField]
-    public LocId? CancelledPopup { get; }
+    public LocId? CancelledPopup { get; set; }
 }
