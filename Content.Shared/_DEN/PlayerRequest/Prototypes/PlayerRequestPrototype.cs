@@ -8,7 +8,7 @@ namespace Content.Shared._DEN.PlayerRequest;
 /// This is a prototype for declaring player requests
 /// </summary>
 [Prototype]
-public sealed class PlayerRequestPrototype : IPrototype, IInheritingPrototype
+public sealed partial class PlayerRequestPrototype : IPrototype, IInheritingPrototype
 {
     /// <inheritdoc/>
     [IdDataField]
