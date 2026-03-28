@@ -42,7 +42,7 @@
   - AppearanceDwarf
   - MobHuman
   id: MobDwarf
-  name: Urist McHands The Dwarf
+  name: Urist McHands the Dwarf
   components:
   - type: Fixtures
     fixtures: # TODO: This needs a second fixture just for mob collisions.
@@ -66,6 +66,10 @@
     accent: dwarf
   - type: Speech
     speechSounds: Bass
+  # DEN start
+  - type: PhysiologyDescription
+    baseLabel: physiology-description-species-base-dwarf
+  # End DEN
 
 - type: entity
   parent: OrganBase

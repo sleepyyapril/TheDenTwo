@@ -173,6 +173,10 @@
       types:
         Asphyxiation: -1.0
     maxSaturation: 15
+  # DEN start
+  - type: PhysiologyDescription
+    baseLabel: physiology-description-species-base-slime
+  # End DEN
 
 - type: entity
   parent: OrganBase
@@ -262,15 +266,7 @@
   - type: Metabolizer
     maxReagents: 6
     metabolizerTypes: [ Slime ]
-    removeEmpty: true
-    groups:
-    - id: Food
-    - id: Drink
-    - id: Medicine
-    - id: Poison
-    - id: Narcotic
-    - id: Alcohol
-      rateModifier: 2.5
+    stages: [ Digestion, Bloodstream, Metabolites ]
 
 - type: entity
   parent: [ OrganBaseLungs, OrganSlimePersonInternal, OrganSlimePersonMetabolizer ]
