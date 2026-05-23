@@ -1,0 +1,518 @@
+# HeadTop
+
+- type: marking
+  id: VulpEarTajaran
+  bodyPart: HeadTop
+  # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid, Kitsune]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: msai
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: msai-inner
+
+- type: marking
+  id: VulpEarDalmatian
+  bodyPart: HeadTop
+  # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid, Kitsune]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
+      state: dalmatian
+
+- type: marking
+  id: EarsCheesegal
+  bodyPart: HeadTop
+  # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/cheesegal.rsi
+    state: sergears-1
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/cheesegal.rsi
+    state: sergears-2
+
+# Snout
+
+- type: marking
+  id: VulpSnoutAlt
+  bodyPart: Snout
+  # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Kitsune]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
+      state: muzzle_alt
+    - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
+      state: nose
+
+- type: marking
+  id: VulpSnoutSharp
+  bodyPart: Snout
+  # speciesRestriction: [Vulpkanin, SlimePerson, Kitsune]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
+      state: muzzle_sharp
+    - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
+      state: nose
+
+- type: marking
+  id: VulpSnoutFade
+  bodyPart: Snout
+  # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Kitsune]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
+      state: muzzle_fade
+    - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
+      state: nose
+
+- type: marking
+  id: VulpSnoutSwift
+  bodyPart: Snout
+  # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Kitsune]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
+      state: vulpine-lines
+
+- type: marking
+  id: SnoutCheesegal
+  bodyPart: Snout
+  # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+   - sprite: _DEN/Mobs/Customization/Vulpkanin/cheesegal.rsi
+     state: sergsnoutredux-1
+   - sprite: _DEN/Mobs/Customization/Vulpkanin/cheesegal.rsi
+     state: sergsnoutredux-2
+
+# Head
+
+- type: marking
+  id: VulpHeadTiger
+  bodyPart: Head
+  # speciesRestriction: [Vulpkanin, SlimePerson]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
+      state: tiger_head
+
+- type: marking
+  id: VulpHeadTigerFace
+  bodyPart: Head
+  # speciesRestriction: [Vulpkanin, SlimePerson]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
+      state: tiger_face
+
+- type: marking
+  id: VulpHeadSlash
+  bodyPart: Head
+  # speciesRestriction: [Vulpkanin, SlimePerson]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
+      state: slash
+
+# Tail
+
+- type: marking
+  id: VulpTail
+  bodyPart: Tail
+  # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid, Kitsune]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: vulp
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: vulp-fade
+
+- type: marking
+  id: VulpTailAnimated
+  bodyPart: Tail
+  # speciesRestriction: []
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: vulp_wag
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: vulp_wag-tip
+
+- type: marking
+  id: VulpTailTip
+  bodyPart: Tail
+  # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid, Kitsune]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: vulp
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: vulp-tip
+
+- type: marking
+  id: VulpTailTipAnimated
+  bodyPart: Tail
+  # speciesRestriction: []
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: vulp_wag
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: vulp_wag-tip
+
+- type: marking
+  id: VulpTailAlt
+  bodyPart: Tail
+  # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: vulp_alt
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: vulp_alt-fade
+
+- type: marking
+  id: VulpTailAltTip
+  bodyPart: Tail
+  # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: vulp_alt
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: vulp_alt-tip
+
+- type: marking
+  id: VulpTailFoxAnimated
+  bodyPart: Tail
+  # speciesRestriction: []
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: fox_wag
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: fox_wag-fade
+
+- type: marking
+  id: VulpTailFoxTip
+  bodyPart: Tail
+  # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid, Kitsune]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: fox
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: fox-tip
+
+- type: marking
+  id: VulpTailFoxTipAnimated
+  bodyPart: Tail
+  #speciesRestriction: []
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: fox_wag
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: fox_wag-tip
+
+- type: marking
+  id: VulpTailBushy
+  bodyPart: Tail
+  # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: bushfluff
+
+- type: marking
+  id: VulpTailBushyAnimated
+  bodyPart: Tail
+  # speciesRestriction: []
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: bushfluff_wag
+
+- type: marking
+  id: VulpTailCoyoteAnimated
+  bodyPart: Tail
+  # speciesRestriction: []
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: coyote_wag
+
+- type: marking
+  id: VulpTailCorgi
+  bodyPart: Tail
+  # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: corgi
+
+- type: marking
+  id: VulpTailCorgiAnimated
+  bodyPart: Tail
+  # speciesRestriction: []
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: corgi_wag
+
+- type: marking
+  id: VulpTailHuskyAlt
+  bodyPart: Tail
+  # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: husky
+
+- type: marking
+  id: VulpTailFox2
+  bodyPart: Tail
+  # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid, Kitsune]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: fox2
+
+- type: marking
+  id: VulpTailFox3
+  bodyPart: Tail
+  # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid, Kitsune]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: fox3
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: fox3-tip
+
+- type: marking
+  id: VulpTailDalmatian
+  bodyPart: Tail
+  # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: dalmatian
+
+- type: marking
+  id: VulpTailDalmatianAnimated
+  bodyPart: Tail
+  # speciesRestriction: []
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
+      state: dalmatian_wag
+
+- type: marking
+  id: TailBrushTip # Previous TailBrushtip
+  bodyPart: Tail
+  # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/vulpkanin.rsi
+    state: brushtiptail
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/vulpkanin.rsi
+    state: brushtiptail2
+
+- type: marking
+  id: TailCheesegal
+  bodyPart: Tail
+  # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/cheesegal.rsi
+    state: sergtail-1
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/cheesegal.rsi
+    state: sergtail-2
+
+- type: marking
+  id: VulpTailFluffyTip
+  bodyPart: Tail
+  # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/fluffytip.rsi
+    state: fluffyalt
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/fluffytip.rsi
+    state: fluffyalttip
+
+- type: marking
+  id: VulpTailFluffyAnimated
+  bodyPart: Tail
+  # speciesRestriction: []
+  groupWhitelist: [Vulpkanin]
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/fluffytip.rsi
+    state: fluffywag
+
+- type: marking
+  id: VulpTailFluffyTipAnimated
+  bodyPart: Tail
+  # speciesRestriction: []
+  groupWhitelist: [Vulpkanin]
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/fluffytip.rsi
+    state: fluffyaltwag
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/fluffytip.rsi
+    state: fluffyaltwagtip
+
+# Chest
+
+- type: marking
+  id: NeckChestFluff # Previous NeckChestfluff
+  bodyPart: Chest
+  # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/vulpkanin.rsi
+    state: chestfloof
+
+- type: marking
+  id: NeckChestSmallFluff # Previous NeckChestsmallfluff
+  bodyPart: Chest
+  # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/neckfluff.rsi
+    state: smallfluff
+
+- type: marking
+  id: NeckChestBigFluff # Previous NeckChestbigfluff
+  bodyPart: Chest
+  # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/neckfluff.rsi
+    state: bigfluff
+
+- type: marking
+  id: NeckChestBackGerm #Previous NeckChestbackgerm
+  bodyPart: Chest
+  # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/backmarks.rsi
+    state: backgerm
+
+- type: marking
+  id: NeckChestBackUpper # Previous NeckChestbackupper
+  bodyPart: Chest
+  # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/backmarks.rsi
+    state: backupper
+
+- type: marking
+  id: NeckChestBackWhole # Previous NeckChestbackwhole
+  bodyPart: Chest
+  # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/backmarks.rsi
+    state: backwhole
+
+- type: marking
+  id: NeckChestBandanaFluff # Previous NeckChestbandanafluff
+  bodyPart: Chest
+  # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Vulpkanin/neckfluff.rsi
+    state: bandanafluff
+
+# RLeg
+
+# LLeg
+
+- type: marking
+  id: VulpPointsCrestLegs
+  bodyPart: LLeg
+  # speciesRestriction: [Vulpkanin, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
+      state: points_crest-legs
+
+- type: marking
+  id: VulpPointsFadeLegs
+  bodyPart: LLeg
+  # speciesRestriction: [Vulpkanin, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
+      state: points_fade-legs
+
+- type: marking
+  id: VulpPointsSharpLegs
+  bodyPart: LLeg
+  # speciesRestriction: [Vulpkanin, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
+      state: points_sharp-legs
+
+# RFoot
+
+- type: marking
+  id: VulpPointsFeet
+  bodyPart: RFoot
+  # speciesRestriction: [Vulpkanin, SlimePerson, Human, Kitsune, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
+      state: points_feet
+
+# LFoot
+
+# RArm
+
+# LArm
+
+- type: marking
+  id: VulpPointsCrestArms
+  bodyPart: LArm
+  # speciesRestriction: [Vulpkanin, SlimePerson, Human, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
+      state: points_crest-arms
+
+- type: marking
+  id: VulpPointsFadeArms
+  bodyPart: LArm
+  # speciesRestriction: [Vulpkanin, SlimePerson, Human, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
+      state: points_fade-arms
+
+- type: marking
+  id: VulpPointsSharpArms
+  bodyPart: LArm
+  # speciesRestriction: [Vulpkanin, SlimePerson, Human, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
+      state: points_sharp-arms
+
+# RHand
+
+- type: marking
+  id: VulpPointsHands
+  bodyPart: RHand
+  # speciesRestriction: [Vulpkanin, SlimePerson, Human, Oni]
+  groupWhitelist: [Vulpkanin]
+  sprites:
+    - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
+      state: points_hands
+
+# LHand
+
+# Hair
+
+# Facial Hair
