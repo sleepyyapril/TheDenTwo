@@ -4,7 +4,7 @@
   id: VulpEarTajaran
   bodyPart: HeadTop
   # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid, Kitsune]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
       state: msai
@@ -15,7 +15,7 @@
   id: VulpEarDalmatian
   bodyPart: HeadTop
   # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid, Kitsune]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/ear_markings.rsi
       state: dalmatian
@@ -24,7 +24,7 @@
   id: EarsCheesegal
   bodyPart: HeadTop
   # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
   - sprite: _DEN/Mobs/Customization/Vulpkanin/cheesegal.rsi
     state: sergears-1
@@ -37,7 +37,7 @@
   id: VulpSnoutAlt
   bodyPart: Snout
   # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Kitsune]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
       state: muzzle_alt
@@ -48,7 +48,7 @@
   id: VulpSnoutSharp
   bodyPart: Snout
   # speciesRestriction: [Vulpkanin, SlimePerson, Kitsune]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
       state: muzzle_sharp
@@ -59,7 +59,7 @@
   id: VulpSnoutFade
   bodyPart: Snout
   # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Kitsune]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
       state: muzzle_fade
@@ -70,7 +70,7 @@
   id: VulpSnoutSwift
   bodyPart: Snout
   # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Kitsune]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
       state: vulpine-lines
@@ -79,7 +79,7 @@
   id: SnoutCheesegal
   bodyPart: Snout
   # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
    - sprite: _DEN/Mobs/Customization/Vulpkanin/cheesegal.rsi
      state: sergsnoutredux-1
@@ -92,7 +92,7 @@
   id: VulpHeadTiger
   bodyPart: Head
   # speciesRestriction: [Vulpkanin, SlimePerson]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
       state: tiger_head
@@ -101,7 +101,7 @@
   id: VulpHeadTigerFace
   bodyPart: Head
   # speciesRestriction: [Vulpkanin, SlimePerson]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
       state: tiger_face
@@ -110,7 +110,7 @@
   id: VulpHeadSlash
   bodyPart: Head
   # speciesRestriction: [Vulpkanin, SlimePerson]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/head_markings.rsi
       state: slash
@@ -121,7 +121,7 @@
   id: VulpTail
   bodyPart: Tail
   # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid, Kitsune]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: vulp
@@ -132,7 +132,7 @@
   id: VulpTailAnimated
   bodyPart: Tail
   # speciesRestriction: []
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: vulp_wag
@@ -143,7 +143,7 @@
   id: VulpTailTip
   bodyPart: Tail
   # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid, Kitsune]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: vulp
@@ -154,7 +154,7 @@
   id: VulpTailTipAnimated
   bodyPart: Tail
   # speciesRestriction: []
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: vulp_wag
@@ -165,7 +165,7 @@
   id: VulpTailAlt
   bodyPart: Tail
   # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: vulp_alt
@@ -176,7 +176,7 @@
   id: VulpTailAltTip
   bodyPart: Tail
   # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: vulp_alt
@@ -187,7 +187,7 @@
   id: VulpTailFoxAnimated
   bodyPart: Tail
   # speciesRestriction: []
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: fox_wag
@@ -198,7 +198,7 @@
   id: VulpTailFoxTip
   bodyPart: Tail
   # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid, Kitsune]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: fox
@@ -209,7 +209,7 @@
   id: VulpTailFoxTipAnimated
   bodyPart: Tail
   #speciesRestriction: []
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: fox_wag
@@ -220,7 +220,7 @@
   id: VulpTailBushy
   bodyPart: Tail
   # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: bushfluff
@@ -229,7 +229,7 @@
   id: VulpTailBushyAnimated
   bodyPart: Tail
   # speciesRestriction: []
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: bushfluff_wag
@@ -238,7 +238,7 @@
   id: VulpTailCoyoteAnimated
   bodyPart: Tail
   # speciesRestriction: []
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: coyote_wag
@@ -247,7 +247,7 @@
   id: VulpTailCorgi
   bodyPart: Tail
   # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: corgi
@@ -256,7 +256,7 @@
   id: VulpTailCorgiAnimated
   bodyPart: Tail
   # speciesRestriction: []
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: corgi_wag
@@ -265,7 +265,7 @@
   id: VulpTailHuskyAlt
   bodyPart: Tail
   # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: husky
@@ -274,7 +274,7 @@
   id: VulpTailFox2
   bodyPart: Tail
   # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid, Kitsune]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: fox2
