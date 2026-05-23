@@ -293,7 +293,7 @@
   id: VulpTailDalmatian
   bodyPart: Tail
   # speciesRestriction: [Vulpkanin, Human, SlimePerson, IPC, Canid]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: dalmatian
@@ -302,7 +302,7 @@
   id: VulpTailDalmatianAnimated
   bodyPart: Tail
   # speciesRestriction: []
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/tail_markings.rsi
       state: dalmatian_wag
@@ -311,7 +311,7 @@
   id: TailBrushTip # Previous TailBrushtip
   bodyPart: Tail
   # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
   - sprite: _DEN/Mobs/Customization/Vulpkanin/vulpkanin.rsi
     state: brushtiptail
@@ -322,7 +322,7 @@
   id: TailCheesegal
   bodyPart: Tail
   # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
   - sprite: _DEN/Mobs/Customization/Vulpkanin/cheesegal.rsi
     state: sergtail-1
@@ -333,7 +333,7 @@
   id: VulpTailFluffyTip
   bodyPart: Tail
   # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
   - sprite: _DEN/Mobs/Customization/Vulpkanin/fluffytip.rsi
     state: fluffyalt
@@ -344,7 +344,7 @@
   id: VulpTailFluffyAnimated
   bodyPart: Tail
   # speciesRestriction: []
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
   - sprite: _DEN/Mobs/Customization/Vulpkanin/fluffytip.rsi
     state: fluffywag
@@ -353,7 +353,7 @@
   id: VulpTailFluffyTipAnimated
   bodyPart: Tail
   # speciesRestriction: []
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
   - sprite: _DEN/Mobs/Customization/Vulpkanin/fluffytip.rsi
     state: fluffyaltwag
@@ -366,7 +366,7 @@
   id: NeckChestFluff # Previous NeckChestfluff
   bodyPart: Chest
   # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
   - sprite: _DEN/Mobs/Customization/Vulpkanin/vulpkanin.rsi
     state: chestfloof
@@ -375,7 +375,7 @@
   id: NeckChestSmallFluff # Previous NeckChestsmallfluff
   bodyPart: Chest
   # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
   - sprite: _DEN/Mobs/Customization/Vulpkanin/neckfluff.rsi
     state: smallfluff
@@ -384,7 +384,7 @@
   id: NeckChestBigFluff # Previous NeckChestbigfluff
   bodyPart: Chest
   # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
   - sprite: _DEN/Mobs/Customization/Vulpkanin/neckfluff.rsi
     state: bigfluff
@@ -393,7 +393,7 @@
   id: NeckChestBackGerm #Previous NeckChestbackgerm
   bodyPart: Chest
   # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
   - sprite: _DEN/Mobs/Customization/Vulpkanin/backmarks.rsi
     state: backgerm
@@ -402,7 +402,7 @@
   id: NeckChestBackUpper # Previous NeckChestbackupper
   bodyPart: Chest
   # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
   - sprite: _DEN/Mobs/Customization/Vulpkanin/backmarks.rsi
     state: backupper
@@ -411,7 +411,7 @@
   id: NeckChestBackWhole # Previous NeckChestbackwhole
   bodyPart: Chest
   # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
   - sprite: _DEN/Mobs/Customization/Vulpkanin/backmarks.rsi
     state: backwhole
@@ -420,7 +420,7 @@
   id: NeckChestBandanaFluff # Previous NeckChestbandanafluff
   bodyPart: Chest
   # speciesRestriction: [Vulpkanin, IPC, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
   - sprite: _DEN/Mobs/Customization/Vulpkanin/neckfluff.rsi
     state: bandanafluff
@@ -433,7 +433,7 @@
   id: VulpPointsCrestLegs
   bodyPart: LLeg
   # speciesRestriction: [Vulpkanin, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
       state: points_crest-legs
@@ -442,7 +442,7 @@
   id: VulpPointsFadeLegs
   bodyPart: LLeg
   # speciesRestriction: [Vulpkanin, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
       state: points_fade-legs
@@ -451,7 +451,7 @@
   id: VulpPointsSharpLegs
   bodyPart: LLeg
   # speciesRestriction: [Vulpkanin, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
       state: points_sharp-legs
@@ -462,7 +462,7 @@
   id: VulpPointsFeet
   bodyPart: RFoot
   # speciesRestriction: [Vulpkanin, SlimePerson, Human, Kitsune, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
       state: points_feet
@@ -477,7 +477,7 @@
   id: VulpPointsCrestArms
   bodyPart: LArm
   # speciesRestriction: [Vulpkanin, SlimePerson, Human, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
       state: points_crest-arms
@@ -486,7 +486,7 @@
   id: VulpPointsFadeArms
   bodyPart: LArm
   # speciesRestriction: [Vulpkanin, SlimePerson, Human, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
       state: points_fade-arms
@@ -495,7 +495,7 @@
   id: VulpPointsSharpArms
   bodyPart: LArm
   # speciesRestriction: [Vulpkanin, SlimePerson, Human, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
       state: points_sharp-arms
@@ -506,7 +506,7 @@
   id: VulpPointsHands
   bodyPart: RHand
   # speciesRestriction: [Vulpkanin, SlimePerson, Human, Oni]
-  groupWhitelist: [Vulpkanin]
+  groupWhitelist: [Human, Vulpkanin]
   sprites:
     - sprite: _DV/Mobs/Customization/Vulpkanin/body_markings.rsi
       state: points_hands
