@@ -9,7 +9,6 @@ public sealed partial class DiscordCommands
 {
     private async void OnKickCommandRan(CommandReceivedEventArgs args)
     {
-        _sawmill.Info("meow");
         if (!IsDiscordUserAdmin(args))
         {
             await args.Message.ReplyAsync("No permission.");
@@ -79,7 +78,7 @@ public sealed partial class DiscordCommands
         if (cmdArgs.Count >= 1)
             arrivalTime = cmdArgs[0];
 
-        _consoleHost.ExecuteCommand($"callshuttle");
+        _consoleHost.ExecuteCommand($"callshuttle {arrivalTime}");
         await args.Message.ReplyAsync("The shuttle has been called.");
     }
 
