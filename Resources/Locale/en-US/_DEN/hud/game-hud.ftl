@@ -1,0 +1,1 @@
+game-hud-open-consent-window-button-tooltip = Consent Menu

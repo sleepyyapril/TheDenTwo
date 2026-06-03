@@ -1,0 +1,1 @@
+ui-lobby-consent-button = Consent

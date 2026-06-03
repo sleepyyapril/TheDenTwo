@@ -125,6 +125,7 @@ namespace Content.Client.Input
             ghost.AddFunction(EngineKeyFunctions.MoveRight);
             ghost.AddFunction(EngineKeyFunctions.Walk);
 
+            common.AddFunction(ContentKeyFunctions.OpenConsentWindow); // DEN - Consent UI
             common.AddFunction(ContentKeyFunctions.OpenEntitySpawnWindow);
             common.AddFunction(ContentKeyFunctions.OpenSandboxWindow);
             common.AddFunction(ContentKeyFunctions.OpenTileSpawnWindow);

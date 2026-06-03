@@ -12,3 +12,6 @@ cmd-consent-help = {$command}
 
 cmd-consent-no-different = No different consents; all consents are using their defaults.
 cmd-consent-differences = Different consents:\n- {$differentConsents}
+
+cmd-consentprefs-desc = Toggles the consent preferences UI.
+cmd-consentprefs-help = {$command}

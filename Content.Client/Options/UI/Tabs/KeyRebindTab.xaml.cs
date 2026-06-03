@@ -233,6 +233,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.OpenActionsMenu);
             AddButton(ContentKeyFunctions.OpenEmotesMenu);
             AddButton(ContentKeyFunctions.ToggleRoundEndSummaryWindow);
+            AddButton(ContentKeyFunctions.OpenConsentWindow); // DEN - Consent UI
             AddButton(ContentKeyFunctions.OpenEntitySpawnWindow);
             AddButton(ContentKeyFunctions.OpenSandboxWindow);
             AddButton(ContentKeyFunctions.OpenTileSpawnWindow);

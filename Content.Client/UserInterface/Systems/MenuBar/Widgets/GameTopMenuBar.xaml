@@ -23,6 +23,18 @@
         HorizontalExpand="True"
         AppendStyleClass="{x:Static style:StyleClass.ButtonOpenRight}"
         />
+    <!-- DEN Start: consent UI -->
+    <ui:MenuButton
+        Name="ConsentButton"
+        Access="Internal"
+        Icon = "{xe:Tex '/Textures/_DEN/Interface/VerbIcons/lewd.svg.64x64.png'}"
+        BoundKey = "{x:Static is:ContentKeyFunctions.OpenConsentWindow}"
+        ToolTip="{Loc 'game-hud-open-consent-window-button-tooltip'}"
+        MinSize="42 64"
+        HorizontalExpand="True"
+        AppendStyleClass="{x:Static style:StyleClass.ButtonSquare}"
+    />
+    <!-- DEN End -->
     <ui:MenuButton
         Name="GuidebookButton"
         Access="Internal"
