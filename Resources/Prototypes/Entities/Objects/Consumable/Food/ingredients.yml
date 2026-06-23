@@ -705,9 +705,6 @@
     refineResult:
     - id: FoodButterSlice
       amount: 12
-  - type: SliceableFood
-    count: 12
-    slice: FoodButterSlice
   - type: Tag # Frontier
     tags:
     - NFButterStick
