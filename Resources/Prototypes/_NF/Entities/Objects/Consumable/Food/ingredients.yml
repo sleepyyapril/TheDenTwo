@@ -23,7 +23,7 @@
         Quantity: 15
 
 - type: entity
-  parent: [FoodDoughFlat BaseSlicingRefinableFood]
+  parent: [FoodDoughFlat, BaseSlicingRefinableFood] # DEN - butchery refactor
   id: FoodDoughFlatPastry
   name: pastry dough
   description: A buttery, rolled out pastry dough.
@@ -34,7 +34,7 @@
   - type: Construction
     graph: Pizza
     node: pastry
-  - type: ToolRefinable
+  - type: ToolRefinable # DEN - butchery refactor
     refineResult:
     - id: FoodDoughPastryBaseRaw
       amount: 6
