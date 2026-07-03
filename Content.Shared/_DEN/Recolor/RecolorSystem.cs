@@ -100,8 +100,8 @@ public sealed partial class RecolorSystem : EntitySystem
         EntityUid uid,
         Color color,
         bool removable,
-        string? shader,
-        string? paintType,
+        string? shader = null,
+        string? paintType = null,
         EntityUid? recolorer = null)
     {
         var recolorData = new RecolorData
