@@ -3,6 +3,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._DEN.Loadout.Modules;
 
+[Serializable]
 public sealed class ColorableModule : ILoadoutModule
 {
     /// <summary>
