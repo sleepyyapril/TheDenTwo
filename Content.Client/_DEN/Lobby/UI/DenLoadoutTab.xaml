@@ -1,0 +1,20 @@
+<ContainerButton xmlns="https://spacestation14.io"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:ui="clr-namespace:Content.Client._DEN.Lobby.UI">
+    <BoxContainer Orientation="Vertical"
+                  HorizontalExpand="True"
+                  VerticalExpand="True">
+        <BoxContainer HorizontalExpand="True"
+                      VerticalExpand="True"
+                      Orientation="Vertical"
+                      SeparationOverride="5"
+                      Margin="5">
+            <ui:DenLoadoutButtons HorizontalExpand="True" />
+            <ui:DenLoadoutButtons HorizontalExpand="True" />
+            <ui:DenLoadoutButtons HorizontalExpand="True" />
+            <ui:DenLoadoutButtons HorizontalExpand="True" />
+            <ui:DenLoadoutButtons HorizontalExpand="True" />
+            <ui:DenLoadoutButtons HorizontalExpand="True" />
+        </BoxContainer>
+    </BoxContainer>
+</ContainerButton>

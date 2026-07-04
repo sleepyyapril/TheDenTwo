@@ -789,7 +789,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         if (prototype.StartingGear is not null)
             gear.Add(prototype.StartingGear.Value);
 
-        _loadout.Equip(antag, gear, prototype.RoleLoadout);
+        // _loadout.Equip(antag, gear, prototype.RoleLoadout); - DEN: Custom Loadout System
 
         // Ensure that we have the right mind for our entity.
         if (!_mind.TryGetMind(player, out var mind, out var mindComp) || mindComp.OwnedEntity != antag)

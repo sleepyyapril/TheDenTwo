@@ -1,0 +1,28 @@
+<ui:DenLoadoutButtons xmlns="https://spacestation14.io"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:ui="clr-namespace:Content.Client._DEN.Lobby.UI">
+    <PanelContainer StyleClasses="ChatPanel"
+                    HorizontalExpand="True">
+        <BoxContainer VerticalAlignment="Center"
+                      Orientation="Horizontal"
+                      Margin="5">
+            <Label Name="LoadoutNameLabel"
+                   StyleClasses="TraitsEntryNameLabel"
+                   Text="My Loadout"
+                   Margin="5 0 0 0"/>
+            <Control HorizontalExpand="True" />
+            <Button Text="Edit Jobs"
+                    Margin="0 2 0 0"
+                    StyleClasses="OpenRight"/>
+            <Button Text="Edit Loadout"
+                    Margin="0 2 0 0"
+                    StyleClasses="OpenBoth"/>
+            <Button Text="Rename"
+                    Margin="0 2 0 0"
+                    StyleClasses="OpenBoth"/>
+            <Button Text="Delete"
+                    Margin="0 2 0 0"
+                    StyleClasses="OpenLeft"/>
+        </BoxContainer>
+    </PanelContainer>
+</ui:DenLoadoutButtons>

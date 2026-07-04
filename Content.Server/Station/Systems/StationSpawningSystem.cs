@@ -83,7 +83,7 @@ public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
     /// <param name="station">The station this player is being spawned on.</param>
     /// <param name="entity">The entity to use, if one already exists.</param>
     /// <returns>The spawned entity</returns>
-    public EntityUid SpawnPlayerMob(
+    public EntityUid SpawnPlayerMobUpstream(
         EntityCoordinates coordinates,
         ProtoId<JobPrototype>? job,
         HumanoidCharacterProfile? profile,

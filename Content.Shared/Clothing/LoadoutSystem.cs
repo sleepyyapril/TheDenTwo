@@ -24,6 +24,7 @@ public sealed partial class LoadoutSystem : EntitySystem
     [Dependency] private IPrototypeManager _protoMan = default!;
     [Dependency] private IRobustRandom _random = default!;
 
+    /* DEN: Custom Loadout System
     public override void Initialize()
     {
         base.Initialize();
@@ -31,6 +32,7 @@ public sealed partial class LoadoutSystem : EntitySystem
         // Wait until the character has all their organs before we give them their loadout
         SubscribeLocalEvent<LoadoutComponent, MapInitEvent>(OnMapInit, after: [typeof(InitialBodySystem)]);
     }
+    */
 
     public static string GetJobPrototype(string? loadout)
     {

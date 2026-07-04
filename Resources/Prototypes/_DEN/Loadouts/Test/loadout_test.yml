@@ -1,0 +1,6 @@
+- type: entityLoadout
+  id: test1
+  name: loadout-name-test1
+  description: loadout-desc-test
+  items:
+  - WeaponSubMachineGunDrozd
