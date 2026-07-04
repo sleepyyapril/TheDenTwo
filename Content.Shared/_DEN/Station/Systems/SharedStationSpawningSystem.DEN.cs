@@ -1,4 +1,8 @@
 using Content.Shared._DEN.Loadout;
+using Content.Shared.Clothing.Components;
+using Content.Shared.Hands.Components;
+using Content.Shared.Inventory;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
@@ -6,7 +10,7 @@ namespace Content.Shared.Station;
 
 public abstract partial class SharedStationSpawningSystem
 {
-    private const string DefaultItemsSlot = "BACK";
+    private const string DefaultItemsSlot = "back";
 
     public void SpawnCharacterLoadout(HashSet<ProtoId<EntityLoadoutPrototype>> loadouts,
         EntityUid character,
@@ -114,32 +118,98 @@ public abstract partial class SharedStationSpawningSystem
         }
     }
 
-    // TODO: go through every possible slot for an item
     private void SpawnCharacterItems(EntityUid character,
         List<EntProtoId> items,
         EntityCoordinates coordinates
     )
     {
-        _inventoryQuery.TryComp(character, out var inventoryComp);
-
-        if (inventoryComp == null)
+        if (!_inventoryQuery.TryComp(character, out var inventoryComp))
+        {
+            Log.Info("6");
             return;
+        }
 
         // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
         foreach (var item in items)
         {
             var spawnedEntity = Spawn(item, coordinates);
+            var (bestSlot, inside) = GetSlotSpawnable((character, inventoryComp), spawnedEntity);
 
-            if (!InventorySystem.TryGetSlotEntity(character, DefaultItemsSlot, out var storageUid, inventoryComp)
-                || !_storageQuery.TryComp(storageUid, out var storageComponent))
+            if (bestSlot == null
+                && TryComp<HandsComponent>(character, out var handsComponent)
+                && _handsSystem.TryGetEmptyHand((character, handsComponent), out var emptyHand))
+            {
+                _handsSystem.TryPickup(character, spawnedEntity, emptyHand, checkActionBlocker: false, handsComp: handsComponent);
                 continue;
+            }
 
-            _storage.Insert(storageUid.Value,
-                spawnedEntity,
-                out _,
-                storageComp: storageComponent,
-                playSound: false);
+            if (bestSlot == null)
+            {
+                Log.Info("4");
+                continue;
+            }
+
+            if (inside
+                && !InventorySystem.TryGetSlotEntity(character,
+                    bestSlot.Name,
+                    out var slotEnt,
+                    inventoryComponent: inventoryComp)
+                && _storageQuery.TryComp(slotEnt, out var storageComponent)
+                && _storage.Insert(slotEnt.Value, spawnedEntity, out _, storageComp: storageComponent, playSound: false))
+            {
+                continue;
+            }
+
+            InventorySystem.TryEquip(character, spawnedEntity, bestSlot.Name, silent: true, force: true);
+            Log.Info("bitch##&^$&^#$&#");
         }
+    }
+
+    private (SlotDefinition?, bool inside) GetSlotSpawnable(Entity<InventoryComponent> character, EntityUid item)
+    {
+        var slotFlags = SlotFlags.All;
+
+        if (TryComp<ClothingComponent>(item, out var clothingComponent))
+        {
+            slotFlags = clothingComponent.Slots;
+        }
+
+        var enumerator = InventorySystem.GetSlotEnumerator(character.Owner, slotFlags);
+
+        while (enumerator.MoveNext(out var slot))
+        {
+            if (!InventorySystem.TryGetSlot(character, slot.ID, out var slotDefinition, character.Comp))
+            {
+                Log.Info("1");
+                continue;
+            }
+
+            if ((slotDefinition.SlotFlags & slotFlags) != 0x0)
+            {
+                return (slotDefinition, false);
+            }
+
+            if (slot.ContainedEntity == null)
+            {
+                Log.Info("2");
+                continue;
+            }
+
+            if (!InventorySystem.TryGetSlotEntity(character,
+                    slotDefinition.Name,
+                    out var slotEnt,
+                    inventoryComponent: character.Comp) ||
+                !_storageQuery.TryComp(slotEnt, out var storageComponent))
+            {
+                Log.Info("3");
+                continue;
+            }
+
+            if (_storage.HasSpace((slotEnt.Value, storageComponent)))
+                return (slotDefinition, true);
+        }
+
+        return (null, false);
     }
 
     private List<EntProtoId> GetItems(List<EntityLoadoutPrototype> sortedLoadouts)
@@ -176,19 +246,21 @@ public abstract partial class SharedStationSpawningSystem
         EntityUid character)
     {
         var result = new List<EntProtoId>();
+        var hands = _handsSystem.GetHandCount(character);
+        var inhandItems = 0;
 
         foreach (var loadout in sortedLoadouts)
         {
             foreach (var inhand in loadout.Inhand)
             {
+                inhandItems++;
+
+                if (inhandItems > hands)
+                    break;
+
                 result.Add(inhand);
             }
         }
-
-        var hands = _handsSystem.GetHandCount(character);
-        var length = result.Count - hands;
-
-        result.RemoveRange(hands, length);
 
         return result;
     }

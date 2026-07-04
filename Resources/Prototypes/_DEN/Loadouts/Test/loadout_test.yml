@@ -4,3 +4,10 @@
   description: loadout-desc-test
   items:
   - WeaponSubMachineGunDrozd
+
+- type: entityLoadout
+  id: test2
+  name: loadout-name-test2
+  description: loadout-desc-test
+  equipment:
+    back: ClothingBackpackHolding

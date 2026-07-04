@@ -12,10 +12,11 @@ namespace Content.Server.Station.Systems;
 public sealed partial class StationSpawningSystem
 {
     private const string LoadoutTest1 = "test1";
+    private const string LoadoutTest2 = "test2";
 
     private readonly HashSet<ProtoId<EntityLoadoutPrototype>> _testingLoadouts = new()
     {
-        LoadoutTest1
+        LoadoutTest1, LoadoutTest2
     };
 
     public EntityUid SpawnPlayerMob(

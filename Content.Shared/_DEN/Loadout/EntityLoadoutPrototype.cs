@@ -2,6 +2,7 @@ using Content.Shared._DEN.Requirements.PlayerRequirements;
 using Content.Shared._DEN.Traits.TraitFunctions;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
 namespace Content.Shared._DEN.Loadout;
 
@@ -13,11 +14,11 @@ public sealed partial class EntityLoadoutPrototype : IInheritingPrototype, IProt
     public string ID { get; private set; } = default!;
 
     /// <inheritdoc/>
-    [DataField]
+    [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<EntityLoadoutPrototype>))]
     public string[]? Parents { get; private set; }
 
     /// <inheritdoc/>
-    [DataField]
+    [AbstractDataField]
     public bool Abstract { get; private set; }
 
     /// <summary>
@@ -74,7 +75,7 @@ public sealed partial class EntityLoadoutPrototype : IInheritingPrototype, IProt
     /// <summary>
     /// The full list of items to spawn in this loadout.
     /// </summary>
-    [DataField(required: true)]
+    [DataField]
     public List<EntProtoId> Items = new();
 
     /// <summary>
