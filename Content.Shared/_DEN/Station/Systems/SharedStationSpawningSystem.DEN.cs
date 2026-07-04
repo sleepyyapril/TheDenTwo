@@ -2,6 +2,7 @@ using Content.Shared._DEN.Loadout;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Storage;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -124,10 +125,7 @@ public abstract partial class SharedStationSpawningSystem
     )
     {
         if (!_inventoryQuery.TryComp(character, out var inventoryComp))
-        {
-            Log.Info("6");
             return;
-        }
 
         // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
         foreach (var item in items)
@@ -135,6 +133,7 @@ public abstract partial class SharedStationSpawningSystem
             var spawnedEntity = Spawn(item, coordinates);
             var (bestSlot, inside) = GetSlotSpawnable((character, inventoryComp), spawnedEntity);
 
+            // ReSharper disable once ConvertIfStatementToSwitchStatement
             if (bestSlot == null
                 && TryComp<HandsComponent>(character, out var handsComponent)
                 && _handsSystem.TryGetEmptyHand((character, handsComponent), out var emptyHand))
@@ -144,24 +143,23 @@ public abstract partial class SharedStationSpawningSystem
             }
 
             if (bestSlot == null)
-            {
-                Log.Info("4");
                 continue;
-            }
 
+            // ReSharper disable once ConvertIfStatementToSwitchStatement
             if (inside
-                && !InventorySystem.TryGetSlotEntity(character,
+                && InventorySystem.TryGetSlotEntity(character,
                     bestSlot.Name,
                     out var slotEnt,
                     inventoryComponent: inventoryComp)
                 && _storageQuery.TryComp(slotEnt, out var storageComponent)
-                && _storage.Insert(slotEnt.Value, spawnedEntity, out _, storageComp: storageComponent, playSound: false))
+                && _storage.CanInsert(slotEnt.Value, spawnedEntity, out _))
             {
+                _storage.Insert(slotEnt.Value, spawnedEntity, out _, storageComp: storageComponent, playSound: false);
                 continue;
             }
 
-            InventorySystem.TryEquip(character, spawnedEntity, bestSlot.Name, silent: true, force: true);
-            Log.Info("bitch##&^$&^#$&#");
+            if (!inside)
+                InventorySystem.TryEquip(character, spawnedEntity, bestSlot.Name, silent: true, force: true);
         }
     }
 
@@ -179,36 +177,34 @@ public abstract partial class SharedStationSpawningSystem
         while (enumerator.MoveNext(out var slot))
         {
             if (!InventorySystem.TryGetSlot(character, slot.ID, out var slotDefinition, character.Comp))
-            {
-                Log.Info("1");
                 continue;
-            }
 
-            if ((slotDefinition.SlotFlags & slotFlags) != 0x0)
-            {
+            if ((slotDefinition.SlotFlags & slotFlags) != 0x0
+                && slot.ContainedEntity == null
+                && InventorySystem.CanEquip(character,
+                    item,
+                    slotDefinition.Name,
+                    out _))
                 return (slotDefinition, false);
-            }
 
             if (slot.ContainedEntity == null)
-            {
-                Log.Info("2");
                 continue;
-            }
 
-            if (!InventorySystem.TryGetSlotEntity(character,
-                    slotDefinition.Name,
-                    out var slotEnt,
-                    inventoryComponent: character.Comp) ||
-                !_storageQuery.TryComp(slotEnt, out var storageComponent))
-            {
-                Log.Info("3");
+            if (!InventorySystem.TryGetSlotContainer(character.Owner,
+                    slot.ID,
+                    out var containerSlot,
+                    out _,
+                    inventory: character.Comp)
+                || containerSlot.ContainedEntity is not { Valid: true } slotEnt)
                 continue;
-            }
 
-            if (_storage.HasSpace((slotEnt.Value, storageComponent)))
+            if (!TryComp<StorageComponent>(slotEnt, out var storageComponent))
+                continue;
+
+            if (_storage.CanInsert(slotEnt, item, out _, storageComponent))
                 return (slotDefinition, true);
         }
-
+;
         return (null, false);
     }
 
