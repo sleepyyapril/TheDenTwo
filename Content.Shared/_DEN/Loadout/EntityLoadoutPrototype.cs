@@ -5,7 +5,8 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._DEN.Loadout;
 
-public sealed class EntityLoadoutPrototype : IInheritingPrototype, IPrototype
+[Prototype]
+public sealed partial class EntityLoadoutPrototype : IInheritingPrototype, IPrototype
 {
     [ViewVariables]
     [IdDataField]
