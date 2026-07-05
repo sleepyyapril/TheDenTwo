@@ -11,8 +11,6 @@ namespace Content.Shared.Station;
 
 public abstract partial class SharedStationSpawningSystem
 {
-    private const string DefaultItemsSlot = "back";
-
     public void SpawnCharacterLoadout(HashSet<ProtoId<EntityLoadoutPrototype>> loadouts,
         EntityUid character,
         EntityCoordinates coordinates)
@@ -60,7 +58,7 @@ public abstract partial class SharedStationSpawningSystem
                 || string.IsNullOrEmpty(equipmentId))
                 continue;
 
-            var equipmentEntity = Spawn(equipmentId, coordinates);
+            var equipmentEntity = PredictedSpawnAtPosition(equipmentId, coordinates);
             InventorySystem.TryEquip(character, equipmentEntity, slot.Name, silent: true, force: true);
         }
     }
@@ -78,7 +76,7 @@ public abstract partial class SharedStationSpawningSystem
         // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
         foreach (var prototype in inhand)
         {
-            var inhandEntity = Spawn(prototype, coords);
+            var inhandEntity = PredictedSpawnAtPosition(prototype, coords);
 
             if (_handsSystem.TryGetEmptyHand((character, handsComponent), out var emptyHand))
             {
@@ -113,7 +111,7 @@ public abstract partial class SharedStationSpawningSystem
             // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
             foreach (var entProto in entProtos)
             {
-                var spawnedEntity = Spawn(entProto, coordinates);
+                var spawnedEntity = PredictedSpawnAtPosition(entProto, coordinates);
                 _storage.Insert(slotEnt.Value, spawnedEntity, out _, storageComp: storageComponent, playSound: false);
             }
         }
@@ -130,7 +128,7 @@ public abstract partial class SharedStationSpawningSystem
         // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
         foreach (var item in items)
         {
-            var spawnedEntity = Spawn(item, coordinates);
+            var spawnedEntity = PredictedSpawnAtPosition(item, coordinates);
             var (bestSlot, inside) = GetSlotSpawnable((character, inventoryComp), spawnedEntity);
 
             // ReSharper disable once ConvertIfStatementToSwitchStatement

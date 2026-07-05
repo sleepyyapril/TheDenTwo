@@ -1,5 +1,3 @@
-using Content.Shared.Preferences.Loadouts;
-using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -10,15 +8,29 @@ public record struct DenLoadout
 {
     public Guid Id;
     public int Priority;
+    public string Name;
+    public Guid LoadoutCategory;
 
-    public Dictionary<Guid, ProtoId<LoadoutPrototype>> Loadouts;
-    public Dictionary<Guid, DenCustomLoadoutInfo> CustomLoadouts;
+    public HashSet<ProtoId<EntityLoadoutPrototype>> Loadouts;
+    //public Dictionary<Guid, HashSet<DenCustomLoadoutInfo>> CustomLoadouts;
 }
 
 [Serializable, NetSerializable]
 public record struct DenCustomLoadoutInfo
 {
+    public EntProtoId EntProtoId;
+
     public string? CustomName;
     public string? CustomDescription;
     public string? CustomColor;
+}
+
+[Serializable, NetSerializable]
+public record struct DenLoadoutCategory
+{
+    public Guid Id;
+    public int Priority;
+    public string Name;
+    public string Color;
+    public HashSet<Guid> Members;
 }

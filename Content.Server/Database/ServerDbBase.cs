@@ -51,6 +51,12 @@ namespace Content.Server.Database
                     .ThenInclude(h => h.Loadouts)
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
+                .Include(p => p.Profiles) // DEN
+                    .ThenInclude(c => c.LoadoutCategories) // DEN
+                    .ThenInclude(l => l.Members) // DEN
+                .Include(p => p.Profiles).ThenInclude(j => j.JobLoadouts) // DEN
+                .Include(p => p.Profiles)
+
                 .AsSplitQuery()
                 .SingleOrDefaultAsync(p => p.UserId == userId.UserId, cancel);
         }
@@ -108,6 +114,9 @@ namespace Content.Server.Database
                 .Include(p => p.Loadouts)
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
+                .Include(c => c.LoadoutCategories) // DEN
+                    .ThenInclude(l => l.Members) // DEN
+                .Include(j => j.JobLoadouts) // DEN
                 .AsSplitQuery()
                 .SingleOrDefault(h => h.Slot == slot);
 
@@ -265,6 +274,7 @@ namespace Content.Server.Database
 
             profile.Loadouts.Clear();
 
+            /* DEN
             foreach (var (role, loadouts) in humanoid.Loadouts)
             {
                 var dz = new ProfileRoleLoadout()
@@ -292,6 +302,54 @@ namespace Content.Server.Database
                 }
 
                 profile.Loadouts.Add(dz);
+            }
+            */
+
+            foreach (var (guid, category) in humanoid.LoadoutCategories)
+            {
+                var profiles = new List<LoadoutProfile>();
+
+                foreach (var loadoutProfileId in category.Members)
+                {
+                    if (!humanoid.LoadoutProfiles.TryGetValue(loadoutProfileId, out var loadoutProfile))
+                        continue;
+
+                    var items = loadoutProfile.Loadouts
+                        .Select(i => i.Id)
+                        .ToList();
+
+                    var dbProfile = new LoadoutProfile
+                    {
+                        LoadoutUniqueId = loadoutProfileId,
+                        LoadoutItems = items,
+                        LoadoutName = loadoutProfile.Name,
+                        Priority = loadoutProfile.Priority,
+                    };
+
+                    profiles.Add(dbProfile);
+                }
+
+                var dbCategory = new LoadoutCategory
+                {
+                    CategoryUniqueId = guid,
+                    CategoryColor = category.Color,
+                    CategoryName = category.Name,
+                    Priority = category.Priority,
+                    Members = profiles
+                };
+
+                profile.LoadoutCategories.Add(dbCategory);
+            }
+
+            foreach (var (job, loadoutIds) in humanoid.JobLoadouts)
+            {
+                var jobLoadout = new JobLoadout
+                {
+                    LoadoutProfiles = loadoutIds.ToList(),
+                    JobName = job
+                };
+
+                profile.JobLoadouts.Add(jobLoadout);
             }
 
             return profile;

@@ -1,3 +1,4 @@
+using Content.Shared._DEN.Loadout;
 using Content.Shared._DEN.Traits.Prototypes;
 using Content.Shared.Humanoid;
 using Content.Shared.Preferences.Loadouts;
@@ -20,6 +21,21 @@ public sealed partial class HumanoidCharacterProfile
     /// </summary>
     public IReadOnlySet<ProtoId<EntityTraitPrototype>> EntityTraitPreferences => _entityTraitPreferences;
 
+    [DataField("_loadoutCategories")]
+    private Dictionary<Guid, DenLoadoutCategory> _loadoutCategories = new();
+
+    public IReadOnlyDictionary<Guid, DenLoadoutCategory> LoadoutCategories => _loadoutCategories;
+
+    [DataField("_loadoutProfiles")]
+    private Dictionary<Guid, DenLoadout> _loadoutProfiles = new();
+
+    public IReadOnlyDictionary<Guid, DenLoadout> LoadoutProfiles => _loadoutProfiles;
+
+    [DataField("_jobLoadouts")]
+    private Dictionary<ProtoId<JobPrototype>, HashSet<Guid>> _jobLoadouts = new();
+
+    public IReadOnlyDictionary<ProtoId<JobPrototype>, HashSet<Guid>> JobLoadouts => _jobLoadouts;
+
     public HumanoidCharacterProfile(
         string name,
         string flavortext,
@@ -33,7 +49,10 @@ public sealed partial class HumanoidCharacterProfile
         PreferenceUnavailableMode preferenceUnavailable,
         HashSet<ProtoId<AntagPrototype>> antagPreferences,
         HashSet<ProtoId<EntityTraitPrototype>> entityTraitPreferences,
-        Dictionary<string, RoleLoadout> loadouts)
+        // Dictionary<string, RoleLoadout> loadouts, - DEN
+        Dictionary<Guid, DenLoadoutCategory> loadoutCategories,
+        Dictionary<Guid, DenLoadout> loadoutProfiles,
+        Dictionary<ProtoId<JobPrototype>, HashSet<Guid>> jobLoadouts)
     {
         Name = name;
         FlavorText = flavortext;
@@ -47,7 +66,10 @@ public sealed partial class HumanoidCharacterProfile
         PreferenceUnavailable = preferenceUnavailable;
         _antagPreferences = antagPreferences;
         _entityTraitPreferences = entityTraitPreferences; // DEN
-        _loadouts = loadouts;
+        // _loadouts = loadouts; - DEN
+        _loadoutCategories = loadoutCategories;
+        _loadoutProfiles = loadoutProfiles; // DEN
+        _jobLoadouts = jobLoadouts; // DEN
 
         var hasHighPrority = false;
         foreach (var (key, value) in _jobPriorities)
@@ -116,6 +138,69 @@ public sealed partial class HumanoidCharacterProfile
         return new(this)
         {
             _entityTraitPreferences = list,
+        };
+    }
+
+    public HumanoidCharacterProfile WithLoadoutProfile(Guid loadoutId, DenLoadout loadout)
+    {
+        var profiles = new Dictionary<Guid, DenLoadout>(_loadoutProfiles);
+        profiles[loadoutId] = loadout;
+
+        return new(this)
+        {
+            _loadoutProfiles = profiles
+        };
+    }
+
+    public HumanoidCharacterProfile WithLoadoutCategory(Guid categoryId, DenLoadoutCategory category)
+    {
+        var categories = new Dictionary<Guid, DenLoadoutCategory>(_loadoutCategories);
+        categories[categoryId] = category;
+
+        return new(this)
+        {
+            _loadoutCategories = categories
+        };
+    }
+
+    public HumanoidCharacterProfile WithJobLoadout(ProtoId<JobPrototype> jobId, Guid loadoutId)
+    {
+        var jobLoadouts = new Dictionary<ProtoId<JobPrototype>, HashSet<Guid>>(_jobLoadouts);
+
+        if (!jobLoadouts.ContainsKey(jobId))
+            jobLoadouts.Add(jobId, new());
+
+        jobLoadouts[jobId].Add(loadoutId);
+
+        return new(this)
+        {
+            _jobLoadouts = jobLoadouts
+        };
+    }
+
+    public HumanoidCharacterProfile WithoutJobLoadout(ProtoId<JobPrototype> jobId, Guid loadoutId)
+    {
+        var jobLoadouts = new Dictionary<ProtoId<JobPrototype>, HashSet<Guid>>(_jobLoadouts);
+
+        if (!jobLoadouts.ContainsKey(jobId))
+            return this;
+
+        jobLoadouts[jobId].Remove(loadoutId);
+
+        return new(this)
+        {
+            _jobLoadouts = jobLoadouts
+        };
+    }
+
+    public HumanoidCharacterProfile WithJobLoadouts(ProtoId<JobPrototype> jobId, HashSet<Guid> loadoutIds)
+    {
+        var jobLoadouts = new Dictionary<ProtoId<JobPrototype>, HashSet<Guid>>(_jobLoadouts);
+        jobLoadouts[jobId] = new HashSet<Guid>(loadoutIds);
+
+        return new(this)
+        {
+            _jobLoadouts = jobLoadouts
         };
     }
 

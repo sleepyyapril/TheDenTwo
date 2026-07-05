@@ -131,8 +131,8 @@
                     <!-- Markings -->
                     <humanoid:MarkingPicker Name="Markings" HorizontalExpand="True" VerticalExpand="True" />
                 </BoxContainer>
-                <BoxContainer Name="LoadoutTab">
-                    <den:DenLoadoutTab HorizontalExpand="True" VerticalExpand="True" />
+                <BoxContainer Name="LoadoutTab" Orientation="Vertical" Margin="10">
+                    <den:DenLoadoutTab Name="DenLoadouts" HorizontalExpand="True" VerticalExpand="True" />
                 </BoxContainer>
             </TabContainer>
         </BoxContainer>

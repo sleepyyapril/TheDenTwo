@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
+using Content.Shared._DEN.Loadout;
 using Content.Shared._DEN.Traits.Prototypes;
 using Content.Shared.Body;
 using Content.Shared.CCVar;
@@ -145,6 +146,7 @@ namespace Content.Server.Preferences.Managers
                 markings = _marking.ConvertMarkings(markingsList, species);
             }
 
+            /* DEN: Custom Loadout System
             var loadouts = new Dictionary<string, RoleLoadout>();
 
             foreach (var role in profile.Loadouts)
@@ -168,6 +170,52 @@ namespace Content.Server.Preferences.Managers
 
                 loadouts[role.RoleName] = loadout;
             }
+            */
+
+            var jobLoadouts = new Dictionary<ProtoId<JobPrototype>, HashSet<Guid>>();
+            var loadoutCategories = new Dictionary<Guid, DenLoadoutCategory>();
+            var loadoutProfiles = new Dictionary<Guid, DenLoadout>();
+
+            foreach (var loadoutCategory in profile.LoadoutCategories)
+            {
+                var members = loadoutCategory.Members
+                    .Select(l => l.LoadoutUniqueId)
+                    .ToHashSet();
+
+                var category = new DenLoadoutCategory
+                {
+                    Id = loadoutCategory.CategoryUniqueId,
+                    Name = loadoutCategory.CategoryName,
+                    Color = loadoutCategory.CategoryColor,
+                    Members = members,
+                    Priority = loadoutCategory.Priority
+                };
+
+                loadoutCategories[category.Id] = category;
+
+                foreach (var loadoutProfile in loadoutCategory.Members)
+                {
+                    var loadoutItems = loadoutProfile.LoadoutItems.Select(AsLoadoutPrototype).ToHashSet();
+                    var loadout = new DenLoadout
+                    {
+                        Id = loadoutProfile.LoadoutUniqueId,
+                        LoadoutCategory = category.Id,
+                        Name = loadoutProfile.LoadoutName,
+                        Priority = loadoutProfile.Priority,
+                        Loadouts = loadoutItems
+                    };
+
+                    loadoutProfiles[loadoutProfile.LoadoutUniqueId] = loadout;
+                }
+            }
+
+            foreach (var jobLoadout in profile.JobLoadouts)
+            {
+                var profiles = jobLoadout.LoadoutProfiles.ToHashSet();
+                var jobId = AsJobPrototype(jobLoadout.JobName);
+
+                jobLoadouts[jobId] = profiles;
+            }
 
             return new HumanoidCharacterProfile(
                 profile.CharacterName,
@@ -187,7 +235,9 @@ namespace Content.Server.Preferences.Managers
                 (PreferenceUnavailableMode) profile.PreferenceUnavailable,
                 antags.ToHashSet(),
                 traits.ToHashSet(),
-                loadouts
+                loadoutCategories,
+                loadoutProfiles,
+                jobLoadouts
             );
         }
 

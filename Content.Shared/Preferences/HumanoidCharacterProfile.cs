@@ -1,6 +1,7 @@
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Content.Shared._DEN.Loadout;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
@@ -187,7 +188,10 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 // new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences), // DEN
                 new HashSet<ProtoId<EntityTraitPrototype>>(other.EntityTraitPreferences), // DEN
-                new Dictionary<string, RoleLoadout>(other.Loadouts))
+                // new Dictionary<string, RoleLoadout>(other.Loadouts), // DEN
+                new Dictionary<Guid, DenLoadoutCategory>(other.LoadoutCategories),
+                new Dictionary<Guid, DenLoadout>(other.LoadoutProfiles), // DEN
+                new Dictionary<ProtoId<JobPrototype>, HashSet<Guid>>(other.JobLoadouts)) // DEN
         {
         }
 
