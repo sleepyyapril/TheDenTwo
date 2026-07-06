@@ -1,20 +1,60 @@
-<ContainerButton xmlns="https://spacestation14.io"
-         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-         xmlns:ui="clr-namespace:Content.Client._DEN.Lobby.UI">
+<ui:DenLoadoutTab xmlns="https://spacestation14.io"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:ui="clr-namespace:Content.Client._DEN.Lobby.UI"
+                  xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
     <BoxContainer Orientation="Vertical"
-                  HorizontalExpand="True"
-                  VerticalExpand="True">
+                  SeparationOverride="0">
+        <PanelContainer SetHeight="50"
+                        HorizontalExpand="True"
+                        StyleClasses="ChatPanel">
+            <BoxContainer Margin="5 0 5 0">
+                <Label Text="Loadouts"
+                       Margin="15 0 0 0"
+                       StyleClasses="LabelHeading" />
+                <Control HorizontalExpand="True"></Control>
+                <Button Name="ButtonCreateCategory"
+                        Text="Create New Category"
+                        SetHeight="35"
+                        StyleClasses="OpenRight" />
+                <Button Name="ButtonCreateLoadout"
+                        Text="Create New Loadout"
+                        SetHeight="35"
+                        StyleClasses="OpenLeft" />
+            </BoxContainer>
+        </PanelContainer>
+        <PanelContainer Name="WarningsContainer"
+                        SetHeight="50"
+                        HorizontalExpand="True"
+                        StyleClasses="ChatPanel"
+                        Margin="0 5 0 0"
+                        Visible="False">
+            <BoxContainer Margin="5 0 5 0">
+                <RichTextLabel Name="WarningsText" Text="You have [color=#ffa21f]2[/color] unresolved loadout issues. "  Margin="15 0 0 0" />
+                <Control HorizontalExpand="True"></Control>
+                <Button Name="ButtonViewWarnings"
+                        Text="View Warnings"
+                        SetHeight="35" />
+            </BoxContainer>
+        </PanelContainer>
+        <PanelContainer SetHeight="3" HorizontalExpand="True" Margin="0 10 0 6">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#393947" />
+            </PanelContainer.PanelOverride>
+        </PanelContainer>
         <BoxContainer HorizontalExpand="True"
                       VerticalExpand="True"
                       Orientation="Vertical"
-                      SeparationOverride="5"
-                      Margin="5">
-            <ui:DenLoadoutButtons HorizontalExpand="True" />
-            <ui:DenLoadoutButtons HorizontalExpand="True" />
-            <ui:DenLoadoutButtons HorizontalExpand="True" />
-            <ui:DenLoadoutButtons HorizontalExpand="True" />
-            <ui:DenLoadoutButtons HorizontalExpand="True" />
-            <ui:DenLoadoutButtons HorizontalExpand="True" />
+                      Margin="0 5 0 0">
+            <PanelContainer HorizontalExpand="True"
+                            VerticalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <gfx:StyleBoxFlat BorderColor="#1F1F23" BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Name="LoadoutContainer"
+                              Orientation="Vertical">
+                    <!-- <ui:DenCategoryContainer /> -->
+                </BoxContainer>
+            </PanelContainer>
         </BoxContainer>
     </BoxContainer>
-</ContainerButton>
+</ui:DenLoadoutTab>

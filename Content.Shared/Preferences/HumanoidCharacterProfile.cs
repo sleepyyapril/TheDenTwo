@@ -485,7 +485,10 @@ namespace Content.Shared.Preferences
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
             // if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false; // DEN
             if (!_entityTraitPreferences.SequenceEqual(other._entityTraitPreferences)) return false; // den
-            if (!Loadouts.SequenceEqual(other.Loadouts)) return false;
+            // if (!Loadouts.SequenceEqual(other.Loadouts)) return false; // DEN
+            if (!_jobLoadouts.SequenceEqual(other._jobLoadouts)) return false; // DEN
+            if (!_loadoutProfiles.SequenceEqual(other._loadoutProfiles)) return false; // DEN
+            if (!_loadoutCategories.SequenceEqual(other._loadoutCategories)) return false; // DEN
             if (FlavorText != other.FlavorText) return false;
             return Appearance.Equals(other.Appearance);
         }
@@ -749,7 +752,10 @@ namespace Content.Shared.Preferences
             hashCode.Add(_antagPreferences);
             // hashCode.Add(_traitPreferences); // DEN
             hashCode.Add(_entityTraitPreferences); // DEN
-            hashCode.Add(_loadouts);
+            //hashCode.Add(_loadouts); // DEN
+            hashCode.Add(_jobLoadouts); // DEN
+            hashCode.Add(_loadoutProfiles); // DEN
+            hashCode.Add(_loadoutCategories); // DEN
             hashCode.Add(Name);
             hashCode.Add(FlavorText);
             hashCode.Add(Species);

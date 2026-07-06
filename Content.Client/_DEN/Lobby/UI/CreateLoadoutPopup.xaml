@@ -1,0 +1,29 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+              SetSize="350 335"
+              Title="Create Category">
+    <BoxContainer HorizontalExpand="True"
+                  VerticalExpand="True"
+                  Orientation="Vertical"
+                  Margin="10 10 10 0">
+        <BoxContainer Orientation="Vertical" Margin="2">
+            <Label HorizontalExpand="True" Text="Category name:" />
+            <LineEdit Name="LoadoutNameEdit"
+                      HorizontalExpand="True"
+                      PlaceHolder="My Loadout" />
+        </BoxContainer>
+        <BoxContainer Orientation="Vertical" Margin="0 5 0 0">
+            <Label Margin="2"
+                   HorizontalExpand="True"
+                   Text="Category:" />
+            <OptionButton Name="OptionsCategories" />
+        </BoxContainer>
+
+        <Button Name="ButtonSubmit"
+                VerticalAlignment="Center"
+                SetSize="120 35"
+                Margin="7"
+                Text="Submit"/>
+    </BoxContainer>
+</controls:FancyWindow>

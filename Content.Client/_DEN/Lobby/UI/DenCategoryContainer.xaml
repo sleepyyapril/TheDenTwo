@@ -1,13 +1,65 @@
 <ui:DenCategoryContainer xmlns="https://spacestation14.io"
                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                         xmlns:ui="clr-namespace:Content.Client._DEN.Lobby.UI">
-    <PanelContainer StyleClasses="LoadoutBackground"
-                    HorizontalExpand="True">
-        <BoxContainer VerticalAlignment="Center"
-                      Orientation="Horizontal"
-                      SeparationOverride="4"
-                      Margin="5 5">
+                         xmlns:ui="clr-namespace:Content.Client._DEN.Lobby.UI"
+                         xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+    <BoxContainer Orientation="Vertical"
+                  HorizontalExpand="True"
+                  Margin="0 0 0 8">
+        <PanelContainer Name="HeaderPanel" StyleClasses="TraitsCategoryHeader">
+            <Button Name="HeaderButton"
+                    StyleClasses="TraitsCategoryHeaderButton"
+                    HorizontalExpand="True"
+                    SetHeight="45">
+                <BoxContainer Orientation="Horizontal" Margin="8 6">
+                    <Label Name="CategoryNameLabel"
+                           Text="A Loadout"
+                           StyleClasses="TraitsCategoryNameLabel"
+                           Margin="5 0 0 0"/>
 
-        </BoxContainer>
-    </PanelContainer>
+                    <Control HorizontalExpand="True"/>
+
+                    <BoxContainer Name="WarningContainer"
+                                  Visible="False">
+                        <TextureButton TexturePath="/Textures/Interface/VerbIcons/examine.svg.192dpi.png"
+                                       SetSize="32 32"
+                                       Modulate="#c7c7c7" />
+
+                        <Label Name="CategoryStatsLabel"
+                               Text="1 warning"
+                               StyleClasses="TraitsCategoryStatsLabel"
+                               Margin="0 0 4 0"/>
+                    </BoxContainer>
+
+                    <Label Name="ExpandIcon"
+                           Text="▶"
+                           StyleClasses="TraitsCategoryExpandIcon"
+                           Margin="8 0 8 0"/>
+                </BoxContainer>
+            </Button>
+        </PanelContainer>
+
+        <!-- Accent Bar -->
+        <PanelContainer Name="AccentBar"
+                        StyleClasses="TraitsCategoryAccent"
+                        SetHeight="3"
+                        Margin="0 0 0 0"/>
+
+        <!-- Traits Container -->
+        <PanelContainer Name="ContentPanel"
+                        StyleClasses="TraitsCategoryContent"
+                        Visible="False"
+                        Margin="2 2">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BackgroundColor="#2f2f3b"/>
+            </PanelContainer.PanelOverride>
+            <BoxContainer Name="LoadoutContainer"
+                          Orientation="Vertical"
+                          HorizontalExpand="True"
+                          Margin="8 8">
+                <!-- <ui:DenLoadoutButtons /> -->
+            </BoxContainer>
+        </PanelContainer>
+    </BoxContainer>
+
+
 </ui:DenCategoryContainer>

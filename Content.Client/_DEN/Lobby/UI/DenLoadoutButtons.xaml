@@ -1,8 +1,11 @@
 <ui:DenLoadoutButtons xmlns="https://spacestation14.io"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-              xmlns:ui="clr-namespace:Content.Client._DEN.Lobby.UI">
-    <PanelContainer StyleClasses="ChatPanel"
-                    HorizontalExpand="True">
+              xmlns:ui="clr-namespace:Content.Client._DEN.Lobby.UI"
+              xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+    <PanelContainer HorizontalExpand="True">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#2a2a35"/>
+        </PanelContainer.PanelOverride>
         <BoxContainer VerticalAlignment="Center"
                       Orientation="Horizontal"
                       Margin="5">

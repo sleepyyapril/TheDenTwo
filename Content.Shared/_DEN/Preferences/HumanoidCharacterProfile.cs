@@ -143,21 +143,47 @@ public sealed partial class HumanoidCharacterProfile
 
     public HumanoidCharacterProfile WithLoadoutProfile(Guid loadoutId, DenLoadout loadout)
     {
-        var profiles = new Dictionary<Guid, DenLoadout>(_loadoutProfiles);
-        profiles[loadoutId] = loadout;
+        var profiles = new Dictionary<Guid, DenLoadout>(_loadoutProfiles)
+        {
+            [loadoutId] = loadout,
+        };
 
-        return new(this)
+        return new HumanoidCharacterProfile(this)
         {
             _loadoutProfiles = profiles
         };
     }
 
+    public HumanoidCharacterProfile WithNewLoadout(Guid loadoutId, Guid categoryId, DenLoadout loadout)
+    {
+        if (!_loadoutCategories.TryGetValue(categoryId, out var loadoutCategory))
+            return this;
+
+        var profiles = new Dictionary<Guid, DenLoadout>(_loadoutProfiles)
+        {
+            [loadoutId] = loadout,
+        };
+
+        var categories = new Dictionary<Guid, DenLoadoutCategory>(_loadoutCategories);
+        loadoutCategory.Members.Add(loadoutId);
+
+        categories[categoryId] = loadoutCategory;
+
+        return new HumanoidCharacterProfile(this)
+        {
+            _loadoutProfiles = profiles,
+            _loadoutCategories = categories,
+        };
+    }
+
     public HumanoidCharacterProfile WithLoadoutCategory(Guid categoryId, DenLoadoutCategory category)
     {
-        var categories = new Dictionary<Guid, DenLoadoutCategory>(_loadoutCategories);
-        categories[categoryId] = category;
+        var categories = new Dictionary<Guid, DenLoadoutCategory>(_loadoutCategories)
+        {
+            [categoryId] = category,
+        };
 
-        return new(this)
+        return new HumanoidCharacterProfile(this)
         {
             _loadoutCategories = categories
         };
@@ -172,7 +198,7 @@ public sealed partial class HumanoidCharacterProfile
 
         jobLoadouts[jobId].Add(loadoutId);
 
-        return new(this)
+        return new HumanoidCharacterProfile(this)
         {
             _jobLoadouts = jobLoadouts
         };
@@ -187,7 +213,7 @@ public sealed partial class HumanoidCharacterProfile
 
         jobLoadouts[jobId].Remove(loadoutId);
 
-        return new(this)
+        return new HumanoidCharacterProfile(this)
         {
             _jobLoadouts = jobLoadouts
         };
@@ -195,10 +221,12 @@ public sealed partial class HumanoidCharacterProfile
 
     public HumanoidCharacterProfile WithJobLoadouts(ProtoId<JobPrototype> jobId, HashSet<Guid> loadoutIds)
     {
-        var jobLoadouts = new Dictionary<ProtoId<JobPrototype>, HashSet<Guid>>(_jobLoadouts);
-        jobLoadouts[jobId] = new HashSet<Guid>(loadoutIds);
+        var jobLoadouts = new Dictionary<ProtoId<JobPrototype>, HashSet<Guid>>(_jobLoadouts)
+        {
+            [jobId] = new(loadoutIds),
+        };
 
-        return new(this)
+        return new HumanoidCharacterProfile(this)
         {
             _jobLoadouts = jobLoadouts
         };

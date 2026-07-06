@@ -286,6 +286,13 @@ namespace Content.Client.Lobby.UI
 
             #endregion Markings
 
+            #region Den Loadouts
+
+            TabContainer.SetTabTitle(5, "Loadouts"); // TODO: localize
+            RefreshDenLoadouts();
+
+            #endregion
+
             RefreshFlavorText();
 
             #region Dummy

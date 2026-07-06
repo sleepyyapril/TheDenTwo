@@ -945,6 +945,119 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("job", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.JobLoadout", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("job_loadout_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("JobName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("job_name");
+
+                    b.PrimitiveCollection<List<Guid>>("LoadoutProfiles")
+                        .IsRequired()
+                        .HasColumnType("uuid[]")
+                        .HasColumnName("loadout_profiles");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("integer")
+                        .HasColumnName("profile_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_job_loadout");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("job_loadout", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.LoadoutCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("loadout_category_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CategoryColor")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("category_color");
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("category_name");
+
+                    b.Property<Guid>("CategoryUniqueId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("category_unique_id");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("integer")
+                        .HasColumnName("profile_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_loadout_category");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("loadout_category", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.LoadoutProfile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("loadout_profile_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("LoadoutCategoryId")
+                        .HasColumnType("integer")
+                        .HasColumnName("loadout_category_id");
+
+                    b.PrimitiveCollection<List<string>>("LoadoutItems")
+                        .IsRequired()
+                        .HasColumnType("text[]")
+                        .HasColumnName("loadout_items");
+
+                    b.Property<string>("LoadoutName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("loadout_name");
+
+                    b.Property<Guid>("LoadoutUniqueId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("loadout_unique_id");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("PK_loadout_profile");
+
+                    b.HasIndex("LoadoutCategoryId");
+
+                    b.ToTable("loadout_profile", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.PlayTime", b =>
                 {
                     b.Property<int>("Id")
@@ -1874,6 +1987,42 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.JobLoadout", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithMany("JobLoadouts")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_job_loadout_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.LoadoutCategory", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithMany("LoadoutCategories")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_loadout_category_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.LoadoutProfile", b =>
+                {
+                    b.HasOne("Content.Server.Database.LoadoutCategory", "Category")
+                        .WithMany("Members")
+                        .HasForeignKey("LoadoutCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_loadout_profile_loadout_category_loadout_category_id");
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("Content.Server.Database.Player", b =>
                 {
                     b.OwnsOne("Content.Server.Database.TypedHwid", "LastSeenHWId", b1 =>
@@ -2079,6 +2228,11 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("BanHits");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.LoadoutCategory", b =>
+                {
+                    b.Navigation("Members");
+                });
+
             modelBuilder.Entity("Content.Server.Database.Player", b =>
                 {
                     b.Navigation("AdminLogs");
@@ -2123,7 +2277,11 @@ namespace Content.Server.Database.Migrations.Postgres
                 {
                     b.Navigation("Antags");
 
+                    b.Navigation("JobLoadouts");
+
                     b.Navigation("Jobs");
+
+                    b.Navigation("LoadoutCategories");
 
                     b.Navigation("Loadouts");
 
