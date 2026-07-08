@@ -112,7 +112,8 @@ public enum ChatPart
 {
     Dialog,
     Emote,
-    Tag
+    DialogTag,
+    EmoteTag,
 }
 
 public readonly record struct ComplexChatMessage()
@@ -160,19 +161,43 @@ public readonly record struct ComplexChatMessage()
         NeedsSeparation = needsSeparation;
         if (escapeMarkup)
             message = FormattedMessage.EscapeText(message);
+
+        var parsedMsg = FormattedMessage.FromMarkupPermissive(message);
+        List<(ChatPart, string)> parts = [];
         if (!isDetailed)
         {
-            Parts = [(ChatPart.Dialog, message)];
+            foreach (var hunk in parsedMsg.Nodes)
+            {
+                parts.Add((hunk.IsPlainText ? ChatPart.Dialog : ChatPart.DialogTag, hunk.ToString()));
+            }
+
+            Parts = parts;
             return;
         }
 
         var outside = false;
-        List<(ChatPart, string)> parts = [];
-        foreach (var msgChunk in message.Split(delimiter))
+        foreach (var hunk in parsedMsg.Nodes)
         {
-            if (!string.IsNullOrEmpty(msgChunk))
-                parts.Add((outside ? ChatPart.Dialog : ChatPart.Emote, msgChunk));
-            outside = !outside;
+            if (!hunk.IsPlainText)
+            {
+                parts.Add((outside ? ChatPart.DialogTag : ChatPart.EmoteTag, hunk.ToString()));
+                continue;
+            }
+
+            // Don't swap output between tags.
+            var pieces = hunk.ToString().Split(Delimiter);
+            if (pieces.Length == 1 && !string.IsNullOrEmpty(pieces[0]))
+            {
+                parts.Add((outside ? ChatPart.Dialog : ChatPart.Emote, pieces[0]));
+                continue;
+            }
+            
+            foreach (var msgChunk in pieces)
+            {
+                if (!string.IsNullOrEmpty(msgChunk))
+                    parts.Add((outside ? ChatPart.Dialog : ChatPart.Emote, msgChunk));
+                outside = !outside;
+            }
         }
 
         Parts = parts;
