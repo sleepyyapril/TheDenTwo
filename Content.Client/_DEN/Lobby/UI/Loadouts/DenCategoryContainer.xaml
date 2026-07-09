@@ -1,6 +1,7 @@
 <PanelContainer xmlns="https://spacestation14.io"
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+                xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                xmlns:loadouts="clr-namespace:Content.Client._DEN.Lobby.UI.Loadouts">
     <BoxContainer Orientation="Vertical"
                   HorizontalExpand="True"
                   Margin="0 0 0 8">
@@ -21,11 +22,14 @@
                                        SetSize="32 32"
                                        Modulate="#c7c7c7" />
 
-                        <Label Name="CategoryStatsLabel"
+                        <Label Name="CategoryWarningCount"
                                Text="1 warning"
                                StyleClasses="TraitsCategoryStatsLabel"
                                Margin="0 0 4 0"/>
                     </BoxContainer>
+                    <Label Name="CategoryLoadoutCount"
+                           StyleClasses="TraitsCategoryStatsLabel"
+                           Margin="0 0 4 0"/>
                     <Label Name="ExpandIcon"
                            Text="▶"
                            StyleClasses="TraitsCategoryExpandIcon"
@@ -52,7 +56,7 @@
                           Orientation="Vertical"
                           HorizontalExpand="True"
                           Margin="8 8">
-                <!-- <ui:DenLoadoutButtons /> -->
+                <loadouts:DenCategoryActions Name="CategoryActions" Access="Public" />
             </BoxContainer>
         </PanelContainer>
     </BoxContainer>

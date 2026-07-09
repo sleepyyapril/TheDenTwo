@@ -1,0 +1,29 @@
+<ContainerButton xmlns="https://spacestation14.io"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+              xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls">
+    <PanelContainer HorizontalExpand="True">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#2a2a35"/>
+        </PanelContainer.PanelOverride>
+        <BoxContainer VerticalAlignment="Center"
+                      Orientation="Horizontal"
+                      Margin="5">
+            <Label Name="LoadoutNameLabel"
+                   StyleClasses="TraitsEntryNameLabel"
+                   Text="Category actions"
+                   Margin="5 0 0 0"/>
+            <Control HorizontalExpand="True" />
+            <Button Name="ButtonEdit"
+                    Text="Edit Category"
+                    Margin="0 2 0 0"
+                    StyleClasses="OpenBoth"
+                    Access="Public"/>
+            <controls:ConfirmButton Name="ButtonDelete"
+                                    Text="Delete Category"
+                                    Margin="0 2 0 0"
+                                    StyleClasses="OpenLeft"
+                                    Access="Public"/>
+        </BoxContainer>
+    </PanelContainer>
+</ContainerButton>

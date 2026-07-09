@@ -17,13 +17,15 @@ public sealed partial class CreateLoadoutPopup : FancyWindow
 
         _categories = categories;
 
-        var index = -1;
+        var index = 0;
 
         foreach (var category in categories)
         {
-            OptionsCategories.AddItem(category.CategoryName, index++);
+            OptionsCategories.AddItem(category.CategoryName, index);
+            index += 1;
         }
 
+        OptionsCategories.OnItemSelected += args => OptionsCategories.SelectId(args.Id);
         ButtonSubmit.OnPressed += _ => OnSubmitPressed();
     }
 

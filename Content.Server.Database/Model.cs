@@ -49,7 +49,7 @@ namespace Content.Server.Database
         public DbSet<AdminMessage> AdminMessages { get; set; } = null!;
         public DbSet<RoleWhitelist> RoleWhitelists { get; set; } = null!;
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
-        public DbSet<DenuModel.DenuSettings> DenuSettings { get; set; } = null!;
+        public DbSet<DenModel.DenuSettings> DenuSettings { get; set; } = null!;
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -62,10 +62,10 @@ namespace Content.Server.Database
                 .HasIndex(p => new {p.Slot, PrefsId = p.PreferenceId})
                 .IsUnique();
 
-            modelBuilder.Entity<DenuModel.DenuSettings>()
+            modelBuilder.Entity<DenModel.DenuSettings>()
                 .HasOne(d => d.Player)
                 .WithOne()
-                .HasForeignKey<DenuModel.DenuSettings>(d => d.PlayerUserId)
+                .HasForeignKey<DenModel.DenuSettings>(d => d.PlayerUserId)
                 .HasPrincipalKey<Player>(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -96,19 +96,19 @@ namespace Content.Server.Database
                 .IsRequired();
 
             // DEN Start: Custom Loadout System
-            modelBuilder.Entity<JobLoadout>()
+            modelBuilder.Entity<DenModel.JobLoadout>()
                 .HasOne(e => e.Profile)
                 .WithMany(e => e.JobLoadouts)
                 .HasForeignKey(e => e.ProfileId)
                 .IsRequired();
 
-            modelBuilder.Entity<LoadoutCategory>()
+            modelBuilder.Entity<DenModel.LoadoutCategory>()
                 .HasOne(e => e.Profile)
                 .WithMany(e => e.LoadoutCategories)
                 .HasForeignKey(e => e.ProfileId)
                 .IsRequired();
 
-            modelBuilder.Entity<LoadoutProfile>()
+            modelBuilder.Entity<DenModel.LoadoutProfile>()
                 .HasOne(e => e.Category)
                 .WithMany(e => e.Members)
                 .HasForeignKey(e => e.LoadoutCategoryId)
@@ -379,9 +379,9 @@ namespace Content.Server.Database
         public List<Antag> Antags { get; } = new();
         public List<Trait> Traits { get; } = new();
 
-        public List<JobLoadout> JobLoadouts { get; } = new();
+        public List<DenModel.JobLoadout> JobLoadouts { get; } = new();
 
-        public List<LoadoutCategory> LoadoutCategories { get; } = new();
+        public List<DenModel.LoadoutCategory> LoadoutCategories { get; } = new();
 
         public List<ProfileRoleLoadout> Loadouts { get; } = new();
 
@@ -503,63 +503,6 @@ namespace Content.Server.Database
         /*
          * Insert extra data here like custom descriptions or colors or whatever.
          */
-    }
-
-    #endregion
-
-    #region Den Loadouts
-
-    public class LoadoutProfile
-    {
-        public int Id { get; set; }
-
-        public int LoadoutCategoryId {  get; set; }
-
-        public LoadoutCategory Category { get; set; } = null!;
-
-        public Guid LoadoutUniqueId { get; set; }
-
-        [MaxLength(256)]
-        public string LoadoutName { get; set; } = string.Empty;
-
-        public int Priority { get; set; }
-
-        public List<string> LoadoutItems { get; set; } = new();
-    }
-
-    public class JobLoadout
-    {
-        public int Id { get; set; }
-
-        public int ProfileId { get; set; }
-
-        public Profile Profile { get; set; } = null!;
-
-        [MaxLength(256)]
-        public string JobName { get; set; } = string.Empty;
-
-        public List<Guid> LoadoutProfiles { get; set; } = new();
-    }
-
-    public class LoadoutCategory
-    {
-        public int Id { get; set; }
-
-        public int ProfileId { get; set; }
-
-        public Profile Profile { get; set; } = null!;
-
-        public Guid CategoryUniqueId { get; set; }
-
-        public int Priority { get; set; }
-
-        [MaxLength(256)]
-        public string CategoryName { get; set; } = string.Empty;
-
-        [MaxLength(10)]
-        public string CategoryColor { get; set; } = string.Empty;
-
-        public List<LoadoutProfile> Members { get; set; } = new();
     }
 
     #endregion

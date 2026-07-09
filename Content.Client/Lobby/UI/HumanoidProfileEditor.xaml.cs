@@ -289,7 +289,6 @@ namespace Content.Client.Lobby.UI
             #region Den Loadouts
 
             TabContainer.SetTabTitle(5, "Loadouts"); // TODO: localize
-            RefreshDenLoadouts();
 
             #endregion
 
@@ -386,7 +385,7 @@ namespace Content.Client.Lobby.UI
 
             RefreshAntags();
             RefreshJobs();
-            RefreshLoadouts();
+            RefreshDenLoadouts();
             RefreshSpecies();
             RefreshTraits();
             RefreshFlavorText();

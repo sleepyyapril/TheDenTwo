@@ -307,7 +307,7 @@ namespace Content.Server.Database
 
             foreach (var (guid, category) in humanoid.LoadoutCategories)
             {
-                var profiles = new List<LoadoutProfile>();
+                var profiles = new List<DenModel.LoadoutProfile>();
 
                 foreach (var loadoutProfileId in category.Members)
                 {
@@ -318,7 +318,7 @@ namespace Content.Server.Database
                         .Select(i => i.Id)
                         .ToList();
 
-                    var dbProfile = new LoadoutProfile
+                    var dbProfile = new DenModel.LoadoutProfile
                     {
                         LoadoutUniqueId = loadoutProfileId,
                         LoadoutItems = items,
@@ -329,7 +329,7 @@ namespace Content.Server.Database
                     profiles.Add(dbProfile);
                 }
 
-                var dbCategory = new LoadoutCategory
+                var dbCategory = new DenModel.LoadoutCategory
                 {
                     CategoryUniqueId = guid,
                     CategoryColor = category.Color,
@@ -343,7 +343,7 @@ namespace Content.Server.Database
 
             foreach (var (job, loadoutIds) in humanoid.JobLoadouts)
             {
-                var jobLoadout = new JobLoadout
+                var jobLoadout = new DenModel.JobLoadout
                 {
                     LoadoutProfiles = loadoutIds.ToList(),
                     JobName = job
@@ -1613,7 +1613,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
             if (record == null)
             {
-                record = new DenuModel.DenuSettings
+                record = new DenModel.DenuSettings
                 {
                     PlayerUserId = userId,
                     SettingsJson = settingsJson

@@ -20,11 +20,17 @@ public sealed partial class DenCategoryContainer : PanelContainer
 
         _categoryDefinition = category;
 
+        RefreshCategoryName();
         RefreshCategoryColor();
         RefreshLoadoutContainers(loadouts);
 
         HeaderButton.OnPressed += _ => ToggleExpanded();
         UpdateExpandedState();
+    }
+
+    private void RefreshCategoryName()
+    {
+        CategoryNameLabel.Text = _categoryDefinition.Name;
     }
 
     private void RefreshCategoryColor()
@@ -42,10 +48,18 @@ public sealed partial class DenCategoryContainer : PanelContainer
         foreach (var loadoutProfile in loadoutProfiles)
         {
             var container = new DenLoadoutContainer(loadoutProfile);
+            container.Visible = true;
 
-            AddChild(container);
+            LoadoutContainer.AddChild(container);
             _loadouts.Add(container);
         }
+
+        var countText = $"{_loadouts.Count} loadout";
+
+        if (_loadouts.Count != 1)
+            countText += "s";
+
+        CategoryLoadoutCount.Text = countText;
     }
 
     private void ToggleExpanded()
@@ -56,7 +70,7 @@ public sealed partial class DenCategoryContainer : PanelContainer
 
     private void UpdateExpandedState()
     {
-        LoadoutContainer.Visible = _isExpanded;
+        ContentPanel.Visible = _isExpanded;
         ExpandIcon.Text = _isExpanded ? "▼" : "▶";
     }
 }
