@@ -1,7 +1,6 @@
-<ui:DenCategoryContainer xmlns="https://spacestation14.io"
-                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                         xmlns:ui="clr-namespace:Content.Client._DEN.Lobby.UI"
-                         xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+<PanelContainer xmlns="https://spacestation14.io"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
     <BoxContainer Orientation="Vertical"
                   HorizontalExpand="True"
                   Margin="0 0 0 8">
@@ -15,9 +14,7 @@
                            Text="A Loadout"
                            StyleClasses="TraitsCategoryNameLabel"
                            Margin="5 0 0 0"/>
-
                     <Control HorizontalExpand="True"/>
-
                     <BoxContainer Name="WarningContainer"
                                   Visible="False">
                         <TextureButton TexturePath="/Textures/Interface/VerbIcons/examine.svg.192dpi.png"
@@ -29,7 +26,6 @@
                                StyleClasses="TraitsCategoryStatsLabel"
                                Margin="0 0 4 0"/>
                     </BoxContainer>
-
                     <Label Name="ExpandIcon"
                            Text="▶"
                            StyleClasses="TraitsCategoryExpandIcon"
@@ -62,4 +58,4 @@
     </BoxContainer>
 
 
-</ui:DenCategoryContainer>
+</PanelContainer>

@@ -1,7 +1,7 @@
-<ui:DenLoadoutTab xmlns="https://spacestation14.io"
+<loadouts:DenLoadoutTab xmlns="https://spacestation14.io"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                  xmlns:ui="clr-namespace:Content.Client._DEN.Lobby.UI"
-                  xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+                  xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                  xmlns:loadouts="clr-namespace:Content.Client._DEN.Lobby.UI.Loadouts">
     <BoxContainer Orientation="Vertical"
                   SeparationOverride="0">
         <PanelContainer SetHeight="50"
@@ -57,4 +57,4 @@
             </PanelContainer>
         </BoxContainer>
     </BoxContainer>
-</ui:DenLoadoutTab>
+</loadouts:DenLoadoutTab>

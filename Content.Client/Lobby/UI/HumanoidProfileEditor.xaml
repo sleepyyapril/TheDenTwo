@@ -4,7 +4,7 @@
          xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
          xmlns:ui="clr-namespace:Content.Client.Lobby.UI"
          xmlns:profile="clr-namespace:Content.Client.Lobby.UI.ProfileEditorControls"
-         xmlns:den="clr-namespace:Content.Client._DEN.Lobby.UI"
+         xmlns:loadouts="clr-namespace:Content.Client._DEN.Lobby.UI.Loadouts"
          HorizontalExpand="True">
         <!-- Left side -->
         <BoxContainer Orientation="Vertical" Margin="10 10 10 10" HorizontalExpand="True">
@@ -132,7 +132,7 @@
                     <humanoid:MarkingPicker Name="Markings" HorizontalExpand="True" VerticalExpand="True" />
                 </BoxContainer>
                 <BoxContainer Name="LoadoutTab" Orientation="Vertical" Margin="10">
-                    <den:DenLoadoutTab Name="DenLoadouts" HorizontalExpand="True" VerticalExpand="True" />
+                    <loadouts:DenLoadoutTab Name="DenLoadouts" HorizontalExpand="True" VerticalExpand="True" />
                 </BoxContainer>
             </TabContainer>
         </BoxContainer>
