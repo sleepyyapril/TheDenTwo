@@ -17,7 +17,7 @@
             <Button Name="ButtonEdit"
                     Text="Edit Category"
                     Margin="0 2 0 0"
-                    StyleClasses="OpenBoth"
+                    StyleClasses="OpenRight"
                     Access="Public"/>
             <controls:ConfirmButton Name="ButtonDelete"
                                     Text="Delete Category"

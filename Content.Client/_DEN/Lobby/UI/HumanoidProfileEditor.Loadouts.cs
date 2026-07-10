@@ -8,9 +8,9 @@ public sealed partial class HumanoidProfileEditor
         {
             Profile = profile;
             SetDirty();
-            RefreshDenLoadouts();
         };
 
         DenLoadouts.SetProfile(Profile);
+        DenLoadouts.RefreshCategories();
     }
 }

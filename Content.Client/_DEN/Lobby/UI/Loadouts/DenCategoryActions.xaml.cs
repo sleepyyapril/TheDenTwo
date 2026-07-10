@@ -8,14 +8,14 @@ namespace Content.Client._DEN.Lobby.UI.Loadouts;
 [GenerateTypedNameReferences]
 public sealed partial class DenCategoryActions : ContainerButton
 {
-    public event Action? OnTryProfileEdit;
-    public event Action? OnTryProfileDelete;
+    public event Action? OnTryCategoryEdit;
+    public event Action? OnTryCategoryDelete;
 
     public DenCategoryActions()
     {
         RobustXamlLoader.Load(this);
 
-        ButtonEdit.OnPressed += _ => OnTryProfileEdit?.Invoke();
-        ButtonDelete.OnPressed += _ => OnTryProfileDelete?.Invoke();
+        ButtonEdit.OnPressed += _ => OnTryCategoryEdit?.Invoke();
+        ButtonDelete.OnPressed += _ => OnTryCategoryDelete?.Invoke();
     }
 }

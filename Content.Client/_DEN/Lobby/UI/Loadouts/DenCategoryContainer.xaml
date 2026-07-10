@@ -55,7 +55,8 @@
             <BoxContainer Name="LoadoutContainer"
                           Orientation="Vertical"
                           HorizontalExpand="True"
-                          Margin="8 8">
+                          Margin="8 8"
+                          SeparationOverride="6">
                 <loadouts:DenCategoryActions Name="CategoryActions" Access="Public" />
             </BoxContainer>
         </PanelContainer>

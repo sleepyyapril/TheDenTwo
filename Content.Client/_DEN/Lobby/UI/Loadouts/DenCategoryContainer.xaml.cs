@@ -9,16 +9,21 @@ namespace Content.Client._DEN.Lobby.UI.Loadouts;
 [GenerateTypedNameReferences]
 public sealed partial class DenCategoryContainer : PanelContainer
 {
-    private DenLoadoutCategory _categoryDefinition;
-    private List<DenLoadoutContainer> _loadouts = new();
-    private bool _isExpanded;
+    public event Action<DenLoadout, DenLoadoutAction>? OnClickLoadoutAction;
+    public Dictionary<Guid, DenLoadoutContainer> LoadoutContainers = new();
+    public List<DenLoadout> Loadouts = new();
+    public bool IsExpanded;
+
+    private DenLoadoutCategory _category;
 
     public DenCategoryContainer(DenLoadoutCategory category,
         List<DenLoadout> loadouts)
     {
         RobustXamlLoader.Load(this);
 
-        _categoryDefinition = category;
+        Loadouts = loadouts;
+        _category = category;
+
 
         RefreshCategoryName();
         RefreshCategoryColor();
@@ -28,14 +33,24 @@ public sealed partial class DenCategoryContainer : PanelContainer
         UpdateExpandedState();
     }
 
+    public void UpdateCategory(DenLoadoutCategory category, List<DenLoadout> loadouts)
+    {
+        RefreshCategoryName();
+        RefreshCategoryColor();
+        RefreshLoadoutContainers(loadouts);
+
+        Loadouts = loadouts;
+        _category = category;
+    }
+
     private void RefreshCategoryName()
     {
-        CategoryNameLabel.Text = _categoryDefinition.Name;
+        CategoryNameLabel.Text = _category.Name;
     }
 
     private void RefreshCategoryColor()
     {
-        var color = Color.TryFromHex(_categoryDefinition.Color);
+        var color = Color.TryFromHex(_category.Color);
 
         AccentBar.PanelOverride = new StyleBoxFlat
         {
@@ -47,30 +62,47 @@ public sealed partial class DenCategoryContainer : PanelContainer
     {
         foreach (var loadoutProfile in loadoutProfiles)
         {
-            var container = new DenLoadoutContainer(loadoutProfile);
-            container.Visible = true;
+            DenLoadoutContainer container;
 
-            LoadoutContainer.AddChild(container);
-            _loadouts.Add(container);
+            if (LoadoutContainers.TryGetValue(loadoutProfile.Id, out var cachedContainer))
+            {
+                container = cachedContainer;
+            }
+            else
+            {
+                container = new DenLoadoutContainer(loadoutProfile);
+                container.Visible = true;
+                container.OnClickLoadoutAction += DoLoadoutAction;
+
+                LoadoutContainers.Add(loadoutProfile.Id, container);
+                LoadoutContainer.AddChild(container);
+            }
+
+            container.UpdateLoadout(loadoutProfile);
         }
 
-        var countText = $"{_loadouts.Count} loadout";
+        var countText = $"{LoadoutContainers.Count} loadout";
 
-        if (_loadouts.Count != 1)
+        if (LoadoutContainers.Count != 1)
             countText += "s";
 
         CategoryLoadoutCount.Text = countText;
     }
 
-    private void ToggleExpanded()
+    private void DoLoadoutAction(DenLoadout profile, DenLoadoutAction action)
     {
-        _isExpanded = !_isExpanded;
+        OnClickLoadoutAction?.Invoke(profile, action);
+    }
+
+    public void ToggleExpanded()
+    {
+        IsExpanded = !IsExpanded;
         UpdateExpandedState();
     }
 
     private void UpdateExpandedState()
     {
-        ContentPanel.Visible = _isExpanded;
-        ExpandIcon.Text = _isExpanded ? "▼" : "▶";
+        ContentPanel.Visible = IsExpanded;
+        ExpandIcon.Text = IsExpanded ? "▼" : "▶";
     }
 }

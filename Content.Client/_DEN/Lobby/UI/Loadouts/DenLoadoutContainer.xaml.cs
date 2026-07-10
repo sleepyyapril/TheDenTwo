@@ -8,6 +8,8 @@ namespace Content.Client._DEN.Lobby.UI.Loadouts;
 [GenerateTypedNameReferences]
 public sealed partial class DenLoadoutContainer : ContainerButton
 {
+    public event Action<DenLoadout, DenLoadoutAction>? OnClickLoadoutAction;
+
     private DenLoadout _loadout;
 
     public DenLoadoutContainer(DenLoadout loadoutProfile)
@@ -18,5 +20,32 @@ public sealed partial class DenLoadoutContainer : ContainerButton
 
         LoadoutNameLabel.Text = loadoutProfile.Name;
 
+        ButtonEditJobs.OnPressed += _ =>
+            OnClickLoadoutAction?.Invoke(_loadout, DenLoadoutAction.EditJobs);
+        ButtonEditLoadouts.OnPressed += _ =>
+            OnClickLoadoutAction?.Invoke(_loadout, DenLoadoutAction.EditLoadouts);
+        ButtonEditLoadoutProfile.OnPressed += _ =>
+            OnClickLoadoutAction?.Invoke(_loadout, DenLoadoutAction.EditLoadoutProfile);
+        ButtonDeleteProfile.OnPressed += _ =>
+            OnClickLoadoutAction?.Invoke(_loadout, DenLoadoutAction.DeleteLoadoutProfile);
     }
+
+    public void UpdateLoadout(DenLoadout loadout)
+    {
+        if (_loadout == loadout)
+            return;
+
+        if (loadout.Name != _loadout.Name)
+            LoadoutNameLabel.Text = loadout.Name;
+
+        _loadout = loadout;
+    }
+}
+
+public enum DenLoadoutAction
+{
+    EditJobs,
+    EditLoadouts,
+    EditLoadoutProfile,
+    DeleteLoadoutProfile
 }

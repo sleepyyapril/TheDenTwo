@@ -1,6 +1,7 @@
 <ContainerButton xmlns="https://spacestation14.io"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-              xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+              xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+              xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls">
     <PanelContainer HorizontalExpand="True">
         <PanelContainer.PanelOverride>
             <graphics:StyleBoxFlat BackgroundColor="#2a2a35"/>
@@ -13,18 +14,22 @@
                    Text="My Loadout"
                    Margin="5 0 0 0"/>
             <Control HorizontalExpand="True" />
-            <Button Text="Edit Jobs"
+            <Button Name="ButtonEditJobs"
+                    Text="Edit Jobs"
                     Margin="0 2 0 0"
                     StyleClasses="OpenRight"/>
-            <Button Text="Edit Loadout"
+            <Button Name="ButtonEditLoadouts"
+                    Text="Edit Loadouts"
                     Margin="0 2 0 0"
                     StyleClasses="OpenBoth"/>
-            <Button Text="Rename"
+            <Button Name="ButtonEditLoadoutProfile"
+                    Text="Edit Loadout Profile"
                     Margin="0 2 0 0"
                     StyleClasses="OpenBoth"/>
-            <Button Text="Delete"
-                    Margin="0 2 0 0"
-                    StyleClasses="OpenLeft"/>
+            <controls:ConfirmButton Name="ButtonDeleteProfile"
+                                    Text="Delete Loadout Profile"
+                                    Margin="0 2 0 0"
+                                    StyleClasses="OpenLeft"/>
         </BoxContainer>
     </PanelContainer>
 </ContainerButton>
