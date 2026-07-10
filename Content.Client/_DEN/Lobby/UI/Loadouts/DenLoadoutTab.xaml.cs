@@ -108,7 +108,8 @@ public sealed partial class DenLoadoutTab : ContainerButton
             LoadoutContainer.AddChild(categoryContainer);
             _categories.Add(category.Id, categoryContainer);
         }
-
+        
+        categoryContainer.CategoryActions.SetDeleteDisabled(profiles.Count > 0);
         return categoryContainer;
     }
 
@@ -146,6 +147,7 @@ public sealed partial class DenLoadoutTab : ContainerButton
 
         _profile = _profile.WithoutLoadoutCategory(category);
         SetDirty(_profile);
+        RefreshCategories();
     }
 
     private void SetDirty(HumanoidCharacterProfile? profile)

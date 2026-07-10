@@ -11,7 +11,9 @@ public sealed partial class DenLoadoutTab
 
     public void OnClickDeleteLoadoutProfile(DenLoadout loadout)
     {
-        var profile = _profile?.WithoutLoadoutProfile(loadout);
-        SetDirty(profile);
+        _profile = _profile?.WithoutLoadoutProfile(loadout);
+        SetDirty(_profile);
+
+        RefreshCategories();
     }
 }

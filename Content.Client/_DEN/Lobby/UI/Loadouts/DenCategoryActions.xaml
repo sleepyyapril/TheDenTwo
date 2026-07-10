@@ -23,6 +23,7 @@
                                     Text="Delete Category"
                                     Margin="0 2 0 0"
                                     StyleClasses="OpenLeft"
+                                    Disabled="True"
                                     Access="Public"/>
         </BoxContainer>
     </PanelContainer>

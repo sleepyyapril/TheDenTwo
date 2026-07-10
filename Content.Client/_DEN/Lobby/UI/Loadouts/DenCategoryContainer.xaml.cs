@@ -24,9 +24,8 @@ public sealed partial class DenCategoryContainer : PanelContainer
         Loadouts = loadouts;
         _category = category;
 
-
-        RefreshCategoryName();
-        RefreshCategoryColor();
+        RefreshCategoryName(category);
+        RefreshCategoryColor(category);
         RefreshLoadoutContainers(loadouts);
 
         HeaderButton.OnPressed += _ => ToggleExpanded();
@@ -35,22 +34,22 @@ public sealed partial class DenCategoryContainer : PanelContainer
 
     public void UpdateCategory(DenLoadoutCategory category, List<DenLoadout> loadouts)
     {
-        RefreshCategoryName();
-        RefreshCategoryColor();
+        RefreshCategoryName(category);
+        RefreshCategoryColor(category);
         RefreshLoadoutContainers(loadouts);
 
         Loadouts = loadouts;
         _category = category;
     }
 
-    private void RefreshCategoryName()
+    private void RefreshCategoryName(DenLoadoutCategory category)
     {
-        CategoryNameLabel.Text = _category.Name;
+        CategoryNameLabel.Text = category.Name;
     }
 
-    private void RefreshCategoryColor()
+    private void RefreshCategoryColor(DenLoadoutCategory category)
     {
-        var color = Color.TryFromHex(_category.Color);
+        var color = Color.TryFromHex(category.Color);
 
         AccentBar.PanelOverride = new StyleBoxFlat
         {
