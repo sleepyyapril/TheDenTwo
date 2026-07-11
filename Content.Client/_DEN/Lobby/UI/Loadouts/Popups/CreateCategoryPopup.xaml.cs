@@ -10,7 +10,7 @@ public sealed partial class CreateCategoryPopup : FancyWindow
 {
     public event Action<CategoryCreationRequest>? OnSubmit;
 
-    public CreateCategoryPopup(DenLoadoutCategory? maybeCategory)
+    public CreateCategoryPopup(LoadoutProfileCategory? maybeCategory)
     {
         RobustXamlLoader.Load(this);
 
@@ -25,7 +25,7 @@ public sealed partial class CreateCategoryPopup : FancyWindow
         ButtonSubmit.OnPressed += _ => OnSubmitPressed(maybeCategory);
     }
 
-    private void OnSubmitPressed(DenLoadoutCategory? existingCategory)
+    private void OnSubmitPressed(LoadoutProfileCategory? existingCategory)
     {
         var request = new CategoryCreationRequest
         {

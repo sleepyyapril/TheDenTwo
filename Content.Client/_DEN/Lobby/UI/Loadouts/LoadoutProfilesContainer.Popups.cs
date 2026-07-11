@@ -6,7 +6,7 @@ namespace Content.Client._DEN.Lobby.UI.Loadouts;
 
 public sealed partial class LoadoutProfilesContainer
 {
-    private void OnTryCreateCategory(DenLoadoutCategory? existingCategory = null)
+    private void OnTryCreateCategory(LoadoutProfileCategory? existingCategory = null)
     {
         if (_createCategoryPopup != null)
             return;
@@ -32,7 +32,7 @@ public sealed partial class LoadoutProfilesContainer
             members.UnionWith(loadout.Members);
         }
 
-        var category = new DenLoadoutCategory
+        var category = new LoadoutProfileCategory
         {
             Id = guid,
             Color = request.CategoryColor.ToHex(),
@@ -48,7 +48,7 @@ public sealed partial class LoadoutProfilesContainer
         OnCloseCategoryPopup();
     }
 
-    private void OnTryCreateLoadout(DenLoadout? loadout = null)
+    private void OnTryCreateLoadout(DenLoadoutProfile? loadout = null)
     {
         if (_createLoadoutPopup != null)
             return;
@@ -76,7 +76,7 @@ public sealed partial class LoadoutProfilesContainer
             loadouts.UnionWith(loadoutProfile.Loadouts);
         }
 
-        var loadout = new DenLoadout
+        var loadout = new DenLoadoutProfile
         {
             Id = guid,
             Name = request.LoadoutName,

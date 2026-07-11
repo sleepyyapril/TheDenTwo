@@ -189,8 +189,8 @@ namespace Content.Shared.Preferences
                 // new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences), // DEN
                 new HashSet<ProtoId<EntityTraitPrototype>>(other.EntityTraitPreferences), // DEN
                 // new Dictionary<string, RoleLoadout>(other.Loadouts), // DEN
-                new Dictionary<Guid, DenLoadoutCategory>(other.LoadoutCategories),
-                new Dictionary<Guid, DenLoadout>(other.LoadoutProfiles), // DEN
+                new Dictionary<Guid, LoadoutProfileCategory>(other.LoadoutCategories),
+                new Dictionary<Guid, DenLoadoutProfile>(other.LoadoutProfiles), // DEN
                 new Dictionary<ProtoId<JobPrototype>, HashSet<Guid>>(other.JobLoadouts)) // DEN
         {
         }

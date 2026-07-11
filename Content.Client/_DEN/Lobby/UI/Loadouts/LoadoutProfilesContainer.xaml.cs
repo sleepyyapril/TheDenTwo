@@ -17,14 +17,14 @@ public sealed partial class LoadoutProfilesContainer : BoxContainer
     private Popups.CreateLoadoutPopup? _createLoadoutPopup;
     private HumanoidCharacterProfile? _profile;
 
-    private Dictionary<Guid, DenLoadoutCategory> _popupCategories;
+    private Dictionary<Guid, LoadoutProfileCategory> _popupCategories;
     private Dictionary<Guid, DenCategoryContainer> _categories = [];
 
     public LoadoutProfilesContainer()
     {
         RobustXamlLoader.Load(this);
 
-        _popupCategories = new Dictionary<Guid, DenLoadoutCategory>();
+        _popupCategories = new Dictionary<Guid, LoadoutProfileCategory>();
         ButtonCreateCategory.OnPressed += _ => OnTryCreateCategory();
         ButtonCreateLoadout.OnPressed += _ => OnTryCreateLoadout();
     }
@@ -79,9 +79,9 @@ public sealed partial class LoadoutProfilesContainer : BoxContainer
             || !_profile.LoadoutCategories.TryGetValue(categoryId, out var category))
             return null;
 
-        _popupCategories = new Dictionary<Guid, DenLoadoutCategory>(_profile.LoadoutCategories);
+        _popupCategories = new Dictionary<Guid, LoadoutProfileCategory>(_profile.LoadoutCategories);
 
-        var profiles = new List<DenLoadout>();
+        var profiles = new List<DenLoadoutProfile>();
 
         foreach (var loadoutId in category.Members)
         {
@@ -113,39 +113,39 @@ public sealed partial class LoadoutProfilesContainer : BoxContainer
         return categoryContainer;
     }
 
-    private void OnClickLoadoutAction(DenLoadout loadout, DenLoadoutAction loadoutAction)
+    private void OnClickLoadoutAction(DenLoadoutProfile loadoutProfile, DenLoadoutAction loadoutAction)
     {
         switch (loadoutAction)
         {
             case DenLoadoutAction.EditJobs:
-                OnClickEditJobLoadouts(loadout);
+                OnClickEditJobLoadouts(loadoutProfile);
                 break;
             case DenLoadoutAction.EditLoadouts:
-                OnClickEditLoadouts(loadout);
+                OnClickEditLoadouts(loadoutProfile);
                 break;
             case DenLoadoutAction.EditLoadoutProfile:
-                OnClickEditLoadoutProfile(loadout);
+                OnClickEditLoadoutProfile(loadoutProfile);
                 break;
             case DenLoadoutAction.DeleteLoadoutProfile:
-                OnClickDeleteLoadoutProfile(loadout);
+                OnClickDeleteLoadoutProfile(loadoutProfile);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(loadoutAction), loadoutAction, null);
         }
     }
 
-    private void TryCategoryEdit(DenLoadoutCategory category)
+    private void TryCategoryEdit(LoadoutProfileCategory profileCategory)
     {
-        OnTryCreateCategory(category);
+        OnTryCreateCategory(profileCategory);
     }
 
-    private void TryCategoryDelete(DenLoadoutCategory category)
+    private void TryCategoryDelete(LoadoutProfileCategory profileCategory)
     {
         if (_profile == null
-            || !_profile.LoadoutCategories.ContainsKey(category.Id))
+            || !_profile.LoadoutCategories.ContainsKey(profileCategory.Id))
             return;
 
-        _profile = _profile.WithoutLoadoutCategory(category);
+        _profile = _profile.WithoutLoadoutCategory(profileCategory);
         SetDirty(_profile);
         RefreshCategories();
     }

@@ -4,14 +4,14 @@ namespace Content.Client._DEN.Lobby.UI.Loadouts;
 
 public sealed partial class LoadoutProfilesContainer
 {
-    private void OnClickEditLoadoutProfile(DenLoadout loadout)
+    private void OnClickEditLoadoutProfile(DenLoadoutProfile loadoutProfile)
     {
-        OnTryCreateLoadout(loadout);
+        OnTryCreateLoadout(loadoutProfile);
     }
 
-    private void OnClickDeleteLoadoutProfile(DenLoadout loadout)
+    private void OnClickDeleteLoadoutProfile(DenLoadoutProfile loadoutProfile)
     {
-        _profile = _profile?.WithoutLoadoutProfile(loadout);
+        _profile = _profile?.WithoutLoadoutProfile(loadoutProfile);
         SetDirty(_profile);
 
         RefreshCategories();

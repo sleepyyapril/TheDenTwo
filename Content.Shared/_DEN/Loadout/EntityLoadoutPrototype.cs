@@ -11,7 +11,7 @@ public sealed partial class EntityLoadoutPrototype : IInheritingPrototype, IProt
 {
     [ViewVariables]
     [IdDataField]
-    public string ID { get; private set; } = default!;
+    public string ID { get; private set; } = null!;
 
     /// <inheritdoc/>
     [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<EntityLoadoutPrototype>))]

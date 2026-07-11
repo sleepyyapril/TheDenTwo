@@ -22,14 +22,14 @@ public sealed partial class HumanoidCharacterProfile
     public IReadOnlySet<ProtoId<EntityTraitPrototype>> EntityTraitPreferences => _entityTraitPreferences;
 
     [DataField("_loadoutCategories")]
-    private Dictionary<Guid, DenLoadoutCategory> _loadoutCategories = new();
+    private Dictionary<Guid, LoadoutProfileCategory> _loadoutCategories = new();
 
-    public IReadOnlyDictionary<Guid, DenLoadoutCategory> LoadoutCategories => _loadoutCategories;
+    public IReadOnlyDictionary<Guid, LoadoutProfileCategory> LoadoutCategories => _loadoutCategories;
 
     [DataField("_loadoutProfiles")]
-    private Dictionary<Guid, DenLoadout> _loadoutProfiles = new();
+    private Dictionary<Guid, DenLoadoutProfile> _loadoutProfiles = new();
 
-    public IReadOnlyDictionary<Guid, DenLoadout> LoadoutProfiles => _loadoutProfiles;
+    public IReadOnlyDictionary<Guid, DenLoadoutProfile> LoadoutProfiles => _loadoutProfiles;
 
     [DataField("_jobLoadouts")]
     private Dictionary<ProtoId<JobPrototype>, HashSet<Guid>> _jobLoadouts = new();
@@ -50,8 +50,8 @@ public sealed partial class HumanoidCharacterProfile
         HashSet<ProtoId<AntagPrototype>> antagPreferences,
         HashSet<ProtoId<EntityTraitPrototype>> entityTraitPreferences,
         // Dictionary<string, RoleLoadout> loadouts, - DEN
-        Dictionary<Guid, DenLoadoutCategory> loadoutCategories,
-        Dictionary<Guid, DenLoadout> loadoutProfiles,
+        Dictionary<Guid, LoadoutProfileCategory> loadoutCategories,
+        Dictionary<Guid, DenLoadoutProfile> loadoutProfiles,
         Dictionary<ProtoId<JobPrototype>, HashSet<Guid>> jobLoadouts)
     {
         Name = name;
@@ -141,12 +141,12 @@ public sealed partial class HumanoidCharacterProfile
         };
     }
 
-    public HumanoidCharacterProfile WithLoadoutProfile(Guid loadoutId, Guid categoryId, DenLoadout loadout)
+    public HumanoidCharacterProfile WithLoadoutProfile(Guid loadoutId, Guid categoryId, DenLoadoutProfile loadoutProfile)
     {
         if (!_loadoutCategories.TryGetValue(categoryId, out var loadoutCategory))
             return this;
 
-        var categories = new Dictionary<Guid, DenLoadoutCategory>(_loadoutCategories);
+        var categories = new Dictionary<Guid, LoadoutProfileCategory>(_loadoutCategories);
 
         if (_loadoutProfiles.TryGetValue(loadoutId, out var profile)
             && profile.LoadoutCategory != categoryId)
@@ -156,9 +156,9 @@ public sealed partial class HumanoidCharacterProfile
             categories[profile.LoadoutCategory] = category;
         }
 
-        var profiles = new Dictionary<Guid, DenLoadout>(_loadoutProfiles)
+        var profiles = new Dictionary<Guid, DenLoadoutProfile>(_loadoutProfiles)
         {
-            [loadoutId] = loadout,
+            [loadoutId] = loadoutProfile,
         };
 
         loadoutCategory.Members.Add(loadoutId);
@@ -171,18 +171,18 @@ public sealed partial class HumanoidCharacterProfile
         };
     }
 
-    public HumanoidCharacterProfile WithoutLoadoutProfile(DenLoadout loadout)
+    public HumanoidCharacterProfile WithoutLoadoutProfile(DenLoadoutProfile loadoutProfile)
     {
-        if (!_loadoutCategories.TryGetValue(loadout.LoadoutCategory, out var loadoutCategory))
+        if (!_loadoutCategories.TryGetValue(loadoutProfile.LoadoutCategory, out var loadoutCategory))
             return this;
 
-        var profiles = new Dictionary<Guid, DenLoadout>(_loadoutProfiles);
-        profiles.Remove(loadout.Id);
+        var profiles = new Dictionary<Guid, DenLoadoutProfile>(_loadoutProfiles);
+        profiles.Remove(loadoutProfile.Id);
 
-        var categories = new Dictionary<Guid, DenLoadoutCategory>(_loadoutCategories);
-        loadoutCategory.Members.Remove(loadout.Id);
+        var categories = new Dictionary<Guid, LoadoutProfileCategory>(_loadoutCategories);
+        loadoutCategory.Members.Remove(loadoutProfile.Id);
 
-        categories[loadout.LoadoutCategory] = loadoutCategory;
+        categories[loadoutProfile.LoadoutCategory] = loadoutCategory;
 
         return new HumanoidCharacterProfile(this)
         {
@@ -191,11 +191,11 @@ public sealed partial class HumanoidCharacterProfile
         };
     }
 
-    public HumanoidCharacterProfile WithLoadoutCategory(Guid categoryId, DenLoadoutCategory category)
+    public HumanoidCharacterProfile WithLoadoutCategory(Guid categoryId, LoadoutProfileCategory profileCategory)
     {
-        var categories = new Dictionary<Guid, DenLoadoutCategory>(_loadoutCategories)
+        var categories = new Dictionary<Guid, LoadoutProfileCategory>(_loadoutCategories)
         {
-            [categoryId] = category,
+            [categoryId] = profileCategory,
         };
 
         return new HumanoidCharacterProfile(this)
@@ -204,10 +204,10 @@ public sealed partial class HumanoidCharacterProfile
         };
     }
 
-    public HumanoidCharacterProfile WithoutLoadoutCategory(DenLoadoutCategory category)
+    public HumanoidCharacterProfile WithoutLoadoutCategory(LoadoutProfileCategory profileCategory)
     {
-        var categories = new Dictionary<Guid, DenLoadoutCategory>(_loadoutCategories);
-        categories.Remove(category.Id);
+        var categories = new Dictionary<Guid, LoadoutProfileCategory>(_loadoutCategories);
+        categories.Remove(profileCategory.Id);
 
         return new HumanoidCharacterProfile(this)
         {

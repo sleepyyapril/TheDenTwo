@@ -9,47 +9,47 @@ namespace Content.Client._DEN.Lobby.UI.Loadouts.Subcontainers;
 [GenerateTypedNameReferences]
 public sealed partial class DenCategoryContainer : PanelContainer
 {
-    public event Action<DenLoadout, DenLoadoutAction>? OnClickLoadoutAction;
+    public event Action<DenLoadoutProfile, DenLoadoutAction>? OnClickLoadoutAction;
     public readonly Dictionary<Guid, DenLoadoutContainer> LoadoutContainers = new();
-    public List<DenLoadout> Loadouts;
+    public List<DenLoadoutProfile> Loadouts;
     private bool _isExpanded;
 
-    private DenLoadoutCategory _category;
+    private LoadoutProfileCategory _profileCategory;
 
-    public DenCategoryContainer(DenLoadoutCategory category,
-        List<DenLoadout> loadouts)
+    public DenCategoryContainer(LoadoutProfileCategory profileCategory,
+        List<DenLoadoutProfile> loadouts)
     {
         RobustXamlLoader.Load(this);
 
         Loadouts = loadouts;
-        _category = category;
+        _profileCategory = profileCategory;
 
-        RefreshCategoryName(category);
-        RefreshCategoryColor(category);
+        RefreshCategoryName(profileCategory);
+        RefreshCategoryColor(profileCategory);
         RefreshLoadoutContainers(loadouts);
 
         HeaderButton.OnPressed += _ => ToggleExpanded();
         UpdateExpandedState();
     }
 
-    public void UpdateCategory(DenLoadoutCategory category, List<DenLoadout> loadouts)
+    public void UpdateCategory(LoadoutProfileCategory profileCategory, List<DenLoadoutProfile> loadouts)
     {
-        RefreshCategoryName(category);
-        RefreshCategoryColor(category);
+        RefreshCategoryName(profileCategory);
+        RefreshCategoryColor(profileCategory);
         RefreshLoadoutContainers(loadouts);
 
         Loadouts = loadouts;
-        _category = category;
+        _profileCategory = profileCategory;
     }
 
-    private void RefreshCategoryName(DenLoadoutCategory category)
+    private void RefreshCategoryName(LoadoutProfileCategory profileCategory)
     {
-        CategoryNameLabel.Text = category.Name;
+        CategoryNameLabel.Text = profileCategory.Name;
     }
 
-    private void RefreshCategoryColor(DenLoadoutCategory category)
+    private void RefreshCategoryColor(LoadoutProfileCategory profileCategory)
     {
-        var color = Color.TryFromHex(category.Color);
+        var color = Color.TryFromHex(profileCategory.Color);
 
         AccentBar.PanelOverride = new StyleBoxFlat
         {
@@ -57,7 +57,7 @@ public sealed partial class DenCategoryContainer : PanelContainer
         };
     }
 
-    private void RefreshLoadoutContainers(List<DenLoadout> loadoutProfiles)
+    private void RefreshLoadoutContainers(List<DenLoadoutProfile> loadoutProfiles)
     {
         foreach (var loadoutProfile in loadoutProfiles)
         {
@@ -88,7 +88,7 @@ public sealed partial class DenCategoryContainer : PanelContainer
         CategoryLoadoutCount.Text = countText;
     }
 
-    private void DoLoadoutAction(DenLoadout profile, DenLoadoutAction action)
+    private void DoLoadoutAction(DenLoadoutProfile profile, DenLoadoutAction action)
     {
         OnClickLoadoutAction?.Invoke(profile, action);
     }

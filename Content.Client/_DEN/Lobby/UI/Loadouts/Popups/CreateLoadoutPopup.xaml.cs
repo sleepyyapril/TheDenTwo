@@ -10,7 +10,7 @@ public sealed partial class CreateLoadoutPopup : FancyWindow
 {
     public event Action<LoadoutCreationRequest>? OnSubmit;
 
-    public CreateLoadoutPopup(Dictionary<Guid, DenLoadoutCategory> categories, DenLoadout? maybeLoadout = null)
+    public CreateLoadoutPopup(Dictionary<Guid, LoadoutProfileCategory> categories, DenLoadoutProfile? maybeLoadout = null)
     {
         RobustXamlLoader.Load(this);
 
@@ -44,7 +44,7 @@ public sealed partial class CreateLoadoutPopup : FancyWindow
         ButtonSubmit.OnPressed += _ => OnSubmitPressed(maybeLoadout);
     }
 
-    private void OnSubmitPressed(DenLoadout? maybeLoadout = null)
+    private void OnSubmitPressed(DenLoadoutProfile? maybeLoadout = null)
     {
         var categorySelectedIndex = OptionsCategories.SelectedId;
         var categorySelectedId = (Guid) (OptionsCategories.GetItemMetadata(categorySelectedIndex) ?? Guid.Empty);

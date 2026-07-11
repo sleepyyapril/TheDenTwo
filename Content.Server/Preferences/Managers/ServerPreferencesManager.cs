@@ -173,8 +173,8 @@ namespace Content.Server.Preferences.Managers
             */
 
             var jobLoadouts = new Dictionary<ProtoId<JobPrototype>, HashSet<Guid>>();
-            var loadoutCategories = new Dictionary<Guid, DenLoadoutCategory>();
-            var loadoutProfiles = new Dictionary<Guid, DenLoadout>();
+            var loadoutCategories = new Dictionary<Guid, LoadoutProfileCategory>();
+            var loadoutProfiles = new Dictionary<Guid, DenLoadoutProfile>();
 
             foreach (var loadoutCategory in profile.LoadoutCategories)
             {
@@ -182,7 +182,7 @@ namespace Content.Server.Preferences.Managers
                     .Select(l => l.LoadoutUniqueId)
                     .ToHashSet();
 
-                var category = new DenLoadoutCategory
+                var category = new LoadoutProfileCategory
                 {
                     Id = loadoutCategory.CategoryUniqueId,
                     Name = loadoutCategory.CategoryName,
@@ -196,7 +196,7 @@ namespace Content.Server.Preferences.Managers
                 foreach (var loadoutProfile in loadoutCategory.Members)
                 {
                     var loadoutItems = loadoutProfile.LoadoutItems.Select(AsLoadoutPrototype).ToHashSet();
-                    var loadout = new DenLoadout
+                    var loadout = new DenLoadoutProfile
                     {
                         Id = loadoutProfile.LoadoutUniqueId,
                         LoadoutCategory = category.Id,

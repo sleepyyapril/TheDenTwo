@@ -4,7 +4,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._DEN.Loadout;
 
 [Serializable, NetSerializable]
-public record struct DenLoadout
+public record struct DenLoadoutProfile
 {
     public Guid Id;
     public int Priority;
@@ -26,7 +26,7 @@ public record struct DenCustomLoadoutInfo
 }
 
 [Serializable, NetSerializable]
-public record struct DenLoadoutCategory
+public record struct LoadoutProfileCategory
 {
     public Guid Id;
     public int Priority;

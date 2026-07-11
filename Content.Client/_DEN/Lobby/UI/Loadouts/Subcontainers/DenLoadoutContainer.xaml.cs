@@ -8,37 +8,37 @@ namespace Content.Client._DEN.Lobby.UI.Loadouts.Subcontainers;
 [GenerateTypedNameReferences]
 public sealed partial class DenLoadoutContainer : ContainerButton
 {
-    public event Action<DenLoadout, DenLoadoutAction>? OnClickLoadoutAction;
+    public event Action<DenLoadoutProfile, DenLoadoutAction>? OnClickLoadoutAction;
 
-    private DenLoadout _loadout;
+    private DenLoadoutProfile _loadoutProfile;
 
-    public DenLoadoutContainer(DenLoadout loadoutProfile)
+    public DenLoadoutContainer(DenLoadoutProfile loadoutProfileProfile)
     {
         RobustXamlLoader.Load(this);
 
-        _loadout = loadoutProfile;
+        _loadoutProfile = loadoutProfileProfile;
 
-        LoadoutNameLabel.Text = loadoutProfile.Name;
+        LoadoutNameLabel.Text = loadoutProfileProfile.Name;
 
         ButtonEditJobs.OnPressed += _ =>
-            OnClickLoadoutAction?.Invoke(_loadout, DenLoadoutAction.EditJobs);
+            OnClickLoadoutAction?.Invoke(_loadoutProfile, DenLoadoutAction.EditJobs);
         ButtonEditLoadouts.OnPressed += _ =>
-            OnClickLoadoutAction?.Invoke(_loadout, DenLoadoutAction.EditLoadouts);
+            OnClickLoadoutAction?.Invoke(_loadoutProfile, DenLoadoutAction.EditLoadouts);
         ButtonEditLoadoutProfile.OnPressed += _ =>
-            OnClickLoadoutAction?.Invoke(_loadout, DenLoadoutAction.EditLoadoutProfile);
+            OnClickLoadoutAction?.Invoke(_loadoutProfile, DenLoadoutAction.EditLoadoutProfile);
         ButtonDeleteProfile.OnPressed += _ =>
-            OnClickLoadoutAction?.Invoke(_loadout, DenLoadoutAction.DeleteLoadoutProfile);
+            OnClickLoadoutAction?.Invoke(_loadoutProfile, DenLoadoutAction.DeleteLoadoutProfile);
     }
 
-    public void UpdateLoadout(DenLoadout loadout)
+    public void UpdateLoadout(DenLoadoutProfile loadoutProfile)
     {
-        if (_loadout == loadout)
+        if (_loadoutProfile == loadoutProfile)
             return;
 
-        if (loadout.Name != _loadout.Name)
-            LoadoutNameLabel.Text = loadout.Name;
+        if (loadoutProfile.Name != _loadoutProfile.Name)
+            LoadoutNameLabel.Text = loadoutProfile.Name;
 
-        _loadout = loadout;
+        _loadoutProfile = loadoutProfile;
     }
 }
 
