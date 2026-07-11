@@ -14,6 +14,7 @@ public sealed partial class LoadoutProfilesContainer
         _parents = new();
     private readonly Dictionary<ProtoId<EntityLoadoutPrototype>, EntityLoadoutPrototype> _loadoutEntities = new();
     private readonly HashSet<ProtoId<LoadoutCategoryPrototype>> _root = new();
+    private readonly Dictionary<ProtoId<LoadoutCategoryPrototype>, Button> _categoryButtons = new();
 
     public ProtoId<LoadoutCategoryPrototype>? CurrentCategory = null;
 
@@ -52,6 +53,13 @@ public sealed partial class LoadoutProfilesContainer
     {
         HashSet<LoadoutCategoryPrototype> allCategories;
 
+        foreach (var button in _categoryButtons.Values)
+        {
+            button.Orphan();
+        }
+
+        _categoryButtons.Clear();
+
         if (CurrentCategory != null)
         {
             allCategories = _loadoutCategories[CurrentCategory.Value]
@@ -68,29 +76,33 @@ public sealed partial class LoadoutProfilesContainer
 
         var (itemCategories, subCategories) = GetCategoryTypes(allCategories);
 
-        foreach (var itemCategory in itemCategories)
+        foreach (var category in itemCategories)
         {
             var button = new Button
             {
-                Margin = new Thickness(5, 2),
+                Text = category.Name,
+                Margin = new Thickness(5, 1),
                 HorizontalExpand = true,
-                SetHeight = 35
+                SetHeight = 25
             };
 
             LoadoutItemSelection.LoadoutItemCategoryContainer.AddChild(button);
+            _categoryButtons.Add(category, button);
         }
 
-        foreach (var itemCategory in subCategories)
+        foreach (var category in subCategories)
         {
             var button = new Button
             {
-                Margin = new Thickness(5, 2),
+                Text = "boo",
+                Margin = new Thickness(5, 1),
                 HorizontalExpand = true,
-                SetHeight = 35,
+                SetHeight = 25,
                 StyleClasses = { "ButtonColorGreen" }
             };
 
             LoadoutItemSelection.LoadoutItemCategoryContainer.AddChild(button);
+            _categoryButtons.Add(category, button);
         }
     }
 

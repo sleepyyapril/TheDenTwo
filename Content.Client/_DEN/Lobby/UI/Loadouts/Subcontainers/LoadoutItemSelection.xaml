@@ -8,8 +8,8 @@
                         Margin="0 5">
             <BoxContainer Name="LoadoutItemCategoryContainer"
                           Access="Public"
-                          SeparationOverride="1"
-                          Orientation="Vertical">
+                          Orientation="Vertical"
+                          Margin="0 5">
 
             </BoxContainer>
         </PanelContainer>

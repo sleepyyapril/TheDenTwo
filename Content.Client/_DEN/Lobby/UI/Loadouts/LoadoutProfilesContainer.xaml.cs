@@ -26,6 +26,7 @@ public sealed partial class LoadoutProfilesContainer : BoxContainer
     public LoadoutProfilesContainer()
     {
         RobustXamlLoader.Load(this);
+        IoCManager.InjectDependencies(this);
 
         _popupCategories = new Dictionary<Guid, LoadoutProfileCategory>();
 

@@ -1,5 +1,6 @@
 - type: loadoutCategory
   id: test-one
+  name: loadout-name-test1
   root: true
   items:
   - test1
@@ -9,6 +10,7 @@
 
 - type: loadoutCategory
   id: test-two
+  name: loadout-name-test2
   root: true
   subCategories:
   - test-three
@@ -16,6 +18,7 @@
 
 - type: loadoutCategory
   id: test-three
+  name: loadout-name-test3
   subCategories:
   - test-four
   - test-five
@@ -24,24 +27,28 @@
 
 - type: loadoutCategory
   id: test-four
+  name: loadout-name-test4
   items:
   - test4
   maxItems: 1
 
 - type: loadoutCategory
   id: test-five
+  name: loadout-name-test5
   items:
   - test5
   maxItems: 1
 
 - type: loadoutCategory
   id: test-six
+  name: loadout-name-test6
   subCategories:
   - test-six-seven
   maxItems: 1
 
 - type: loadoutCategory
   id: test-six-seven
+  name: loadout-name-test7
   items:
   - test6
   - test67
