@@ -132,7 +132,7 @@
                     <humanoid:MarkingPicker Name="Markings" HorizontalExpand="True" VerticalExpand="True" />
                 </BoxContainer>
                 <BoxContainer Name="LoadoutTab" Orientation="Vertical" Margin="10">
-                    <loadouts:DenLoadoutTab Name="DenLoadouts" HorizontalExpand="True" VerticalExpand="True" />
+                    <loadouts:LoadoutProfilesContainer Name="DenLoadouts" HorizontalExpand="True" VerticalExpand="True" />
                 </BoxContainer>
             </TabContainer>
         </BoxContainer>

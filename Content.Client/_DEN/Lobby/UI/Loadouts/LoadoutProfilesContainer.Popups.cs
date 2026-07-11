@@ -1,16 +1,17 @@
+using Content.Client._DEN.Lobby.UI.Loadouts.Popups;
 using Content.Shared._DEN.Loadout;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._DEN.Lobby.UI.Loadouts;
 
-public sealed partial class DenLoadoutTab
+public sealed partial class LoadoutProfilesContainer
 {
     private void OnTryCreateCategory(DenLoadoutCategory? existingCategory = null)
     {
         if (_createCategoryPopup != null)
             return;
 
-        _createCategoryPopup = new CreateCategoryPopup(existingCategory);
+        _createCategoryPopup = new Popups.CreateCategoryPopup(existingCategory);
         _createCategoryPopup.OnSubmit += OnSubmitNewCategory;
         _createCategoryPopup.OnClose += OnCloseCategoryPopup;
         _createCategoryPopup.OpenCentered();
@@ -52,7 +53,7 @@ public sealed partial class DenLoadoutTab
         if (_createLoadoutPopup != null)
             return;
 
-        _createLoadoutPopup = new CreateLoadoutPopup(_popupCategories, loadout);
+        _createLoadoutPopup = new Popups.CreateLoadoutPopup(_popupCategories, loadout);
         _createLoadoutPopup.OnSubmit += OnSubmitNewLoadout;
         _createLoadoutPopup.OnClose += OnCloseLoadoutPopup;
         _createLoadoutPopup.OpenCentered();

@@ -2,14 +2,14 @@ using Content.Shared._DEN.Loadout;
 
 namespace Content.Client._DEN.Lobby.UI.Loadouts;
 
-public sealed partial class DenLoadoutTab
+public sealed partial class LoadoutProfilesContainer
 {
-    public void OnClickEditLoadoutProfile(DenLoadout loadout)
+    private void OnClickEditLoadoutProfile(DenLoadout loadout)
     {
         OnTryCreateLoadout(loadout);
     }
 
-    public void OnClickDeleteLoadoutProfile(DenLoadout loadout)
+    private void OnClickDeleteLoadoutProfile(DenLoadout loadout)
     {
         _profile = _profile?.WithoutLoadoutProfile(loadout);
         SetDirty(_profile);

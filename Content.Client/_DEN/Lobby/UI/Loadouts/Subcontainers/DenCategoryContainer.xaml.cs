@@ -4,15 +4,15 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 
-namespace Content.Client._DEN.Lobby.UI.Loadouts;
+namespace Content.Client._DEN.Lobby.UI.Loadouts.Subcontainers;
 
 [GenerateTypedNameReferences]
 public sealed partial class DenCategoryContainer : PanelContainer
 {
     public event Action<DenLoadout, DenLoadoutAction>? OnClickLoadoutAction;
-    public Dictionary<Guid, DenLoadoutContainer> LoadoutContainers = new();
-    public List<DenLoadout> Loadouts = new();
-    public bool IsExpanded;
+    public readonly Dictionary<Guid, DenLoadoutContainer> LoadoutContainers = new();
+    public List<DenLoadout> Loadouts;
+    private bool _isExpanded;
 
     private DenLoadoutCategory _category;
 
@@ -95,13 +95,13 @@ public sealed partial class DenCategoryContainer : PanelContainer
 
     public void ToggleExpanded()
     {
-        IsExpanded = !IsExpanded;
+        _isExpanded = !_isExpanded;
         UpdateExpandedState();
     }
 
     private void UpdateExpandedState()
     {
-        ContentPanel.Visible = IsExpanded;
-        ExpandIcon.Text = IsExpanded ? "▼" : "▶";
+        ContentPanel.Visible = _isExpanded;
+        ExpandIcon.Text = _isExpanded ? "▼" : "▶";
     }
 }

@@ -1,7 +1,7 @@
 <PanelContainer xmlns="https://spacestation14.io"
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-                xmlns:loadouts="clr-namespace:Content.Client._DEN.Lobby.UI.Loadouts">
+                xmlns:loadouts="clr-namespace:Content.Client._DEN.Lobby.UI.Loadouts.Subcontainers">
     <BoxContainer Orientation="Vertical"
                   HorizontalExpand="True"
                   Margin="0 0 0 8">
