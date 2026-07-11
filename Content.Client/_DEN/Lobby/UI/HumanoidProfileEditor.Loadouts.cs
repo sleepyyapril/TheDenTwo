@@ -12,5 +12,6 @@ public sealed partial class HumanoidProfileEditor
 
         DenLoadouts.SetProfile(Profile);
         DenLoadouts.RefreshCategories();
+        DenLoadouts.RefreshLoadoutItemCategories();
     }
 }

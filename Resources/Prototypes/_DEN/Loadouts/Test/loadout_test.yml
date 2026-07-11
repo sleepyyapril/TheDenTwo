@@ -2,6 +2,7 @@
   id: test1
   name: loadout-name-test1
   description: loadout-desc-test
+  category: test-one
   items:
   - WeaponSubMachineGunDrozd
 
@@ -9,5 +10,46 @@
   id: test2
   name: loadout-name-test2
   description: loadout-desc-test
+  category: test-one
+  equipment:
+    back: ClothingBackpackHolding
+
+- type: entityLoadout
+  id: test3
+  name: loadout-name-test1
+  description: loadout-desc-test
+  category: test-one
+  items:
+  - WeaponSubMachineGunDrozd
+
+- type: entityLoadout
+  id: test4
+  name: loadout-name-test2
+  description: loadout-desc-test
+  category: test-four
+  equipment:
+    back: ClothingBackpackHolding
+
+- type: entityLoadout
+  id: test5
+  name: loadout-name-test2
+  description: loadout-desc-test
+  category: test-five
+  equipment:
+    back: ClothingBackpackHolding
+
+- type: entityLoadout
+  id: test6
+  name: loadout-name-test2
+  description: loadout-desc-test
+  category: test-six-seven
+  equipment:
+    back: ClothingBackpackHolding
+
+- type: entityLoadout
+  id: test67
+  name: loadout-name-test2
+  description: loadout-desc-test
+  category: test-six-seven
   equipment:
     back: ClothingBackpackHolding

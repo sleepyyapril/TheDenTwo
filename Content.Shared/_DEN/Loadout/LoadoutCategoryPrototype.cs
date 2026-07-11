@@ -10,7 +10,7 @@ public sealed partial class LoadoutCategoryPrototype : IPrototype
 {
     /// <inheritdoc/>
     [IdDataField, ViewVariables]
-    public string ID { get; private set;  } = default!;
+    public string ID { get; private set;  } = null!;
 
     [DataField]
     public LocId Name = string.Empty;
@@ -19,7 +19,10 @@ public sealed partial class LoadoutCategoryPrototype : IPrototype
     public bool Root;
 
     [DataField]
-    public HashSet<ProtoId<LoadoutCategoryPrototype>> SubCategories = new();
+    public HashSet<ProtoId<LoadoutCategoryPrototype>> SubCategories = [];
+
+    [DataField]
+    public HashSet<ProtoId<EntityLoadoutPrototype>> Items = [];
 
     [DataField]
     public int Priority;
