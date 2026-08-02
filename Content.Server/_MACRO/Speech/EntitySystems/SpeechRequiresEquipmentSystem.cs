@@ -5,7 +5,7 @@ using Content.Shared.Popups;
 using Content.Shared.Speech;
 using Content.Shared.Whitelist;
 
-namespace Content.Server.Speech.EntitySystems;
+namespace Content.Server._MACRO.Speech.EntitySystems;
 
 public sealed partial class SpeechRequiresEquipmentSystem : EntitySystem
 {
