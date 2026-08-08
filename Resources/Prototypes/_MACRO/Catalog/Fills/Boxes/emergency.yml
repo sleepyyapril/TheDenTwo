@@ -157,7 +157,7 @@
     - state: internals
     - state: vaportank
   - type: Label
-    currentLabel: H2O
+    localizedLabel: emergency-box-aquatic-label
 
 - type: entity
   parent: BoxSurvivalAquatic
