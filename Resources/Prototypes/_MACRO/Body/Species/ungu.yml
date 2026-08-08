@@ -228,6 +228,8 @@
     soundsId: UnguBodyEmotes
   - type: Damageable
     damageModifierSet: Ungu
+  - type: Temperature
+    specificHeat: 2500 # 42 -> 2500 (default: 3000)
   - type: TemperatureDamage
     heatDamageThreshold: 320
     coldDamageThreshold: 200
