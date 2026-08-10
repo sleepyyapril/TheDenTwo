@@ -705,14 +705,12 @@
   - type: Tag
     tags:
     - UnguFood
+    - NFButterStick # Frontier
   # macro edit end
   - type: ToolRefinable
     refineResult:
     - id: FoodButterSlice
       amount: 12
-  - type: Tag # Frontier
-    tags:
-    - NFButterStick
 
 - type: entity
   parent: [SolutionVeryTiny, FoodBakingMixableBase]
