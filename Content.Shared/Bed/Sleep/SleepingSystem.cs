@@ -1,4 +1,5 @@
 using Content.Shared._DEN.Language.Components;
+using Content.Shared._MACRO.Bed.Sleep;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Buckle.Components;
