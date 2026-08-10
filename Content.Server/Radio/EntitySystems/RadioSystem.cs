@@ -1,6 +1,8 @@
 using Content.Server._DEN.Language.EntitySystems;
 using Content.Server.Administration.Logs;
+using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
+using Content.Server.Ghost;
 using Content.Server.Power.Components;
 using Content.Shared._DEN.Language;
 using Content.Shared._DEN.Language.Components;
@@ -27,10 +29,11 @@ public sealed partial class RadioSystem : EntitySystem
     [Dependency] private INetManager _netMan = default!;
     [Dependency] private IReplayRecordingManager _replay = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private LanguageSystem _language = default!; // DEN: Languages
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private GhostSystem _ghost = default!;
     [Dependency] private EntityQuery<TelecomExemptComponent> _exemptQuery = default!;
     [Dependency] private EntityQuery<RadioTransmittableComponent> _radioLang = default!; // DEN: Languages
 
@@ -57,25 +60,38 @@ public sealed partial class RadioSystem : EntitySystem
     
     private void OnIntrinsicReceive(EntityUid uid, IntrinsicRadioReceiverComponent component, ref RadioReceiveEvent args)
     {
-        // DEN Start: Languages
-        if (HasComp<ActorComponent>(uid))
+        if (!TryComp(uid, out ActorComponent? actor))
+            return;
+
+        var msg = args.ChatMsg;
+        if (_ghost.CanGhostWarp(actor.PlayerSession, out _))
         {
-            _chat.SendComplexMessageToEntity(
-                args.RadioSource,
-                uid,
-                args.LanguageEnt,
-                args.Message,
-                _prototype.Index(RadioWrapper),
-                ChatChannel.Radio,
-                args.Name,
-                args.Verb,
-                args.Speech.Bold,
-                false,
-                args.Channel.LocalizedName,
-                args.Channel.Color
-            );
+            msg = new MsgChatMessage
+            {
+                Message = new ChatMessage(args.ChatMsg.Message)
+                {
+                    WrappedMessage = _chatManager.PrependFollowButtonIfAppropriate(
+                        args.ChatMsg.Message.WrappedMessage,
+                        args.MessageSource,
+                        actor.PlayerSession.Channel),
+                },
+            };
         }
-        // DEN End
+
+        _chat.SendComplexMessageToEntity(
+            args.RadioSource,
+            uid,
+            args.LanguageEnt,
+            args.Message,
+            _prototype.Index(RadioWrapper),
+            ChatChannel.Radio,
+            args.Name,
+            args.Verb,
+            args.Speech.Bold,
+            false,
+            args.Channel.LocalizedName,
+            args.Channel.Color
+        );
     }
 
     /// <summary>
@@ -120,7 +136,7 @@ public sealed partial class RadioSystem : EntitySystem
         var language = _prototype.Index(languageEnt.Comp.Language); // DEN: Languages
         
         SpeechVerbPrototype speech;
-        if (evt.SpeechVerb != null && _prototype.Resolve(evt.SpeechVerb, out var evntProto))
+        if (evt.SpeechVerb != null && ProtoMan.Resolve(evt.SpeechVerb, out var evntProto))
             speech = evntProto;
         else
             speech = _chat.GetComplexSpeechVerb(messageSource, message, language, ChatChannel.Radio); // DEN: Languages
