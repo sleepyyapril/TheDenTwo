@@ -48,7 +48,7 @@ public sealed partial class RadioSystem : EntitySystem
         SubscribeLocalEvent<IntrinsicRadioReceiverComponent, RadioReceiveEvent>(OnIntrinsicReceive);
         SubscribeLocalEvent<IntrinsicRadioTransmitterComponent, EntitySpokeEvent>(OnIntrinsicSpeak);
     }
-    
+
     private void OnIntrinsicSpeak(EntityUid uid, IntrinsicRadioTransmitterComponent component, EntitySpokeEvent args)
     {
         if (args.Channel != null && component.Channels.Contains(args.Channel.ID))
@@ -57,33 +57,19 @@ public sealed partial class RadioSystem : EntitySystem
             args.Channel = null; // prevent duplicate messages from other listeners.
         }
     }
-    
+
     private void OnIntrinsicReceive(EntityUid uid, IntrinsicRadioReceiverComponent component, ref RadioReceiveEvent args)
     {
         if (!TryComp(uid, out ActorComponent? actor))
             return;
 
-        var msg = args.ChatMsg;
-        if (_ghost.CanGhostWarp(actor.PlayerSession, out _))
-        {
-            msg = new MsgChatMessage
-            {
-                Message = new ChatMessage(args.ChatMsg.Message)
-                {
-                    WrappedMessage = _chatManager.PrependFollowButtonIfAppropriate(
-                        args.ChatMsg.Message.WrappedMessage,
-                        args.MessageSource,
-                        actor.PlayerSession.Channel),
-                },
-            };
-        }
-
+        // DEN start: languages. Follow in chat was moved inside the method below because it was ugly and bad.
         _chat.SendComplexMessageToEntity(
             args.RadioSource,
-            uid,
+            (uid, actor),
             args.LanguageEnt,
             args.Message,
-            _prototype.Index(RadioWrapper),
+            ProtoMan.Index(RadioWrapper),
             ChatChannel.Radio,
             args.Name,
             args.Verb,
@@ -92,6 +78,7 @@ public sealed partial class RadioSystem : EntitySystem
             args.Channel.LocalizedName,
             args.Channel.Color
         );
+        // DEN end
     }
 
     /// <summary>
@@ -108,8 +95,8 @@ public sealed partial class RadioSystem : EntitySystem
             return;
         }
         // DEN End
-        
-        SendRadioMessage(messageSource, languageEnt.Value, complex, _prototype.Index(channel), radioSource); // DEN: Pass Languages and complex
+
+        SendRadioMessage(messageSource, languageEnt.Value, complex, ProtoMan.Index(channel), radioSource); // DEN: Pass Languages and complex
     }
 
     /// <summary>
@@ -133,16 +120,16 @@ public sealed partial class RadioSystem : EntitySystem
         var name = evt.VoiceName;
         name = FormattedMessage.EscapeText(name);
 
-        var language = _prototype.Index(languageEnt.Comp.Language); // DEN: Languages
-        
+        var language = ProtoMan.Index(languageEnt.Comp.Language); // DEN: Languages
+
         SpeechVerbPrototype speech;
         if (evt.SpeechVerb != null && ProtoMan.Resolve(evt.SpeechVerb, out var evntProto))
             speech = evntProto;
         else
             speech = _chat.GetComplexSpeechVerb(messageSource, message, language, ChatChannel.Radio); // DEN: Languages
-        
+
         var verb = Loc.GetString(_random.Pick(speech.SpeechVerbStrings)); // DEN: Languages
-        
+
         var ev = new RadioReceiveEvent(message, languageEnt, speech, name, verb, messageSource, channel, radioSource); // DEN: Languages
 
         var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
@@ -185,7 +172,7 @@ public sealed partial class RadioSystem : EntitySystem
 
         // DEN Start: Build wrapped and unwrapped messages for logging and replay.
         var (unwrappedMessage, wrappedMessage) = _chat.BuildComplexMessage(message,
-            _prototype.Index(RadioWrapper),
+            ProtoMan.Index(RadioWrapper),
             language,
             speech.Bold,
             language.DisplayInChat,
@@ -194,9 +181,9 @@ public sealed partial class RadioSystem : EntitySystem
             verb,
             channel.LocalizedName,
             channel.Color);
-        
+
         Log.Debug("Radio: " + wrappedMessage);
-        
+
         if (name != Name(messageSource))
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} as {name} on {channel.LocalizedName}: {unwrappedMessage}");
         else

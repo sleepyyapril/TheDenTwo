@@ -22,6 +22,7 @@ using Robust.Shared.Replays;
 using System.Linq;
 using Content.Shared._DEN.Language;
 using Content.Shared._DEN.Language.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Telephone;
 
@@ -42,7 +43,7 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
 
     // Has set used to prevent telephone feedback loops
     private HashSet<(EntityUid, string, Entity<TelephoneComponent>)> _recentChatMessages = new();
-    
+
     private static readonly ProtoId<LanguageWrapperPrototype> TelephoneWrapper = "TelephoneWrapper"; // DEN: Languages
 
     public override void Initialize()
@@ -365,13 +366,13 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
         SetTelephoneState(entity, newState);
         SetTelephoneMicrophoneState(entity, false);
     }
-    
+
     private void SendTelephoneMessage(EntityUid messageSource, Entity<LanguageComponent> languageEnt, ComplexChatMessage message, Entity<TelephoneComponent> source) // DEN: Languages
     {
         // This method assumes that you've already checked that this
         // telephone is able to transmit messages and that it can
         // send messages to any telephones linked to it
-        var language = _prototype.Index(languageEnt.Comp.Language); // DEN: Languages
+        var language = ProtoMan.Index(languageEnt.Comp.Language); // DEN: Languages
 
         var ev = new TransformSpeakerNameEvent(messageSource, MetaData(messageSource).EntityName);
         RaiseLocalEvent(messageSource, ev);
@@ -386,7 +387,7 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
             speech = _chat.GetComplexSpeechVerb(messageSource, message, language, ChatChannel.Radio); // DEN: language and complex speech.
 
         var verb = Loc.GetString(_random.Pick(speech.SpeechVerbStrings)); // DEN languages
-        
+
         var evSentMessage = new TelephoneMessageSentEvent(message, languageEnt, messageSource); // DEN Languages
         RaiseLocalEvent(source, ref evSentMessage);
         source.Comp.StateStartTime = _timing.CurTime;
@@ -401,10 +402,10 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
             RaiseLocalEvent(receiverUid, ref evReceivedMessage);
             receiverTelephone.StateStartTime = _timing.CurTime;
         }
-        
+
         // DEN Start: Format complex message and log
         var (unwrappedMessage, wrappedMessage) = _chat.BuildComplexMessage(message,
-            _prototype.Index(TelephoneWrapper),
+            ProtoMan.Index(TelephoneWrapper),
             language,
             speech.Bold,
             language.DisplayInChat,

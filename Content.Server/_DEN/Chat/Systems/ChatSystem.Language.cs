@@ -72,7 +72,7 @@ public sealed partial class ChatSystem
             !ignoreActionBlocker)
             return;
 
-        var language = _prototypeManager.Index(languageEnt.Comp.Language);
+        var language = ProtoMan.Index(languageEnt.Comp.Language);
 
         // Do language transformation, things like accents.
         var message = TransformComplexSpeech(source, originalMessage);
@@ -97,19 +97,18 @@ public sealed partial class ChatSystem
             RaiseLocalEvent(source, nameEv);
             name = nameEv.VoiceName;
             // Check for a speech verb override
-            if (nameEv.SpeechVerb != null && _prototypeManager.Resolve(nameEv.SpeechVerb, out var proto))
+            if (nameEv.SpeechVerb != null && ProtoMan.Resolve(nameEv.SpeechVerb, out var proto))
                 speech = proto;
         }
 
         name = FormattedMessage.EscapeText(name);
-        
         var verb = verbOverride ?? Loc.GetString(_random.Pick(speech.SpeechVerbStrings));
 
         if (language.WrapperOverrides is { } wrapperOverrides &&
             wrapperOverrides.TryGetValue(chatChannel, out var wrapperOverride))
             wrapperProto = wrapperOverride;
 
-        var wrapper = _prototypeManager.Index(wrapperProto);
+        var wrapper = ProtoMan.Index(wrapperProto);
 
         // TODO: It's still weird that this is hardcoded, but you can expand it anyway so it's not the end of the world.
         // Find all of the recipients in our provided range and send the message to them.
@@ -135,7 +134,7 @@ public sealed partial class ChatSystem
                     (!_interaction.InRangeUnobstructed(source, playerEntity, WhisperClearRange)
                     || data.Observer))
                     continue;
-                
+
                 SendComplexMessageToEntity(source,
                     playerEntity,
                     languageEnt,
@@ -258,7 +257,7 @@ public sealed partial class ChatSystem
         if (!Resolve(listener, ref listener.Comp))
             return;
 
-        var language = _prototypeManager.Index(speakingEnt.Comp.Language);
+        var language = ProtoMan.Index(speakingEnt.Comp.Language);
 
         var understandEv = new AttemptUnderstandingEvent(source, language);
         RaiseLocalEvent(listener, understandEv);
@@ -268,12 +267,12 @@ public sealed partial class ChatSystem
             return;
 
         var message = originalMessage;
-        
-        var understanding = _prototypeManager.Index(SharedLanguageSystem.MinimumFluency);
+
+        var understanding = ProtoMan.Index(SharedLanguageSystem.MinimumFluency);
 
         if (understandEv is { Handled: true, Understanding: not null })
         {
-            understanding = _prototypeManager.Index(understandEv.Understanding.Value.Comp.Fluency);
+            understanding = ProtoMan.Index(understandEv.Understanding.Value.Comp.Fluency);
         }
 
         // Pass the message off to the language system to allow for mangling it based on the specific language.
@@ -295,7 +294,7 @@ public sealed partial class ChatSystem
             return;
 
         // Handle this listener's preferences in regard to seeing language fonts.
-        var hasMaxUnderstanding = understanding >= _prototypeManager.Index(SharedLanguageSystem.MaximumFluency);
+        var hasMaxUnderstanding = understanding >= ProtoMan.Index(SharedLanguageSystem.MaximumFluency);
         var useLanguageFont = true;
         if (_mindSystem.TryGetMind(listener, out var mindId, out _) &&
             TryComp<LanguageFontSuppressionComponent>(mindId, out var suppression))
@@ -303,9 +302,9 @@ public sealed partial class ChatSystem
                 useLanguageFont = !(suppression.AllFonts || hasMaxUnderstanding);
         }
         var hideLanguage = !(language.DisplayInChat &&
-                             _prototypeManager.Index(language.UnderstandingForDisplay) <= understanding) ||
+                             ProtoMan.Index(language.UnderstandingForDisplay) <= understanding) ||
                            understandEv.HideLanguage;
-        
+
         // Put the pieces of the modified message together with the wrapper and various variables and send it off to them.
         var (unwrappedMessage, wrappedMessage) = BuildComplexMessage(message,
             wrapper,
@@ -317,6 +316,11 @@ public sealed partial class ChatSystem
             verb,
             radioChannel,
             color);
+
+        wrappedMessage = _chatManager.PrependFollowButtonIfAppropriate(
+                wrappedMessage,
+                source,
+                listener.Comp.PlayerSession.Channel); // TODO: this method of doing follow in chat sucks, but the original is worse.
 
         _chatManager.ChatMessageToOne(channel,
             unwrappedMessage,
@@ -403,7 +407,7 @@ public sealed partial class ChatSystem
             {
                 var current = workingSet[i];
                 // Matching Dialog or Emote.
-                if ((lastSeen.Item1 is ChatPart.Dialog or ChatPart.DialogTag 
+                if ((lastSeen.Item1 is ChatPart.Dialog or ChatPart.DialogTag
                     && current.Item1 is ChatPart.Dialog or ChatPart.DialogTag)
                     || (lastSeen.Item1 is ChatPart.Emote or ChatPart.EmoteTag
                         && current.Item1 is ChatPart.Emote or ChatPart.EmoteTag))
@@ -422,7 +426,6 @@ public sealed partial class ChatSystem
                 }
             }
             mergedParts.Add(lastSeen);
-  
             // Loop over the parts of the complex speech.
             // Dialog gets a lot of special formatting where as emotes just get default action formatting.
             foreach (var (kind, part) in mergedParts)

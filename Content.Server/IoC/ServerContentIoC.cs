@@ -1,6 +1,7 @@
 using Content.Server._DEN.Discord;
 using Content.Server._DEN.Requirements.Managers;
 using Content.Server._DEN.Denu;
+using Content.Server._MACRO.Announcements;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
