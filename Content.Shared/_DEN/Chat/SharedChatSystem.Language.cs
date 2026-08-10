@@ -60,7 +60,7 @@ public abstract partial class SharedChatSystem
         {
             if (speechVerbs.TryGetValue(channel, out var channelVerbs))
             {
-                current = _prototypeManager.Index(channelVerbs.DefaultVerb);
+                current = ProtoMan.Index(channelVerbs.DefaultVerb);
                 currentSuffixVerbs = channelVerbs.SuffixSpeechVerbs;
             }
         }
@@ -69,7 +69,7 @@ public abstract partial class SharedChatSystem
         {
             foreach (var (str, id) in currentSuffixVerbs)
             {
-                var proto = _prototypeManager.Index(id);
+                var proto = ProtoMan.Index(id);
                 if (lastDialog.EndsWith(Loc.GetString(str)) && proto.Priority >= (current?.Priority ?? 0))
                 {
                     current = proto;
@@ -193,7 +193,7 @@ public readonly record struct ComplexChatMessage()
                 parts.Add((outside ? ChatPart.Emote : ChatPart.Dialog, pieces[0]));
                 continue;
             }
-            
+
             foreach (var msgChunk in pieces)
             {
                 if (!string.IsNullOrEmpty(msgChunk))
