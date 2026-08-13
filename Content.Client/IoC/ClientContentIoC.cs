@@ -1,3 +1,4 @@
+using Content.Client._DEN.Dialog;
 using Content.Client.Administration.Managers;
 using Content.Client.Audio.Midi;
 using Content.Client.Changelog;
@@ -71,6 +72,7 @@ namespace Content.Client.IoC
             collection.Register<ISharedFeedbackManager, ClientFeedbackManager>();
             collection.Register<IPlayerRequirementManager, PlayerRequirementManager>(); // DEN
             collection.Register<MidiFileCollectionManager>();
+            collection.Register<IDialogManager, DialogManager>(); // DEN
         }
     }
 }

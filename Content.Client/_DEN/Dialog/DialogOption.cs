@@ -1,20 +1,36 @@
+using Content.Client.UserInterface.Controls;
 using Robust.Shared.Player;
 
 namespace Content.Client._DEN.Dialog;
 
-public class DialogOptionPressedArgs
+public sealed class DialogOptionPressedArgs
 {
-    public required ICommonSession Session { get; set; }
+    public required ICommonSession? Session { get; set; }
+    public required FancyWindow DialogWindow {  get; set; }
 }
 
-public abstract class DialogOption
+public abstract class DialogOptionBase(LocId text, Action<DialogOptionPressedArgs> onPressed)
 {
-    public LocId Text { get; set; } = string.Empty;
-    public required Action< OnPressed { get; set; }
+    public LocId Text = text;
+    public Action<DialogOptionPressedArgs> OnPressed = onPressed;
 }
 
-public class CancelDialogOption
+public sealed class DialogOption(LocId text, Action<DialogOptionPressedArgs> onPressed) : DialogOptionBase(text, onPressed);
+
+public sealed class CancelDialogOption : DialogOptionBase
 {
-    public LocId Text { get; set; } = string.Empty;
-    public Action OnPressed { get; set; }
+    private static readonly LocId CancelText = "generic-dialog-cancel";
+
+    public CancelDialogOption() : base(CancelText, OnCancelPressed)
+    {
+    }
+
+    public CancelDialogOption(LocId text) : base(text, OnCancelPressed)
+    {
+    }
+
+    private static void OnCancelPressed(DialogOptionPressedArgs args)
+    {
+        args.DialogWindow.Close();
+    }
 }
