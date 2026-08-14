@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2025 portfiend <109661617+portfiend@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 sleepyyapril <123355664+sleepyyapril@users.noreply.github.com>
-#
-# SPDX-License-Identifier: MIT
-
 marking-IPCAntennaDogUp = Robot Dog Ears, up
 marking-IPCAntennaDogUp-dog_up_base = Ear
 marking-IPCAntennaDogUp-dog_up_accent = Joint
