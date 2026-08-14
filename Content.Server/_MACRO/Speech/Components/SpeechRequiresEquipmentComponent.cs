@@ -1,4 +1,4 @@
-using Content.Server.Speech.EntitySystems;
+using Content.Server._MACRO.Speech.EntitySystems;
 using Content.Shared.Whitelist;
 
 namespace Content.Server.Speech.Components;
