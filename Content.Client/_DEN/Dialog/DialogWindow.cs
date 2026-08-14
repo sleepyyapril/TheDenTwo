@@ -26,7 +26,7 @@ public sealed partial class DialogWindow : FancyWindow
         _textLabel = new RichTextLabel
         {
             HorizontalExpand = true,
-            HorizontalAlignment = HAlignment.Center,
+            Margin = new Thickness(2, 0, 0, 2),
             Text = Loc.GetString("dialog-generic-missing-text")
         };
 
