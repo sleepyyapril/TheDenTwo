@@ -82,7 +82,6 @@
   - LoadoutSpeciesVoxNitrogen
   - EmergencyAquatic # MACRO: Decapoids
   - LoadoutSpeciesAquaticFullTank # MACRO: Decapoids
-  - EmergencyWheat # MACRO: Ungu
 
 # nitrogen or oxygen tank, depending on what your species needs
 - type: loadoutGroup
@@ -92,7 +91,6 @@
   loadouts:
   - LoadoutSpeciesEVANitrogen
   - LoadoutSpeciesEVAOxygen
-  - LoadoutSpeciesEVAUngu # macro
 
 # vox get a nitrogen tank, other species get nothing
 - type: loadoutGroup
@@ -109,7 +107,6 @@
   loadouts:
   - LoadoutSpeciesPocketDoubleNitrogen
   - LoadoutSpeciesPocketDoubleOxygen
-  - LoadoutSpeciesPocketDoubleOxygenUngu # macro
 
 # Command
 - type: loadoutGroup
@@ -569,7 +566,6 @@
   - LoadoutSpeciesVoxNitrogen
   - EmergencyAquaticClown # MACRO: Decapoids
   - LoadoutSpeciesAquaticFullTank # MACRO: Decapoids
-  - EmergencyWheatClown # MACRO: Ungu
 
 - type: loadoutGroup
   id: ClownJobTrinkets
@@ -971,7 +967,6 @@
   - LoadoutSpeciesVoxNitrogen
   - EmergencyAquaticExtended # MACRO: Decapoids
   - LoadoutSpeciesAquaticFullTank # MACRO: Decapoids
-  - EmergencyWheatExtended # MACRO: Ungu
 
 # Science
 - type: loadoutGroup
@@ -1308,7 +1303,6 @@
   - LoadoutSpeciesVoxNitrogen
   - EmergencyAquaticSecurity # MACRO: Decapoids
   - LoadoutSpeciesAquaticFullTank # MACRO: Decapoids
-  - EmergencyWheatSecurity # MACRO: Ungu
 
 # Wildcards
 - type: loadoutGroup
@@ -1403,7 +1397,6 @@
   - LoadoutSpeciesVoxNitrogen
   - EmergencyAquaticSyndicate # MACRO: Decapoids
   - LoadoutSpeciesAquaticFullTank # MACRO: Decapoids
-  - EmergencyWheatSyndicate # MACRO: Ungu
 
 - type: loadoutGroup
   id: SurvivalMilitaryDouble # Survival box mostly used by ERT/deathsquad
