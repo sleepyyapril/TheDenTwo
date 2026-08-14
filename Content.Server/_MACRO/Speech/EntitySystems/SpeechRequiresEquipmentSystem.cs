@@ -1,5 +1,4 @@
 using Content.Server._MACRO.Speech.Components;
-using Content.Server.Speech.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Speech;
