@@ -23,10 +23,10 @@
     soundHit:
       collection: AlienClaw
   - type: Blocking
-    passiveModifierSet:
+    passiveBlockModifier:
       coefficients:
         Blunt: 0.5
-    activeModifierSet:
+    activeBlockModifier:
       coefficients:
         Blunt: 0
   - type: ToolTileCompatible
