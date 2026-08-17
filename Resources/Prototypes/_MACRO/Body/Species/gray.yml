@@ -334,8 +334,6 @@
   id: BaseMobGray
   abstract: true
   components:
-  - type: Hunger
-  - type: Thirst
   - type: Icon
     sprite: _MACRO/Mobs/Species/Gray/parts.rsi
     state: full

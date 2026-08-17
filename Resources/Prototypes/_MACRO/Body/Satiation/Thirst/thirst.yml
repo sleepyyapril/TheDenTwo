@@ -1,0 +1,7 @@
+- type: satiation
+  parent: [ BaseHalfChangeRate, NormalSatiationThirst ]
+  id: OviniaSatiationThirst
+
+- type: satiation
+  parent: [ BaseNoChangeRate, NormalSatiationThirst ]
+  id: DecapoidSatiationThirst
