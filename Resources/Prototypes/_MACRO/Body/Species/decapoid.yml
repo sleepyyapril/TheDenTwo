@@ -182,7 +182,7 @@
       types:
         Blunt: 0 # immune to space
   - type: Satiation
-    thresholds:
+    satiations:
       Hunger:
         prototype: NormalSatiationHunger
       Thirst:
