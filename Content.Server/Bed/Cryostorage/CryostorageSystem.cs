@@ -25,6 +25,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Station;
+using Content.Shared.Station.Components;
 using Content.Shared.StationRecords.Components;
 using Content.Shared.StationRecords.Systems;
 using Robust.Shared.Audio.Systems;
