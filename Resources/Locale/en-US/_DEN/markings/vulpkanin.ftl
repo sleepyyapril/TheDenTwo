@@ -86,9 +86,6 @@ marking-VulpTailBushy = Vulpkanin Bushy
 marking-VulpTailBushyAnimated = Vulpkanin Bushy (Animated)
 marking-VulpTailBushyAnimated-bushfluff_wag = Bushy Tail
 
-marking-VulpTailCoyoteAnimated = Vulpkanin Coyote (Animated)
-marking-VulpTailCoyoteAnimated-coyote_wag = Coyote Tail
-
 marking-VulpTailHuskyAlt-husky = Husky Tail
 marking-VulpTailHuskyAlt = Vulpkanin Husky Alt
 
@@ -112,9 +109,6 @@ marking-VulpTailDalmatianAnimated-dalmatian_wag = Dalmation Tail
 marking-TailBrushTip-brushtiptail2 = Brush Tail (Accent)
 marking-TailBrushTip-brushtiptail = Brush Tail (Base)
 marking-TailBrushTip = Vulpkanin Brush Tip
-
-marking-VulpTailFluffyAnimated-fluffywag = Tail Base
-marking-VulpTailFluffyAnimated = Vulpkanin Fluffy (Animated)
 
 marking-VulpTailFluffyTip-fluffyalttip = Fluffy Tail (Tip)
 marking-VulpTailFluffyTip-fluffyalt = Fluffy Tail (Base)
