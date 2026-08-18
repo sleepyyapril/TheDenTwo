@@ -31,6 +31,9 @@
   - EmergencyNitrogenMedical
   - EmergencyOxygenMedical
   - LoadoutSpeciesVoxNitrogen
+  - EmergencyAquaticMedical # MACRO: Decapoids
+  - LoadoutSpeciesAquaticFullTank # MACRO: Decapoids
+  - EmergencyWheatMedical # MACRO: Ungu
 
 # Chief Medical Officer
 
@@ -74,12 +77,11 @@
   - BrownShoes
   - MedicalWinterBoots
 
-- type: loadoutGroup
-  id: ChiefMedicalOfficerJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieChiefMedicalOfficer
+#- type: loadoutGroup
+#  id: ChiefMedicalOfficerJobTrinkets
+#  name: loadout-group-jobtrinkets
+#  minLimit: 0
+#  loadouts:
 
 # Medical Doctor
 
@@ -124,12 +126,11 @@
   - MedicalDoctorPDA
   - SeniorPhysicianPDA
 
-- type: loadoutGroup
-  id: MedicalDoctorJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieMedicalDoctor
+#- type: loadoutGroup
+#  id: MedicalDoctorJobTrinkets
+#  name: loadout-group-jobtrinkets
+#  minLimit: 0
+#  loadouts:
 
 # Medical Intern
 
@@ -140,12 +141,11 @@
   - WhiteJumpsuit
   - WhiteJumpskirt
 
-- type: loadoutGroup
-  id: MedicalInternJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieMedicalIntern
+#- type: loadoutGroup
+#  id: MedicalInternJobTrinkets
+#  name: loadout-group-jobtrinkets
+#  minLimit: 0
+#  loadouts:
 
 # Chemist
 
@@ -173,12 +173,11 @@
   - ChemistSatchel
   - ChemistDuffel
 
-- type: loadoutGroup
-  id: ChemistJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieChemist
+#- type: loadoutGroup
+#  id: ChemistJobTrinkets
+#  name: loadout-group-jobtrinkets
+#  minLimit: 0
+#  loadouts:
 
 # Paramedic
 
@@ -212,9 +211,8 @@
   - WhiteShoes
   - MedicalWinterBoots
 
-- type: loadoutGroup
-  id: ParamedicJobTrinkets
-  name: loadout-group-jobtrinkets
-  minLimit: 0
-  loadouts:
-  - LizardPlushieParamedic
+#- type: loadoutGroup
+#  id: ParamedicJobTrinkets
+#  name: loadout-group-jobtrinkets
+#  minLimit: 0
+#  loadouts:
