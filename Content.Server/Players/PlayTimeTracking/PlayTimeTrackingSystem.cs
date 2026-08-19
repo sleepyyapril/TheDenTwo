@@ -326,7 +326,7 @@ public sealed partial class PlayTimeTrackingSystem : EntitySystem
         var context = _requirements.GetPlayerContext(player);
         foreach (var job in ProtoMan.EnumeratePrototypes<JobPrototype>())
         {
-            if (IsJobAllowed(player, job, context))
+            if (!IsJobAllowed(player, job, context))
                 roles.Add(job.ID);
         }
         // End DEN
