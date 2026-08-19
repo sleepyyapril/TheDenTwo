@@ -25,6 +25,7 @@
   - type: AtmosExposed # DEN
   - type: Temperature # DEN
     temperature: 290
+    heatCapacity: 750
   - type: TemperatureDamage # DEN
   - type: InternalTemperature # DEN - i decree These values are arbitrary <3
   - type: Fixtures # DEN - less mass for better cooking
