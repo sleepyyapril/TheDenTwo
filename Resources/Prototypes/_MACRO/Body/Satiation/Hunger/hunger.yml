@@ -2,10 +2,10 @@
   parent: [ BaseThreeFourthsChangeRate, NormalSatiationHunger ]
   id: UnguSatiationHunger
   thresholds:
-      Overfed: 150
-      Okay: 100
-      Peckish: 50
-      Starving: 25
+    Overfed: 150
+    Okay: 100
+    Peckish: 50
+    Starving: 25
 
 - type: satiation
   parent: [ BaseHalfChangeRate, NormalSatiationHunger ]
