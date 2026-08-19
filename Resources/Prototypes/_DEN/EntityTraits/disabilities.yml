@@ -68,18 +68,18 @@
       gear:
       - OffsetCane
 
-# - type: entityTrait
-#   id: Muted
-#   name: trait-muted-name
-#   description: trait-muted-desc
-#   category: Disabilities
-#   blacklist:
-#     components:
-#       - BorgChassis
-#   functions:
-#   - !type:AddComponentTrait
-#       components:
-#       - type: MutedStatusEffect
+- type: entityTrait
+  id: Muted
+  name: trait-muted-name
+  description: trait-muted-desc
+  category: Disabilities
+  blacklist:
+    components:
+      - BorgChassis
+  functions:
+  - !type:AddComponentTrait
+      components:
+      - type: MutedStatusEffect
 
 - type: entityTrait
   id: Narcolepsy
