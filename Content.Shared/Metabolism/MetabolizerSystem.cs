@@ -33,7 +33,6 @@ public sealed partial class MetabolizerSystem : EntitySystem
     [Dependency] private EntityQuery<OrganComponent> _organQuery = default!;
     [Dependency] private EntityQuery<SolutionManagerComponent> _solutionQuery = default!;
 
-
     [SubscribeLocalEvent]
     private void OnAddMetabolismInit(Entity<AddMetabolismComponent> ent, ref MapInitEvent args)
     {
@@ -41,7 +40,6 @@ public sealed partial class MetabolizerSystem : EntitySystem
             return;
 
         AddMetabolizerToBody(ent, ent.Comp.AddedMetabolizer.Value);
-        InitializeDen(); // DEN - metabolizer extension
     }
 
     [SubscribeLocalEvent]

@@ -9,8 +9,10 @@ public sealed partial class MetabolizerSystem
 {
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
-    private void InitializeDen()
+    public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<BodyComponent, AddTraitMetabolizerEvent>(_body.RelayEvent);
         SubscribeLocalEvent<BodyComponent, RemoveTraitMetabolizerEvent>(_body.RelayEvent);
     }
