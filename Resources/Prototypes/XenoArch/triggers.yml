@@ -263,6 +263,7 @@
     - ZombieBlood
     - Sap
     - SulfurBlood
+    - BloodKodepiia # macro add
 
 - type: xenoArchTrigger
   id: TriggerThrow

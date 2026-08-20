@@ -132,6 +132,10 @@
       - !type:Satiate
         satiationType: Hunger
         factor: 0.5
+        conditions: # macro add
+        - !type:MetabolizerTypeCondition
+          type: [Kodepiia]
+          inverted: true
       - !type:Satiate
         satiationType: Thirst
         factor: -0.5 # high salt content
@@ -205,6 +209,10 @@
       - !type:Satiate
         satiationType: Hunger
         factor: 6.0 #Stronger than cookedramen
+        conditions: # macro add
+        - !type:MetabolizerTypeCondition
+          type: [Kodepiia]
+          inverted: true
   footstepSound:
     collection: FootstepSlime
     params:
