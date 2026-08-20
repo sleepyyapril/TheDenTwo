@@ -1,5 +1,5 @@
 - type: satiation
-  parent: [ BaseThreeFourthsChangeRate, NormalSatiationHunger ]
+  parent: [ NormalSatiationHunger, BaseThreeFourthsChangeRate ]
   id: UnguSatiationHunger
   thresholds:
     Overfed: 150
@@ -8,7 +8,7 @@
     Starving: 25
 
 - type: satiation
-  parent: [ BaseHalfChangeRate, NormalSatiationHunger ]
+  parent: [ NormalSatiationHunger, BaseHalfChangeRate ]
   id: OviniaSatiationHunger
 
 - type: satiation
