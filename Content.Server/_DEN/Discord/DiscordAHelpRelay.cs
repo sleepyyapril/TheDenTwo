@@ -77,12 +77,19 @@ public sealed partial class DiscordAHelpRelay : IPostInjectInit
         {
             if (!_enabled || _channelId == -1
                 || !ulong.TryParse(_channelId.ToString(), out var channelId))
+            {
+                _sawmill.Error("AHelp relay not enabled or channel ID not specified correctly.");
                 return;
+            }
             var nextLine = GetNextLineFormatted(ev);
             var discordMessage = await GetDiscordMessage(session, ev, channelId, nextLine.Length);
 
             if (discordMessage == null)
+            {
+                _sawmill.Error(
+                    $"No discord message found for specified channel ID: {channelId}. Does the channel exist?");
                 return;
+            }
 
             await SendNextMessage(session, discordMessage, ev, nextLine);
         }
@@ -172,6 +179,7 @@ public sealed partial class DiscordAHelpRelay : IPostInjectInit
                                           "\nTo send an AHelp that can only be seen by admins, prefix your message with ``%``.");
             _threadsToUsers.Add(thread.Id, data.UserId);
         }
+
         return messageAttempt;
     }
 
