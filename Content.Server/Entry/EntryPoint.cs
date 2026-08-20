@@ -80,7 +80,7 @@ namespace Content.Server.Entry
         [Dependency] private ServerInfoManager _serverInfo = default!;
         [Dependency] private ServerUpdateManager _updateManager = default!;
         [Dependency] private ServerFeedbackManager _feedbackManager = null!;
-        [Dependency] private DenEntryPoint _denEntryPoint = null!;
+        [Dependency] private DenEntryPoint _denEntryPoint = null!; // DEN
 
         public override void PreInit()
         {
@@ -211,7 +211,7 @@ namespace Content.Server.Entry
             // We don't care when or how this finishes, just spin the task off into the void.
             _ = _discordLink.Shutdown();
             _discordChatLink.Shutdown();
-            _denEntryPoint.Disposing();
+            _denEntryPoint.Disposing(); // DEN
         }
 
         private static void LoadConfigPresets(IConfigurationManager cfg, IResourceManager res, ISawmill sawmill)
