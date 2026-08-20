@@ -1,6 +1,3 @@
-using Content.Server._DEN.Discord;
-using Content.Server._DEN.Requirements.Managers;
-using Content.Server._DEN.Denu;
 using Content.Server._MACRO.Announcements;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -28,7 +25,6 @@ using Content.Server.Preferences.Managers;
 using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
 using Content.Server.Voting.Managers;
-using Content.Shared._DEN.Requirements.Managers;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Chat;
@@ -87,10 +83,9 @@ internal static class ServerContentIoC
         deps.Register<DiscordChatLink>();
         deps.Register<ServerFeedbackManager>();
         deps.Register<ISharedFeedbackManager, ServerFeedbackManager>();
-        deps.Register<IDenuSettingsManager, DenuSettingsManager>(); // DEN
-        deps.Register<IPlayerRequirementManager, PlayerRequirementManager>(); // DEN
-        deps.Register<DiscordCommands>(); // DEN
         deps.Register<AnnouncerManager>(); // Macrocosm edit
         deps.Register<WhitelistManager>();
+
+        DenServerContentIoC.Register(deps); // DEN
     }
 }

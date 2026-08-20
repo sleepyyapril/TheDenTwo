@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Content.Server._DEN.Discord;
+using Content.Server._DEN.Entry;
 using Content.Server.Acz;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -79,7 +80,7 @@ namespace Content.Server.Entry
         [Dependency] private ServerInfoManager _serverInfo = default!;
         [Dependency] private ServerUpdateManager _updateManager = default!;
         [Dependency] private ServerFeedbackManager _feedbackManager = null!;
-        [Dependency] private DiscordCommands _discordCommands = null!; // DEN
+        [Dependency] private DenEntryPoint _denEntryPoint = null!;
 
         public override void PreInit()
         {
@@ -136,7 +137,7 @@ namespace Content.Server.Entry
             _watchlistWebhookManager.Initialize();
             _job.Initialize();
             _rateLimit.Initialize();
-            _discordCommands.Initialize();
+            _denEntryPoint.Init(); // DEN
         }
 
         public override void PostInit()
@@ -210,6 +211,7 @@ namespace Content.Server.Entry
             // We don't care when or how this finishes, just spin the task off into the void.
             _ = _discordLink.Shutdown();
             _discordChatLink.Shutdown();
+            _denEntryPoint.Disposing();
         }
 
         private static void LoadConfigPresets(IConfigurationManager cfg, IResourceManager res, ISawmill sawmill)
