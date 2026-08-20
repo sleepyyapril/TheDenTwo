@@ -10,3 +10,8 @@
 - type: satiation
   parent: [ BaseHalfChangeRate, NormalSatiationHunger ]
   id: OviniaSatiationHunger
+
+- type: satiation
+  parent: NormalSatiationHunger
+  id: KodepiiaSatiationHunger
+  baseChangeRate: -0.15
