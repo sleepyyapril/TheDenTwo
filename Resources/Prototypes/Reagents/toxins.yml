@@ -519,7 +519,7 @@
       - !type:PopupMessage
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Detritivore ] # DEN: Add Detritivore
+          type: [ Animal, Vox, Kodepiia, Detritivore ] #Macro, add Kodepiia, # DEN: Add Detritivore
           inverted: true
         type: Local
         visualType: MediumCaution
@@ -529,12 +529,12 @@
         probability: 0.1
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant, Detritivore ] # DEN: Add Detritivore
+          type: [ Animal, Vox, Plant, Kodepiia, Detritivore ] #Macro, add Kodepiia, # DEN: Add Detritivore
           inverted: true
       - !type:HealthChange
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Animal, Vox, Plant, Detritivore ] # DEN: Add Detritivore
+          type: [ Animal, Vox, Plant, Kodepiia, Detritivore ] #Macro, add Kodepiia, # DEN: Add Detritivore
           inverted: true
         damage:
           types:
@@ -561,6 +561,24 @@
           inverted: true
         reagent: Protein
         amount: 0.25
+      # macro edit start
+      - !type:EvenHealthChange
+        probability: 0.5
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [Kodepiia]
+        damage:
+          Brute: -0.4
+      - !type:SatiateHunger
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Kodepiia ]
+      - !type:ModifyBloodLevel
+        amount: 1
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Kodepiia ]
+      # macro edit end
 
 - type: reagent
   id: Allicin

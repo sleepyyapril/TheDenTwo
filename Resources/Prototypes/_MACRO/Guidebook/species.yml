@@ -15,14 +15,19 @@
   name: species-name-apid
   text: "/ServerInfo/_MACRO/Guidebook/Mobs/Apid.xml"
 
+#- type: guideEntry
+#  id: Kodepiia
+#  name: Kodepiia
+#  text: "/ServerInfo/_MACRO/Guidebook/Mobs/Kodepiia.xml"
+
 - type: guideEntry
   id: Ungu
-  name: species-name-ungu
+  name: Ungu
   text: "/ServerInfo/_MACRO/Guidebook/Mobs/Ungu.xml"
 
 - type: guideEntry
   id: Decapoid
-  name: species-name-decapoid
+  name: Decapoid
   text: "/ServerInfo/_MACRO/Guidebook/Mobs/Decapoid.xml"
 
 - type: guideEntry

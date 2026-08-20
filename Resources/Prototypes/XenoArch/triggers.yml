@@ -251,6 +251,8 @@
     - AmmoniaBlood
     - ZombieBlood
     - Sap
+    # - SulfurBlood # DEN: no
+    - BloodKodepiia # macro add
 
 - type: xenoArchTrigger
   id: TriggerThrow
