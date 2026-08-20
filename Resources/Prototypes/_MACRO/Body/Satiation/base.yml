@@ -1,15 +1,19 @@
 - type: satiation
+  abstract: true
   id: BaseThreeFourthsChangeRate
   baseChangeRate: -0.0124 # 3/4 as fast as a human
 
 - type: satiation
+  abstract: true
   id: BaseHalfChangeRate
   baseChangeRate: -0.0083 # 1/2 as fast as a human
 
 - type: satiation
+  abstract: true
   id: BaseQuarterChangeRate
   baseChangeRate: -0.0041666665 # 1/4 as fast as a human
 
 - type: satiation
+  abstract: true
   id: BaseNoChangeRate
   baseChangeRate: 0 # Make it so they never get satiation changes. We can't just remove the component

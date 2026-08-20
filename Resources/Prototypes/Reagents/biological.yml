@@ -229,7 +229,8 @@
   metabolisms: # macro add
     Digestion:
       effects:
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         conditions:
         - !type:MetabolizerTypeCondition
           type: [Kodepiia]

@@ -536,7 +536,8 @@
           type: [Kodepiia]
         damage:
           Brute: -0.4
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Kodepiia ]
