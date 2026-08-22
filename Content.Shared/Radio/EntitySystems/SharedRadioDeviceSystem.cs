@@ -235,8 +235,8 @@ public abstract partial class SharedRadioDeviceSystem : EntitySystem
             return; // no feedback loops please.
 
         var channel = ProtoMan.Index(ent.Comp.BroadcastChannel);
-        if (_recentlySent.Add((args.Message, args.Source, channel)))
-            _radio.SendRadioMessage(args.Source, args.Message, channel, ent.Owner);
+        if (_recentlySent.Add((args.Message.OriginalMessage, args.Source, channel))) // DEN: Languages
+            _radio.SendRadioMessage(args.Source, args.LanguageEnt, args.Message, channel, ent.Owner); // DEN: Languages
     }
 
     [SubscribeLocalEvent]
@@ -263,12 +263,15 @@ public abstract partial class SharedRadioDeviceSystem : EntitySystem
             ("originalName", nameEv.VoiceName));
 
         // log to chat so people can identity the speaker/source, but avoid clogging ghost chat if there are many radios
-        _chat.TrySendInGameICMessage(ent.Owner,
+        _chat.SendEntityComplexSpeech(ent,
             args.Message,
-            InGameICChatType.Whisper,
+            SharedChatSystem.WhisperWrapper,
+            ChatChannel.Whisper,
             ChatTransmitRange.GhostRangeLimit,
-            nameOverride: name,
-            checkRadioPrefix: false);
+            null,
+            name,
+            verbOverride: args.Verb,
+            languageOverride: args.LanguageEnt); // DEN: Languages
     }
 
     [SubscribeLocalEvent]

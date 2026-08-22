@@ -1,3 +1,5 @@
+using Content.Shared._DEN.Language.Components;
+using Content.Shared.Chat;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 
@@ -18,7 +20,17 @@ public abstract partial class SharedRadioSystem : EntitySystem
         EntityUid radioSource,
         bool escapeMarkup = true)
     {
-        SendRadioMessage(messageSource, message, ProtoMan.Index(channel), radioSource, escapeMarkup: escapeMarkup);
+        // DEN Start: Complex messages and languages
+        var complex = new ComplexChatMessage(message, "\"", false, true, false, escapeMarkup);
+        var languageEnt = _language.GetCurrentLanguageEntity(messageSource, true);
+        if (languageEnt is null)
+        {
+            Log.Warning("Default language entity is null! Unable to send message.");
+            return;
+        }
+        // DEN End
+
+        SendRadioMessage(messageSource, languageEnt.Value, complex, ProtoMan.Index(channel), radioSource); // DEN: Pass Languages and complex
     }
 
     /// <summary>
@@ -31,10 +43,10 @@ public abstract partial class SharedRadioSystem : EntitySystem
     /// <param name="escapeMarkup">Whether markup in the message should be escaped.</param>
     [PublicAPI]
     public virtual void SendRadioMessage(EntityUid messageSource,
-        string message,
+        Entity<LanguageComponent> languageEnt,
+        ComplexChatMessage message,
         RadioChannelPrototype channel,
-        EntityUid radioSource,
-        bool escapeMarkup = true)
+        EntityUid radioSource) // DEN Pass Complex messages and language instead.
     {
 
     }
