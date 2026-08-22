@@ -7,7 +7,7 @@
   - type: Sprite
     sprite: _DEN/Tiles/Planet/water.rsi
     layers:
-    - state: pool_water
+    - state: water0
   - type: Solution
     id: pool
     solution:

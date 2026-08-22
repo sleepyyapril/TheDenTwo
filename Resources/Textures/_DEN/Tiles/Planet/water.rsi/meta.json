@@ -8,7 +8,7 @@
   },
   "states": [
     {
-      "name": "pool_water",
+      "name": "water0",
       "delays": [
         [
           0.3,
