@@ -1,5 +1,5 @@
+# todo test pool water
 - type: entity
-  parent: FloorWaterEntity
   id: FloorWaterEntityPool
   name: pool water
   description: You do NOT want to drink this.
