@@ -10,21 +10,19 @@ using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
+using Content.Shared.Radio.EntitySystems;
 using Content.Shared.Speech;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Radio.EntitySystems;
 
-/// <summary>
-///     This system handles intrinsic radios and the general process of converting radio messages into chat messages.
-/// </summary>
-public sealed partial class RadioSystem : EntitySystem
+/// <inheritdoc/>
+public sealed partial class RadioSystem : SharedRadioSystem
 {
     [Dependency] private INetManager _netMan = default!;
     [Dependency] private IReplayRecordingManager _replay = default!;
@@ -81,34 +79,8 @@ public sealed partial class RadioSystem : EntitySystem
         // DEN end
     }
 
-    /// <summary>
-    /// Send radio message to all active radio listeners
-    /// </summary>
-    public void SendRadioMessage(EntityUid messageSource, string message, ProtoId<RadioChannelPrototype> channel, EntityUid radioSource, bool escapeMarkup = true)
-    {
-        // DEN Start: Complex messages and languages
-        var complex = new ComplexChatMessage(message, "\"", false, true, false, escapeMarkup);
-        var languageEnt = _language.GetCurrentLanguageEntity(messageSource, true);
-        if (languageEnt is null)
-        {
-            Log.Warning("Default language entity is null! Unable to send message.");
-            return;
-        }
-        // DEN End
-
-        SendRadioMessage(messageSource, languageEnt.Value, complex, ProtoMan.Index(channel), radioSource); // DEN: Pass Languages and complex
-    }
-
-    /// <summary>
-    /// Send radio message to all active radio listeners
-    /// </summary>
-    /// <param name="messageSource">Entity that spoke the message</param>
-    /// <param name="radioSource">Entity that picked up the message and will send it, e.g. headset</param>
-    public void SendRadioMessage(EntityUid messageSource,
-        Entity<LanguageComponent> languageEnt,
-        ComplexChatMessage message,
-        RadioChannelPrototype channel,
-        EntityUid radioSource) // DEN Pass Complex messages and language instead.
+    /// <inheritdoc/>
+    public override void SendRadioMessage(EntityUid messageSource, string message, RadioChannelPrototype channel, EntityUid radioSource, bool escapeMarkup = true)
     {
         // TODO if radios ever garble / modify messages, feedback-prevention needs to be handled better than this.
         if (!_messages.Add(message.OriginalMessage)) // DEN: Languages
