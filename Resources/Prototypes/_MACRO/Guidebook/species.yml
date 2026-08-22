@@ -22,12 +22,12 @@
 
 - type: guideEntry
   id: Ungu
-  name: Ungu
+  name: species-name-ungu
   text: "/ServerInfo/_MACRO/Guidebook/Mobs/Ungu.xml"
 
 - type: guideEntry
   id: Decapoid
-  name: Decapoid
+  name: species-name-decapoid
   text: "/ServerInfo/_MACRO/Guidebook/Mobs/Decapoid.xml"
 
 - type: guideEntry
