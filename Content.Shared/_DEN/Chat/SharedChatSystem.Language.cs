@@ -34,7 +34,7 @@ public abstract partial class SharedChatSystem
     /// <param name="verbOverride">The verb to use for this message, if one is needed, skips usual verb selection.</param>
     /// <param name="languageOverride">Forces the use of this specific language entity rather than selecting the one
     /// that the entity is currently configured to speak.</param>
-    public abstract void SendEntityComplexSpeech(EntityUid source,
+    public virtual void SendEntityComplexSpeech(EntityUid source,
         ComplexChatMessage originalMessage,
         ProtoId<LanguageWrapperPrototype> wrapperProto,
         ChatChannel chatChannel,
@@ -44,7 +44,9 @@ public abstract partial class SharedChatSystem
         bool hideLog = false,
         bool ignoreActionBlocker = false,
         string? verbOverride = null,
-        Entity<LanguageComponent>? languageOverride = null);
+        Entity<LanguageComponent>? languageOverride = null)
+    {
+    }
 
     // TODO: Kill the other spot where this is getting called from and move this into WhisperMuffle (if we even keep using it)
     /// <summary>
