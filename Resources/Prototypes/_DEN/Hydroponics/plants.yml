@@ -1,7 +1,7 @@
 - type: entity
   parent: BasePlant
   id: EveryspicePlants
-  name: seeds-everyspice-name
+  name: everyspice plant
   components:
   - type: Sprite
     sprite: _NF/Objects/Specific/Hydroponics/everyspice.rsi
@@ -15,8 +15,8 @@
     production: 6
     yield: 2
     potency: 20
-    idealLight: 9 # tropical-ish
-    idealHeat: 303
+  - type: PlantAtmospheric
+    highHeatTolerance: 303 # ~30°C
   - type: PlantHarvest
     harvestRepeat: Repeat
   - type: PlantChemicals
@@ -25,3 +25,32 @@
         min: 1
         max: 10
         potencyDivisor: 10
+
+- type: entity
+  parent: BasePlant
+  id: PomegranatePlants
+  name: pomegranate plant
+  components:
+  - type: Sprite
+    sprite: _DEN/Objects/Specific/Hydroponics/pomegranate.rsi
+  - type: PlantData
+    name: seeds-pomegranate-name
+    packetPrototype: PomegranateSeeds
+    productPrototypes:
+    - FoodPomegranate
+  - type: Plant
+    lifespan: 55
+    maturation: 6
+    production: 6
+    yield: 3
+    potency: 10
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 1
+        max: 10
+        potencyDivisor: 10
+      Vitamin:
+        min: 1
+        max: 4
+        potencyDivisor: 25
