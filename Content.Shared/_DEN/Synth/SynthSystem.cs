@@ -1,3 +1,4 @@
+using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chat.TypingIndicator;
 using Content.Shared.Chemistry.Reagent;
@@ -16,6 +17,10 @@ public sealed partial class SynthSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnMapInit(Entity<SynthComponent> ent, ref MapInitEvent args)
     {
+        // test fail
+        if (!HasComp<BloodstreamComponent>(ent))
+            return;
+
         var maxBlood = _bloodstream.GetBloodSolutionCapacity(ent.Owner);
         ent.Comp.SynthBlood.ScaleTo(maxBlood);
 
