@@ -1,5 +1,6 @@
 using Content.Shared._DEN.Loadout;
 using Content.Shared._DEN.Traits.Prototypes;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Humanoid;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
@@ -42,6 +43,7 @@ public sealed partial class HumanoidCharacterProfile
         string species,
         int age,
         Sex sex,
+        ProtoId<EmoteSoundsPrototype> voice,
         Gender gender,
         HumanoidCharacterAppearance appearance,
         SpawnPriorityPreference spawnPriority,
@@ -59,6 +61,7 @@ public sealed partial class HumanoidCharacterProfile
         Species = species;
         Age = age;
         Sex = sex;
+        Voice = voice;
         Gender = gender;
         Appearance = appearance;
         SpawnPriority = spawnPriority;

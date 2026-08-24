@@ -1,7 +1,8 @@
 using System.Linq;
 using Content.Shared._DEN.CCVar;
 using Content.Shared._DEN.Language;
-using Content.Shared._DEN.Utility;
+using Content.Shared._DEN.Language.Components;
+using Content.Shared.Radio;
 using Content.Shared.Speech;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
@@ -11,10 +12,41 @@ namespace Content.Shared.Chat;
 
 public abstract partial class SharedChatSystem
 {
-
     [Dependency] private IConfigurationManager _cfg = default!;
 
+    public static readonly ProtoId<LanguageWrapperPrototype> SpeakWrapper = "SpeakWrapper";
+    public static readonly ProtoId<LanguageWrapperPrototype> WhisperWrapper = "WhisperWrapper";
     public static readonly string[] ChatAllowedTags = ["bolditalic", "bold", "color", "italic", "mono"];
+
+    /// <summary>
+    /// Attempts to make an entity speak using complex speech (languages, mixed actions and dialog).
+    /// </summary>
+    /// <param name="source">The entity doing the speaking.</param>
+    /// <param name="originalMessage">The message before any modifications are applied.</param>
+    /// <param name="wrapperProto">The wrapper to use for formatting the message to users.</param>
+    /// <param name="chatChannel">The chat channel to speak on.</param>
+    /// <param name="range">The range to which the message will attempt to be transmitted. Keep in mind that language
+    /// features and things like radios and cameras may cause it to be broadcast outside this range.</param>
+    /// <param name="radioChannel">The radio channel to speak on, or null if no radio is being used.</param>
+    /// <param name="nameOverride">The name to display for the speaker in place of their usual one.</param>
+    /// <param name="hideLog">Whether to ignore logging this message.</param>
+    /// <param name="ignoreActionBlocker">Whether this speech attempt ignores things that would usually prevent speaking.</param>
+    /// <param name="verbOverride">The verb to use for this message, if one is needed, skips usual verb selection.</param>
+    /// <param name="languageOverride">Forces the use of this specific language entity rather than selecting the one
+    /// that the entity is currently configured to speak.</param>
+    public virtual void SendEntityComplexSpeech(EntityUid source,
+        ComplexChatMessage originalMessage,
+        ProtoId<LanguageWrapperPrototype> wrapperProto,
+        ChatChannel chatChannel,
+        ChatTransmitRange range,
+        RadioChannelPrototype? radioChannel = null,
+        string? nameOverride = null,
+        bool hideLog = false,
+        bool ignoreActionBlocker = false,
+        string? verbOverride = null,
+        Entity<LanguageComponent>? languageOverride = null)
+    {
+    }
 
     // TODO: Kill the other spot where this is getting called from and move this into WhisperMuffle (if we even keep using it)
     /// <summary>
@@ -53,7 +85,7 @@ public abstract partial class SharedChatSystem
     /// <returns>The correct speech verb prototype to use.</returns>
     public SpeechVerbPrototype GetComplexSpeechVerb(EntityUid source, ComplexChatMessage message, LanguagePrototype language, ChatChannel channel)
     {
-        var lastDialog = message.Parts.LastOrDefault(p => p.Item1 == ChatPart.Dialog).Item2;
+        var lastDialog = message.Parts.LastOrDefault(p => p.Item1 == ChatPart.Dialog).Item2 ?? "";
 
         SpeechVerbPrototype? current = null;
         Dictionary<LocId, ProtoId<SpeechVerbPrototype>>? currentSuffixVerbs = null;
@@ -61,7 +93,7 @@ public abstract partial class SharedChatSystem
         {
             if (speechVerbs.TryGetValue(channel, out var channelVerbs))
             {
-                current = _prototypeManager.Index(channelVerbs.DefaultVerb);
+                current = ProtoMan.Index(channelVerbs.DefaultVerb);
                 currentSuffixVerbs = channelVerbs.SuffixSpeechVerbs;
             }
         }
@@ -70,7 +102,7 @@ public abstract partial class SharedChatSystem
         {
             foreach (var (str, id) in currentSuffixVerbs)
             {
-                var proto = _prototypeManager.Index(id);
+                var proto = ProtoMan.Index(id);
                 if (lastDialog.EndsWith(Loc.GetString(str)) && proto.Priority >= (current?.Priority ?? 0))
                 {
                     current = proto;
@@ -178,12 +210,12 @@ public readonly record struct ComplexChatMessage()
             return;
         }
 
-        var outside = false;
+        var outside = true;
         foreach (var hunk in parsedMsg.Nodes)
         {
             if (!hunk.IsPlainText)
             {
-                parts.Add((outside ? ChatPart.DialogTag : ChatPart.EmoteTag, hunk.ToString()));
+                parts.Add((outside ? ChatPart.EmoteTag : ChatPart.DialogTag, hunk.ToString()));
                 continue;
             }
 
@@ -191,15 +223,17 @@ public readonly record struct ComplexChatMessage()
             var pieces = hunk.ToString().Split(Delimiter);
             if (pieces.Length == 1 && !string.IsNullOrEmpty(pieces[0]))
             {
-                parts.Add((outside ? ChatPart.Dialog : ChatPart.Emote, pieces[0]));
+                parts.Add((outside ? ChatPart.Emote : ChatPart.Dialog, pieces[0]));
                 continue;
             }
-            
+
             foreach (var msgChunk in pieces)
             {
                 if (!string.IsNullOrEmpty(msgChunk))
-                    parts.Add((outside ? ChatPart.Dialog : ChatPart.Emote, msgChunk));
-                outside = !outside;
+                {
+                    parts.Add((outside ? ChatPart.Emote : ChatPart.Dialog, msgChunk));
+                    outside = !outside;
+                }
             }
         }
 

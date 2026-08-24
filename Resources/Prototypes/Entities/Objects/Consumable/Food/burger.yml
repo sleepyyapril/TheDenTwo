@@ -11,6 +11,11 @@
     sprite: Objects/Consumable/Food/burger.rsi
     layers:
     - state: bun
+  # macro edit start - allow ungu to eat
+  - type: Tag
+    tags:
+    - UnguFood
+  # macro edit end
   - type: ToolRefinable
     refineResult:
     - id: FoodBreadBunTop
@@ -1102,9 +1107,9 @@
       - ReagentId: Vitamin
         Quantity: 11
       - ReagentId: TableSalt
-        Quantity: 5
+        Quantity: 1
       - ReagentId: Blackpepper
-        Quantity: 5
+        Quantity: 1
   - type: Sprite
     state: superbite
   - type: Tag
